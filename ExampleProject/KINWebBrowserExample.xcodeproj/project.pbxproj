@@ -1,0 +1,493 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3BBECF2918A1E58D00A2499D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2818A1E58D00A2499D /* Foundation.framework */; };
+		3BBECF2B18A1E58D00A2499D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2A18A1E58D00A2499D /* CoreGraphics.framework */; };
+		3BBECF2D18A1E58D00A2499D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2C18A1E58D00A2499D /* UIKit.framework */; };
+		3BBECF3318A1E58D00A2499D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BBECF3118A1E58D00A2499D /* InfoPlist.strings */; };
+		3BBECF3518A1E58D00A2499D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBECF3418A1E58D00A2499D /* main.m */; };
+		3BBECF3918A1E58D00A2499D /* KINAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBECF3818A1E58D00A2499D /* KINAppDelegate.m */; };
+		3BBECF3B18A1E58D00A2499D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BBECF3A18A1E58D00A2499D /* Images.xcassets */; };
+		3BBECF4218A1E58D00A2499D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF4118A1E58D00A2499D /* XCTest.framework */; };
+		3BBECF4318A1E58E00A2499D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2818A1E58D00A2499D /* Foundation.framework */; };
+		3BBECF4418A1E58E00A2499D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2C18A1E58D00A2499D /* UIKit.framework */; };
+		3BBECF4C18A1E58E00A2499D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BBECF4A18A1E58E00A2499D /* InfoPlist.strings */; };
+		3BBECF4E18A1E58E00A2499D /* KINWebBrowserExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBECF4D18A1E58E00A2499D /* KINWebBrowserExampleTests.m */; };
+		3BBECF5918A1E5F300A2499D /* KINWebBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBECF5718A1E5F300A2499D /* KINWebBrowserViewController.m */; };
+		3BBECF5D18A1E78100A2499D /* backbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BBECF5B18A1E78100A2499D /* backbutton@2x.png */; };
+		3BBECF5E18A1E78100A2499D /* forwardbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BBECF5C18A1E78100A2499D /* forwardbutton@2x.png */; };
+		3BBECF6518A1EAB100A2499D /* KINWebBrowserExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBECF6318A1EAB100A2499D /* KINWebBrowserExampleViewController.m */; };
+		3BBECF6618A1EAB100A2499D /* KINWebBrowserExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BBECF6418A1EAB100A2499D /* KINWebBrowserExampleViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3BBECF4518A1E58E00A2499D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3BBECF1D18A1E58D00A2499D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3BBECF2418A1E58D00A2499D;
+			remoteInfo = KINWebBrowserExample;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3BBECF2518A1E58D00A2499D /* KINWebBrowserExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KINWebBrowserExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BBECF2818A1E58D00A2499D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3BBECF2A18A1E58D00A2499D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3BBECF2C18A1E58D00A2499D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3BBECF3018A1E58D00A2499D /* KINWebBrowserExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KINWebBrowserExample-Info.plist"; sourceTree = "<group>"; };
+		3BBECF3218A1E58D00A2499D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3BBECF3418A1E58D00A2499D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3BBECF3618A1E58D00A2499D /* KINWebBrowserExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KINWebBrowserExample-Prefix.pch"; sourceTree = "<group>"; };
+		3BBECF3718A1E58D00A2499D /* KINAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KINAppDelegate.h; sourceTree = "<group>"; };
+		3BBECF3818A1E58D00A2499D /* KINAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KINAppDelegate.m; sourceTree = "<group>"; };
+		3BBECF3A18A1E58D00A2499D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3BBECF4018A1E58D00A2499D /* KINWebBrowserExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KINWebBrowserExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BBECF4118A1E58D00A2499D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		3BBECF4918A1E58E00A2499D /* KINWebBrowserExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KINWebBrowserExampleTests-Info.plist"; sourceTree = "<group>"; };
+		3BBECF4B18A1E58E00A2499D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3BBECF4D18A1E58E00A2499D /* KINWebBrowserExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KINWebBrowserExampleTests.m; sourceTree = "<group>"; };
+		3BBECF5718A1E5F300A2499D /* KINWebBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KINWebBrowserViewController.m; path = ../KINWebBrowser/KINWebBrowserViewController.m; sourceTree = "<group>"; };
+		3BBECF5818A1E5F300A2499D /* KINWebBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KINWebBrowserViewController.h; path = ../KINWebBrowser/KINWebBrowserViewController.h; sourceTree = "<group>"; };
+		3BBECF5B18A1E78100A2499D /* backbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backbutton@2x.png"; path = "../Assets/backbutton@2x.png"; sourceTree = "<group>"; };
+		3BBECF5C18A1E78100A2499D /* forwardbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "forwardbutton@2x.png"; path = "../Assets/forwardbutton@2x.png"; sourceTree = "<group>"; };
+		3BBECF6218A1EAB100A2499D /* KINWebBrowserExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KINWebBrowserExampleViewController.h; sourceTree = "<group>"; };
+		3BBECF6318A1EAB100A2499D /* KINWebBrowserExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KINWebBrowserExampleViewController.m; sourceTree = "<group>"; };
+		3BBECF6418A1EAB100A2499D /* KINWebBrowserExampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KINWebBrowserExampleViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3BBECF2218A1E58D00A2499D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BBECF2B18A1E58D00A2499D /* CoreGraphics.framework in Frameworks */,
+				3BBECF2D18A1E58D00A2499D /* UIKit.framework in Frameworks */,
+				3BBECF2918A1E58D00A2499D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3BBECF3D18A1E58D00A2499D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BBECF4218A1E58D00A2499D /* XCTest.framework in Frameworks */,
+				3BBECF4418A1E58E00A2499D /* UIKit.framework in Frameworks */,
+				3BBECF4318A1E58E00A2499D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3BBECF1C18A1E58D00A2499D = {
+			isa = PBXGroup;
+			children = (
+				3BBECF5A18A1E68200A2499D /* KINWebBrowser */,
+				3BBECF2E18A1E58D00A2499D /* KINWebBrowserExample */,
+				3BBECF4718A1E58E00A2499D /* KINWebBrowserExampleTests */,
+				3BBECF2718A1E58D00A2499D /* Frameworks */,
+				3BBECF2618A1E58D00A2499D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3BBECF2618A1E58D00A2499D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3BBECF2518A1E58D00A2499D /* KINWebBrowserExample.app */,
+				3BBECF4018A1E58D00A2499D /* KINWebBrowserExampleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3BBECF2718A1E58D00A2499D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3BBECF2818A1E58D00A2499D /* Foundation.framework */,
+				3BBECF2A18A1E58D00A2499D /* CoreGraphics.framework */,
+				3BBECF2C18A1E58D00A2499D /* UIKit.framework */,
+				3BBECF4118A1E58D00A2499D /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3BBECF2E18A1E58D00A2499D /* KINWebBrowserExample */ = {
+			isa = PBXGroup;
+			children = (
+				3BBECF3718A1E58D00A2499D /* KINAppDelegate.h */,
+				3BBECF3818A1E58D00A2499D /* KINAppDelegate.m */,
+				3BBECF6218A1EAB100A2499D /* KINWebBrowserExampleViewController.h */,
+				3BBECF6318A1EAB100A2499D /* KINWebBrowserExampleViewController.m */,
+				3BBECF6418A1EAB100A2499D /* KINWebBrowserExampleViewController.xib */,
+				3BBECF3A18A1E58D00A2499D /* Images.xcassets */,
+				3BBECF2F18A1E58D00A2499D /* Supporting Files */,
+			);
+			path = KINWebBrowserExample;
+			sourceTree = "<group>";
+		};
+		3BBECF2F18A1E58D00A2499D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3BBECF3018A1E58D00A2499D /* KINWebBrowserExample-Info.plist */,
+				3BBECF3118A1E58D00A2499D /* InfoPlist.strings */,
+				3BBECF3418A1E58D00A2499D /* main.m */,
+				3BBECF3618A1E58D00A2499D /* KINWebBrowserExample-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3BBECF4718A1E58E00A2499D /* KINWebBrowserExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				3BBECF4D18A1E58E00A2499D /* KINWebBrowserExampleTests.m */,
+				3BBECF4818A1E58E00A2499D /* Supporting Files */,
+			);
+			path = KINWebBrowserExampleTests;
+			sourceTree = "<group>";
+		};
+		3BBECF4818A1E58E00A2499D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3BBECF4918A1E58E00A2499D /* KINWebBrowserExampleTests-Info.plist */,
+				3BBECF4A18A1E58E00A2499D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3BBECF5A18A1E68200A2499D /* KINWebBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				3BBECF5B18A1E78100A2499D /* backbutton@2x.png */,
+				3BBECF5C18A1E78100A2499D /* forwardbutton@2x.png */,
+				3BBECF5718A1E5F300A2499D /* KINWebBrowserViewController.m */,
+				3BBECF5818A1E5F300A2499D /* KINWebBrowserViewController.h */,
+			);
+			name = KINWebBrowser;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3BBECF2418A1E58D00A2499D /* KINWebBrowserExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3BBECF5118A1E58E00A2499D /* Build configuration list for PBXNativeTarget "KINWebBrowserExample" */;
+			buildPhases = (
+				3BBECF2118A1E58D00A2499D /* Sources */,
+				3BBECF2218A1E58D00A2499D /* Frameworks */,
+				3BBECF2318A1E58D00A2499D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KINWebBrowserExample;
+			productName = KINWebBrowserExample;
+			productReference = 3BBECF2518A1E58D00A2499D /* KINWebBrowserExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3BBECF3F18A1E58D00A2499D /* KINWebBrowserExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3BBECF5418A1E58E00A2499D /* Build configuration list for PBXNativeTarget "KINWebBrowserExampleTests" */;
+			buildPhases = (
+				3BBECF3C18A1E58D00A2499D /* Sources */,
+				3BBECF3D18A1E58D00A2499D /* Frameworks */,
+				3BBECF3E18A1E58D00A2499D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3BBECF4618A1E58E00A2499D /* PBXTargetDependency */,
+			);
+			name = KINWebBrowserExampleTests;
+			productName = KINWebBrowserExampleTests;
+			productReference = 3BBECF4018A1E58D00A2499D /* KINWebBrowserExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3BBECF1D18A1E58D00A2499D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = KIN;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Kinwa, Inc.";
+				TargetAttributes = {
+					3BBECF3F18A1E58D00A2499D = {
+						TestTargetID = 3BBECF2418A1E58D00A2499D;
+					};
+				};
+			};
+			buildConfigurationList = 3BBECF2018A1E58D00A2499D /* Build configuration list for PBXProject "KINWebBrowserExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3BBECF1C18A1E58D00A2499D;
+			productRefGroup = 3BBECF2618A1E58D00A2499D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3BBECF2418A1E58D00A2499D /* KINWebBrowserExample */,
+				3BBECF3F18A1E58D00A2499D /* KINWebBrowserExampleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3BBECF2318A1E58D00A2499D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BBECF5D18A1E78100A2499D /* backbutton@2x.png in Resources */,
+				3BBECF6618A1EAB100A2499D /* KINWebBrowserExampleViewController.xib in Resources */,
+				3BBECF3318A1E58D00A2499D /* InfoPlist.strings in Resources */,
+				3BBECF5E18A1E78100A2499D /* forwardbutton@2x.png in Resources */,
+				3BBECF3B18A1E58D00A2499D /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3BBECF3E18A1E58D00A2499D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BBECF4C18A1E58E00A2499D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3BBECF2118A1E58D00A2499D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BBECF5918A1E5F300A2499D /* KINWebBrowserViewController.m in Sources */,
+				3BBECF3518A1E58D00A2499D /* main.m in Sources */,
+				3BBECF6518A1EAB100A2499D /* KINWebBrowserExampleViewController.m in Sources */,
+				3BBECF3918A1E58D00A2499D /* KINAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3BBECF3C18A1E58D00A2499D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BBECF4E18A1E58E00A2499D /* KINWebBrowserExampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3BBECF4618A1E58E00A2499D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3BBECF2418A1E58D00A2499D /* KINWebBrowserExample */;
+			targetProxy = 3BBECF4518A1E58E00A2499D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3BBECF3118A1E58D00A2499D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3BBECF3218A1E58D00A2499D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3BBECF4A18A1E58E00A2499D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3BBECF4B18A1E58E00A2499D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3BBECF4F18A1E58E00A2499D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3BBECF5018A1E58E00A2499D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3BBECF5218A1E58E00A2499D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KINWebBrowserExample/KINWebBrowserExample-Prefix.pch";
+				INFOPLIST_FILE = "KINWebBrowserExample/KINWebBrowserExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3BBECF5318A1E58E00A2499D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KINWebBrowserExample/KINWebBrowserExample-Prefix.pch";
+				INFOPLIST_FILE = "KINWebBrowserExample/KINWebBrowserExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		3BBECF5518A1E58E00A2499D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KINWebBrowserExample.app/KINWebBrowserExample";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KINWebBrowserExample/KINWebBrowserExample-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "KINWebBrowserExampleTests/KINWebBrowserExampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		3BBECF5618A1E58E00A2499D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KINWebBrowserExample.app/KINWebBrowserExample";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KINWebBrowserExample/KINWebBrowserExample-Prefix.pch";
+				INFOPLIST_FILE = "KINWebBrowserExampleTests/KINWebBrowserExampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3BBECF2018A1E58D00A2499D /* Build configuration list for PBXProject "KINWebBrowserExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BBECF4F18A1E58E00A2499D /* Debug */,
+				3BBECF5018A1E58E00A2499D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3BBECF5118A1E58E00A2499D /* Build configuration list for PBXNativeTarget "KINWebBrowserExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BBECF5218A1E58E00A2499D /* Debug */,
+				3BBECF5318A1E58E00A2499D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3BBECF5418A1E58E00A2499D /* Build configuration list for PBXNativeTarget "KINWebBrowserExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BBECF5518A1E58E00A2499D /* Debug */,
+				3BBECF5618A1E58E00A2499D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3BBECF1D18A1E58D00A2499D /* Project object */;
+}
