@@ -44,7 +44,7 @@
 
 @interface KINWebBrowserViewController ()
 
-@property (nonatomic, assign) BOOL previousViewControllerToolbarState;
+@property (nonatomic, assign) BOOL previousNavigationControllerToolbarHidden, previousNavigationControllerNavigationBarHidden;
 @property (nonatomic, strong) UIBarButtonItem *backButton, *forwardButton, *refreshButton, *actionButton;
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) NSTimer *progressTimer;
@@ -88,6 +88,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.previousNavigationControllerToolbarHidden = self.navigationController.toolbarHidden;
+    self.previousNavigationControllerNavigationBarHidden = self.navigationController.navigationBarHidden;
+    
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [self setAutomaticallyAdjustsScrollViewInsets:YES];
 
@@ -114,7 +117,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.previousViewControllerToolbarState = self.navigationController.toolbarHidden;
     
     [self.navigationController setToolbarHidden:NO animated:NO];
     [self.navigationController.toolbar setTranslucent:YES];
@@ -139,7 +141,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController setToolbarHidden:self.previousViewControllerToolbarState animated:animated];
 }
 
 #pragma mark - UIWebViewDelegate Protocol Implementation
@@ -163,7 +164,7 @@
 #pragma mark - Done Button Action
 
 - (void)doneButtonPressed:(id)sender {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self dismissAnimated:YES];
 }
 
 #pragma mark - UIBarButtonItem Target Action Methods
@@ -216,6 +217,14 @@
             [self.progressView setProgress:progress animated:YES];
         }
     }
+}
+
+#pragma mark - Dismiss
+
+- (void)dismissAnimated:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:self.previousNavigationControllerNavigationBarHidden animated:animated];
+    [self.navigationController setToolbarHidden:self.previousNavigationControllerToolbarHidden animated:animated];
+    [self.navigationController dismissViewControllerAnimated:animated completion:nil];
 }
 
 #pragma mark - Interface Orientation
