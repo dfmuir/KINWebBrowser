@@ -76,6 +76,7 @@
 - (void)loadURL:(NSURL *)URL {
     _URL = URL;
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.URL]];
+    [self didStartLoading];
 }
 
 - (void)loadURLString:(NSString *)URLString {
@@ -129,7 +130,6 @@
     
     UIBarButtonItem *flexibleSeparator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    
     NSArray *barButtonItems = @[self.refreshButton, flexibleSeparator, self.backButton, fixedSeparator, self.forwardButton, flexibleSeparator, self.actionButton];
     [self setToolbarItems:barButtonItems animated:NO];
     
@@ -143,11 +143,31 @@
 #pragma mark - UIWebViewDelegate Protocol Implementation
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    [self progressViewStartLoading];
     [self updateToolbarState];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self updateToolbarState];
+    if(!self.webView.isLoading) {
+        [self didFinishLoading];
+    }
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    if(!self.webView.isLoading) {
+        [self didFinishLoading];
+    }
+}
+
+#pragma mark - Loading States
+
+- (void)didStartLoading {
+    [self progressViewStartLoading];
+    [self updateToolbarState];
+}
+
+- (void)didFinishLoading {
+    [self progressBarStopLoading];
     [self updateToolbarState];
 }
 
@@ -189,28 +209,31 @@
 #pragma mark - Fake Progress Bar Control
 
 - (void)progressViewStartLoading {
-    [self.progressView setHidden:NO];
-    [self.progressView setProgress:0];
-    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/60.f target:self selector:@selector(timerDidFire:) userInfo:nil repeats:YES];
+    if(!self.progressTimer) {
+        [self.progressView setAlpha:1.0f];
+        [self.progressView setHidden:NO];
+        [self.progressView setProgress:0 animated:NO];
+        self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/60.f target:self selector:@selector(timerDidFire:) userInfo:nil repeats:YES];
+    }
+}
+
+- (void)progressBarStopLoading {
+    [self.progressTimer invalidate];
+    self.progressTimer = nil;
+    
+    [self.progressView setProgress:1.0f animated:YES];
+    [UIView animateWithDuration:0.3 delay:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [self.progressView setAlpha:0.0f];
+    } completion:^(BOOL finished) {
+        [self.progressView setHidden:YES];
+    }];
 }
 
 - (void)timerDidFire:(id)sender {
+    CGFloat increment = 0.005/(self.progressView.progress + 0.2);
     if([self.webView isLoading]) {
-        if (self.progressView.progress < 0.90f) {
-            CGFloat progress = self.progressView.progress += 0.05f;
-            [self.progressView setProgress:progress animated:YES];
-        }
-    }
-    else {
-        if(self.progressView.progress >= 1.0f) {
-            [self.progressTimer invalidate];
-            self.progressTimer = nil;
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                [self.progressView setHidden:YES];
-            });
-        }
-        else {
-            CGFloat progress = self.progressView.progress += 0.025f;
+        CGFloat progress = (self.progressView.progress < 0.75f) ? self.progressView.progress + increment : self.progressView.progress + 0.0005;
+        if(self.progressView.progress < 0.95) {
             [self.progressView setProgress:progress animated:YES];
         }
     }

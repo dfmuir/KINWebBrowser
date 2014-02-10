@@ -39,7 +39,7 @@
 
 @end
 
-static NSString* const defaultAddress = @"http://www.apple.com";
+static NSString *const defaultAddress = @"http://www.apple.com/";
 
 @implementation KINWebBrowserExampleViewController
 
@@ -69,17 +69,13 @@ static NSString* const defaultAddress = @"http://www.apple.com";
 - (IBAction)pushButtonPressed:(id)sender {
     KINWebBrowserViewController *webBrowser = [KINWebBrowserViewController webBrowserViewController];
     [self.navigationController pushViewController:webBrowser animated:YES];
-    
     [webBrowser loadURLString:defaultAddress];
-
-    
 }
 
 - (IBAction)presentButtonPressed:(id)sender {
     UINavigationController *webBrowserNavigationController = [KINWebBrowserViewController navigationControllerWithRootWebBrowserViewController];
     [self presentViewController:webBrowserNavigationController animated:YES completion:nil];
                                                               
-
     KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWebBrowserViewController];
     [webBrowser loadURLString:defaultAddress];
 }
