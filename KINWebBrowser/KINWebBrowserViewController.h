@@ -41,7 +41,7 @@
 @end
 
 
-@interface KINWebBrowserViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate>
+@interface KINWebBrowserViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate, UIActionSheetDelegate>
 
 
 @property (nonatomic, strong) UIWebView *webView;

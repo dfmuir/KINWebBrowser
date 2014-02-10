@@ -55,6 +55,14 @@
 
 @implementation KINWebBrowserViewController
 
+static NSString *const safariActionTitle = @"Open in Safari";
+static NSString *const chromeActionTitle = @"Open in Chrome";
+static NSString *const copyActionTitle = @"Copy URL";
+static NSString *const cancelActionTitle = @"Cancel";
+
+
+
+
 #pragma mark - Static Initializers
 
 + (KINWebBrowserViewController *)webBrowserViewController {
@@ -149,6 +157,22 @@
     }
 }
 
+#pragma mark - UIActionSheetDelegate Protocol Implementation
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if([title isEqualToString:safariActionTitle]) {
+        [self openInSafari];
+    }
+    else if([title isEqualToString:chromeActionTitle]) {
+        [self openInChrome];
+    }
+    else if([title isEqualToString:copyActionTitle]) {
+        [self copyURL];
+    }
+}
+
+
 #pragma mark - Loading States
 
 - (void)didStartLoading {
@@ -223,13 +247,11 @@
 }
 
 - (void)actionButtonPressed:(id)sender {
-    
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[self.webView.request.URL] applicationActivities:nil];
-        [self presentViewController:activityController animated:YES completion:nil];
-
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:cancelActionTitle destructiveButtonTitle:nil otherButtonTitles:safariActionTitle, chromeActionTitle, copyActionTitle, nil];
+        [actionSheet showFromToolbar:self.navigationController.toolbar];
     });
-    }
+}
 
 #pragma mark - Fake Progress Bar Control
 
@@ -266,6 +288,46 @@
         }
     }
 }
+
+#pragma mark - Actions
+
+- (void)openInSafari {
+    NSURL *URL = self.webView.request.URL;
+    [[UIApplication sharedApplication] openURL:URL];
+}
+
+- (void)openInChrome {
+    NSURL *URL = self.webView.request.URL;
+
+    NSString *chromeScheme = nil;
+    if ([URL.scheme isEqualToString:@"http"]) {
+        chromeScheme = @"googlechrome";
+    }
+    else if ([URL.scheme isEqualToString:@"https"]) {
+        chromeScheme = @"googlechromes";
+    }
+    
+    if (chromeScheme) {
+        NSString *absoluteString = [URL absoluteString];
+        NSRange rangeForScheme = [absoluteString rangeOfString:@":"];
+        NSString *urlNoScheme =
+        [absoluteString substringFromIndex:rangeForScheme.location];
+        NSString *chromeURLString =
+        [chromeScheme stringByAppendingString:urlNoScheme];
+        NSURL *chromeURL = [NSURL URLWithString:chromeURLString];
+        
+        [[UIApplication sharedApplication] openURL:chromeURL];
+    }
+}
+
+- (void)copyURL {
+    NSURL *URL = self.webView.request.URL;
+    NSString *URLString = [URL absoluteString];
+    
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    [pasteboard setString:URLString];
+}
+
 
 #pragma mark - Dismiss
 
