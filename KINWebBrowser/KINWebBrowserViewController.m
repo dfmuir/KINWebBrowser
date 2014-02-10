@@ -305,10 +305,12 @@ static NSString *const cancelActionTitle = @"Cancel";
     [self.webView stopLoading];
     [self.webView reload];
     [self didStartLoading];
+    [self updateToolbarState];
 }
 
 - (void)stopButtonPressed:(id)sender {
     [self.webView stopLoading];
+    [self updateToolbarState];
 }
 
 - (void)actionButtonPressed:(id)sender {
