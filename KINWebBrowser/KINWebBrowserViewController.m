@@ -132,7 +132,7 @@ static NSString *const cancelActionTitle = @"Cancel";
     @{
       KINWebBrowserShowsActionButton : @YES,
       KINWebBrowserShowsProgressView : @YES
-    };
+      };
 }
 
 
@@ -158,7 +158,7 @@ static NSString *const cancelActionTitle = @"Cancel";
     
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     [self setAutomaticallyAdjustsScrollViewInsets:YES];
-
+    
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.webView setDelegate:self];
     [self.webView setMultipleTouchEnabled:YES];
@@ -183,7 +183,7 @@ static NSString *const cancelActionTitle = @"Cancel";
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationController setToolbarHidden:NO animated:YES];
-
+    
     [self updateToolbarState];
 }
 
@@ -256,8 +256,8 @@ static NSString *const cancelActionTitle = @"Cancel";
     }
     
     NSArray *barButtonItems;
-    if(![self.webView isLoading]) {
-        barButtonItems = @[self.backButton, self.fixedSeparator, self.forwardButton, self.fixedSeparator, self.refreshButton, self.flexibleSeparator,];
+    if(!self.loading) {
+        barButtonItems = @[self.backButton, self.fixedSeparator, self.forwardButton, self.fixedSeparator, self.refreshButton, self.flexibleSeparator];
     }
     else {
         barButtonItems = @[self.backButton, self.fixedSeparator, self.forwardButton, self.fixedSeparator, self.stopButton, self.flexibleSeparator];
@@ -305,12 +305,11 @@ static NSString *const cancelActionTitle = @"Cancel";
     [self.webView stopLoading];
     [self.webView reload];
     [self didStartLoading];
-    [self updateToolbarState];
 }
 
 - (void)stopButtonPressed:(id)sender {
     [self.webView stopLoading];
-    [self updateToolbarState];
+    [self didFinishLoading];
 }
 
 - (void)actionButtonPressed:(id)sender {
@@ -335,7 +334,7 @@ static NSString *const cancelActionTitle = @"Cancel";
     [self.progressView setProgress:0.0f animated:NO];
     [self.progressView setAlpha:1.0f];
     [self.progressView setHidden:NO];
-
+    
     if(!self.progressTimer) {
         self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/60.f target:self selector:@selector(timerDidFire:) userInfo:nil repeats:YES];
     }
@@ -374,7 +373,7 @@ static NSString *const cancelActionTitle = @"Cancel";
 
 - (void)openInChrome {
     NSURL *URL = self.webView.request.URL;
-
+    
     NSString *chromeScheme = nil;
     if ([URL.scheme isEqualToString:@"http"]) {
         chromeScheme = @"googlechrome";
