@@ -223,9 +223,13 @@
 }
 
 - (void)actionButtonPressed:(id)sender {
-    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[self.webView.request.URL] applicationActivities:nil];
-    [self presentViewController:activityController animated:YES completion:nil];
-}
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[self.webView.request.URL] applicationActivities:nil];
+        [self presentViewController:activityController animated:YES completion:nil];
+
+    });
+    }
 
 #pragma mark - Fake Progress Bar Control
 
