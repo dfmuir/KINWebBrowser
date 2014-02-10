@@ -248,7 +248,16 @@ static NSString *const cancelActionTitle = @"Cancel";
 
 - (void)actionButtonPressed:(id)sender {
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:cancelActionTitle destructiveButtonTitle:nil otherButtonTitles:safariActionTitle, chromeActionTitle, copyActionTitle, nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+        [actionSheet setDelegate:self];
+        [actionSheet addButtonWithTitle:safariActionTitle];
+        if([self canOpenGoogleChrome]) {
+            [actionSheet addButtonWithTitle:chromeActionTitle];
+        }
+        [actionSheet addButtonWithTitle:copyActionTitle];
+        [actionSheet addButtonWithTitle:cancelActionTitle];
+        [actionSheet setCancelButtonIndex:[actionSheet numberOfButtons]-1];
+        
         [actionSheet showFromToolbar:self.navigationController.toolbar];
     });
 }
@@ -326,6 +335,12 @@ static NSString *const cancelActionTitle = @"Cancel";
     
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     [pasteboard setString:URLString];
+}
+
+#pragma mark - Determine If Actions Are Possible
+
+- (BOOL)canOpenGoogleChrome {
+    return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"googlechrome://"]];
 }
 
 
