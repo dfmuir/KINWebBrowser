@@ -34,28 +34,67 @@
 
 @class KINWebBrowserViewController;
 
+
+#pragma mark - Initialization Options
+
+// Show the action button on the UIToolbar to allow special actions on current page (launch in Safari, copy URL, etc.)
+FOUNDATION_EXPORT NSString *const KINWebBrowserShowsActionButton;
+// Show the UIProgressView along the bottom of the UINavigationBar to show loading progress
+FOUNDATION_EXPORT NSString *const KINWebBrowserShowsProgressView;
+
+/*
+ 
+UINavigationController+KINWebBrowserWrapper category enables access to casted KINWebBroswerViewController when set as rootViewController of UINavigationController
+ 
+*/
 @interface UINavigationController(KINWebBrowserWrapper)
 
+// Returns rootViewController casted as KINWebBrowserViewController
 - (KINWebBrowserViewController *)rootWebBrowserViewController;
 
 @end
 
 
+/*
+ 
+KINWebBrowserViewController is designed to be used inside of a UINavigationController.
+For convenience, two sets of static initializers are available.
+ 
+*/
 @interface KINWebBrowserViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate, UIActionSheetDelegate>
 
+#pragma mark - Public Properties
 
+// The main and only webview
 @property (nonatomic, strong) UIWebView *webView;
-@property (nonatomic, strong) UIToolbar *toolbar;
-
 
 #pragma mark - Static Initializers
 
-+ (KINWebBrowserViewController *)webBrowserViewController;
-+ (UINavigationController *)navigationControllerWithRootWebBrowserViewController;
+// Initializes a basic KINWebBrowserViewController instance for push onto navigation stack
+// Ideal for use with UINavigationController pushViewController:animated: or initWithRootViewController:
++ (KINWebBrowserViewController *)webBrowser;
+
+// Initializes a KINWebBrowserViewController instance with custom options
+// Ideal for use with UINavigationController pushViewController:animated: or initWithRootViewController:
++ (KINWebBrowserViewController *)webBrowserWithOptions:(NSDictionary *)options;
+
+
+// Initializes a UINavigationController with a KINWebBrowserViewController for modal presentation
+// Ideal for use with presentViewController:animated:
++ (UINavigationController *)navigationControllerWithWebBrowser;
+
+// Initializes a UINavigationController with a KINWebBrowserViewController with custom options
+// Ideal for use with presentViewController:animated:
++ (UINavigationController *)navigationControllerWithWebBrowserWithOptions:(NSDictionary *)options;
 
 #pragma mark - Public Interface
 
+// Loads a NSURL to webView
+// Can be called any time after initialization
 - (void)loadURL:(NSURL *)URL;
+
+// Loads a URL as NSString to webView
+// Can be called any time after initialization
 - (void)loadURLString:(NSString *)URLString;
 
 @end

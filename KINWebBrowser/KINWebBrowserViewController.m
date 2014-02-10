@@ -33,6 +33,11 @@
 
 #import "KINWebBrowserViewController.h"
 
+NSString *const KINWebBrowserShowsActionButton = @"com.kinwa.KINWebBrowser.showsActionButton";
+NSString *const KINWebBrowserShowsProgressView = @"com.kinwa.KINWebBrowser.showsProgressView";
+
+
+
 @implementation UINavigationController(KINWebBrowserWrapper)
 
 - (KINWebBrowserViewController *)rootWebBrowserViewController {
@@ -43,6 +48,8 @@
 @end
 
 @interface KINWebBrowserViewController ()
+
+@property (nonatomic, strong) NSDictionary *options;
 
 @property (nonatomic, assign) BOOL previousNavigationControllerToolbarHidden, previousNavigationControllerNavigationBarHidden;
 @property (nonatomic, assign) BOOL loading;
@@ -55,6 +62,9 @@
 
 @implementation KINWebBrowserViewController
 
+
+
+
 static NSString *const safariActionTitle = @"Open in Safari";
 static NSString *const chromeActionTitle = @"Open in Chrome";
 static NSString *const copyActionTitle = @"Copy URL";
@@ -65,12 +75,17 @@ static NSString *const cancelActionTitle = @"Cancel";
 
 #pragma mark - Static Initializers
 
-+ (KINWebBrowserViewController *)webBrowserViewController {
-    KINWebBrowserViewController *webBrowserViewController = [[KINWebBrowserViewController alloc] init];
++ (KINWebBrowserViewController *)webBrowser {
+    KINWebBrowserViewController *webBrowserViewController = [KINWebBrowserViewController webBrowserWithOptions:nil];
     return webBrowserViewController;
 }
 
-+ (UINavigationController *)navigationControllerWithRootWebBrowserViewController {
++ (KINWebBrowserViewController *)webBrowserWithOptions:(NSDictionary *)options {
+    KINWebBrowserViewController *webBrowserViewController = [[KINWebBrowserViewController alloc] initWithOptions:options];
+    return webBrowserViewController;
+}
+
++ (UINavigationController *)navigationControllerWithWebBrowser {
     KINWebBrowserViewController *webBrowserViewController = [[KINWebBrowserViewController alloc] init];
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:webBrowserViewController action:@selector(doneButtonPressed:)];
@@ -79,6 +94,47 @@ static NSString *const cancelActionTitle = @"Cancel";
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webBrowserViewController];
     return navigationController;
 }
+
++ (UINavigationController *)navigationControllerWithWebBrowserWithOptions:(NSDictionary *)options {
+    KINWebBrowserViewController *webBrowserViewController = [[KINWebBrowserViewController alloc] initWithOptions:options];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:webBrowserViewController action:@selector(doneButtonPressed:)];
+    [webBrowserViewController.navigationItem setRightBarButtonItem:doneButton];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webBrowserViewController];
+    return navigationController;
+}
+
+#pragma mark - Initializers
+
+- (id)initWithOptions:(NSDictionary *)options {
+    self = [super init];
+    if(self) {
+        self.options = options;
+    }
+    return self;
+}
+
+
+#pragma mark - Access Options
+
+- (id)valueForOption:(NSString *)option {
+    if(self.options && [self.options objectForKey:option]) {
+        return [self.options objectForKey:option];
+    }
+    else {
+        return [[self defaultOptions] objectForKey:option];
+    }
+}
+
+- (NSDictionary *)defaultOptions {
+    return
+    @{
+      KINWebBrowserShowsActionButton : @YES,
+      KINWebBrowserShowsProgressView : @YES
+    };
+}
+
 
 #pragma mark - Public Interface
 
@@ -112,10 +168,12 @@ static NSString *const cancelActionTitle = @"Cancel";
     [self.webView.scrollView setAlwaysBounceVertical:YES];
     [self.view addSubview:self.webView];
     
-    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-    [self.progressView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.progressView.frame.size.height)];
-    [self.progressView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-    [self.view addSubview:self.progressView];
+    if([[self valueForOption:KINWebBrowserShowsProgressView] boolValue]) {
+        self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+        [self.progressView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.progressView.frame.size.height)];
+        [self.progressView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        [self.view addSubview:self.progressView];
+    }
     
     [self loadURL:self.URL];
 }
@@ -199,11 +257,18 @@ static NSString *const cancelActionTitle = @"Cancel";
     
     NSArray *barButtonItems;
     if(![self.webView isLoading]) {
-        barButtonItems = @[self.backButton, self.fixedSeparator, self.forwardButton, self.fixedSeparator, self.refreshButton, self.flexibleSeparator, self.actionButton];
+        barButtonItems = @[self.backButton, self.fixedSeparator, self.forwardButton, self.fixedSeparator, self.refreshButton, self.flexibleSeparator,];
     }
     else {
-        barButtonItems = @[self.backButton, self.fixedSeparator, self.forwardButton, self.fixedSeparator, self.stopButton, self.flexibleSeparator, self.actionButton];
+        barButtonItems = @[self.backButton, self.fixedSeparator, self.forwardButton, self.fixedSeparator, self.stopButton, self.flexibleSeparator];
     }
+    
+    if([[self valueForOption:KINWebBrowserShowsActionButton] boolValue]) {
+        NSMutableArray *mutableBarButtonItems = [NSMutableArray arrayWithArray:barButtonItems];
+        [mutableBarButtonItems addObject:self.actionButton];
+        barButtonItems = [NSArray arrayWithArray:mutableBarButtonItems];
+    }
+    
     [self setToolbarItems:barButtonItems animated:YES];
 }
 
