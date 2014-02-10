@@ -45,7 +45,8 @@
 @interface KINWebBrowserViewController ()
 
 @property (nonatomic, assign) BOOL previousNavigationControllerToolbarHidden, previousNavigationControllerNavigationBarHidden;
-@property (nonatomic, strong) UIBarButtonItem *backButton, *forwardButton, *refreshButton, *actionButton;
+@property (nonatomic, assign) BOOL loading;
+@property (nonatomic, strong) UIBarButtonItem *backButton, *forwardButton, *refreshButton, *stopButton, *actionButton, *fixedSeparator, *flexibleSeparator;
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) NSTimer *progressTimer;
 @property (nonatomic, strong) NSURL *URL;
@@ -76,7 +77,6 @@
 - (void)loadURL:(NSURL *)URL {
     _URL = URL;
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.URL]];
-    [self didStartLoading];
 }
 
 - (void)loadURLString:(NSString *)URLString {
@@ -104,13 +104,12 @@
     [self.webView.scrollView setAlwaysBounceVertical:YES];
     [self.view addSubview:self.webView];
     
-    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     [self.progressView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.progressView.frame.size.height)];
     [self.progressView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self.view addSubview:self.progressView];
     
     [self loadURL:self.URL];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -118,20 +117,7 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationController setToolbarHidden:NO animated:YES];
-    
-    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshButtonPressed:)];
-    self.backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backbutton"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed:)];
-    self.forwardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"forwardbutton"] style:UIBarButtonItemStylePlain target:self action:@selector(forwardButtonPressed:)];
-    self.actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonPressed:)];
-    
-    UIBarButtonItem *fixedSeparator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    fixedSeparator.width = 50.0f;
-    
-    UIBarButtonItem *flexibleSeparator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    NSArray *barButtonItems = @[self.backButton, fixedSeparator, self.forwardButton, fixedSeparator, self.refreshButton, flexibleSeparator, self.actionButton];
-    [self setToolbarItems:barButtonItems animated:NO];
-    
+
     [self updateToolbarState];
 }
 
@@ -144,6 +130,9 @@
 #pragma mark - UIWebViewDelegate Protocol Implementation
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
+    if(!self.loading) {
+        [self didStartLoading];
+    }
     [self updateToolbarState];
 }
 
@@ -163,11 +152,13 @@
 #pragma mark - Loading States
 
 - (void)didStartLoading {
+    self.loading = YES;
     [self progressViewStartLoading];
     [self updateToolbarState];
 }
 
 - (void)didFinishLoading {
+    self.loading = NO;
     [self progressBarStopLoading];
     [self updateToolbarState];
 }
@@ -177,6 +168,30 @@
 - (void)updateToolbarState {
     [self.backButton setEnabled:self.webView.canGoBack];
     [self.forwardButton setEnabled:self.webView.canGoForward];
+    
+    if(!self.backButton) {
+        [self setupToolbarItems];
+    }
+    
+    NSArray *barButtonItems;
+    if(![self.webView isLoading]) {
+        barButtonItems = @[self.backButton, self.fixedSeparator, self.forwardButton, self.fixedSeparator, self.refreshButton, self.flexibleSeparator, self.actionButton];
+    }
+    else {
+        barButtonItems = @[self.backButton, self.fixedSeparator, self.forwardButton, self.fixedSeparator, self.stopButton, self.flexibleSeparator, self.actionButton];
+    }
+    [self setToolbarItems:barButtonItems animated:YES];
+}
+
+- (void)setupToolbarItems {
+    self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshButtonPressed:)];
+    self.stopButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stopButtonPressed:)];
+    self.backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backbutton"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed:)];
+    self.forwardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"forwardbutton"] style:UIBarButtonItemStylePlain target:self action:@selector(forwardButtonPressed:)];
+    self.actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonPressed:)];
+    self.fixedSeparator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    self.fixedSeparator.width = 50.0f;
+    self.flexibleSeparator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 }
 
 #pragma mark - Done Button Action
@@ -200,20 +215,26 @@
 - (void)refreshButtonPressed:(id)sender {
     [self.webView stopLoading];
     [self.webView reload];
+    [self didStartLoading];
+}
+
+- (void)stopButtonPressed:(id)sender {
+    [self.webView stopLoading];
 }
 
 - (void)actionButtonPressed:(id)sender {
-    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[self.self.webView.request.URL] applicationActivities:nil];
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[self.webView.request.URL] applicationActivities:nil];
     [self presentViewController:activityController animated:YES completion:nil];
 }
 
 #pragma mark - Fake Progress Bar Control
 
 - (void)progressViewStartLoading {
+    [self.progressView setProgress:0.0f animated:NO];
+    [self.progressView setAlpha:1.0f];
+    [self.progressView setHidden:NO];
+
     if(!self.progressTimer) {
-        [self.progressView setAlpha:1.0f];
-        [self.progressView setHidden:NO];
-        [self.progressView setProgress:0 animated:NO];
         self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f/60.f target:self selector:@selector(timerDidFire:) userInfo:nil repeats:YES];
     }
 }
