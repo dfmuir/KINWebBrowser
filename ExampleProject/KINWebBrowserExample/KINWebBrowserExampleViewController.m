@@ -56,6 +56,8 @@ static NSString *const defaultAddress = @"http://www.apple.com/";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.navigationController setToolbarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning

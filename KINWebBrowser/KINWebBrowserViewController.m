@@ -97,12 +97,10 @@
 
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.webView setDelegate:self];
-    [self.webView setOpaque:NO];
     [self.webView setMultipleTouchEnabled:YES];
     [self.webView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [self.webView setAutoresizesSubviews:YES];
     [self.webView setScalesPageToFit:YES];
-    [self.webView.scrollView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     [self.webView.scrollView setAlwaysBounceVertical:YES];
     [self.view addSubview:self.webView];
     
@@ -118,7 +116,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController setToolbarHidden:NO animated:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setToolbarHidden:NO animated:YES];
     
     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshButtonPressed:)];
     self.backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backbutton"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed:)];
@@ -130,7 +129,7 @@
     
     UIBarButtonItem *flexibleSeparator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    NSArray *barButtonItems = @[self.refreshButton, flexibleSeparator, self.backButton, fixedSeparator, self.forwardButton, flexibleSeparator, self.actionButton];
+    NSArray *barButtonItems = @[self.backButton, fixedSeparator, self.forwardButton, fixedSeparator, self.refreshButton, flexibleSeparator, self.actionButton];
     [self setToolbarItems:barButtonItems animated:NO];
     
     [self updateToolbarState];
@@ -138,6 +137,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:self.previousNavigationControllerNavigationBarHidden animated:animated];
+    [self.navigationController setToolbarHidden:self.previousNavigationControllerToolbarHidden animated:animated];
 }
 
 #pragma mark - UIWebViewDelegate Protocol Implementation
@@ -218,8 +219,10 @@
 }
 
 - (void)progressBarStopLoading {
-    [self.progressTimer invalidate];
-    self.progressTimer = nil;
+    if(self.progressTimer) {
+        [self.progressTimer invalidate];
+        self.progressTimer = nil;
+    }
     
     [self.progressView setProgress:1.0f animated:YES];
     [UIView animateWithDuration:0.3 delay:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -242,8 +245,6 @@
 #pragma mark - Dismiss
 
 - (void)dismissAnimated:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:self.previousNavigationControllerNavigationBarHidden animated:animated];
-    [self.navigationController setToolbarHidden:self.previousNavigationControllerToolbarHidden animated:animated];
     [self.navigationController dismissViewControllerAnimated:animated completion:nil];
 }
 
