@@ -363,12 +363,14 @@ static NSString *const cancelActionTitle = @"Cancel";
         [self.progressTimer invalidate];
     }
     
-    [self.progressView setProgress:1.0f animated:YES];
-    [UIView animateWithDuration:0.3 delay:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        [self.progressView setAlpha:0.0f];
-    } completion:^(BOOL finished) {
-        [self.progressView setHidden:YES];
-    }];
+    if(self.progressView) {
+        [self.progressView setProgress:1.0f animated:YES];
+        [UIView animateWithDuration:0.3 delay:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            [self.progressView setAlpha:0.0f];
+        } completion:^(BOOL finished) {
+            [self.progressView setHidden:YES];
+        }];
+    }
 }
 
 - (void)timerDidFire:(id)sender {
