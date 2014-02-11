@@ -128,7 +128,7 @@ static NSString *const cancelActionTitle = @"Cancel";
       KINWebBrowserShowsActionButton : @YES,
       KINWebBrowserShowsProgressView : @YES,
       KINWebBrowserRestoresNavigationBarState : @YES,
-      KINWebBrowserRestoresToolbarState : @NO
+      KINWebBrowserRestoresToolbarState : @YES
       };
 }
 
