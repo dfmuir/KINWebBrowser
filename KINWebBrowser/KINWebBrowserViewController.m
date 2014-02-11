@@ -200,8 +200,9 @@ static NSString *const cancelActionTitle = @"Cancel";
     }
     
     if([[self valueForOption:KINWebBrowserRestoresToolbarState] boolValue]) {
-        [self.navigationController setToolbarHidden:self.previousNavigationControllerToolbarHidden animated:animated];
+        [self.navigationController setNavigationBarHidden:self.previousNavigationControllerToolbarHidden animated:animated];
     }
+
     
     [self.progressView removeFromSuperview];
 }
