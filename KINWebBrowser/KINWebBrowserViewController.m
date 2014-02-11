@@ -54,7 +54,6 @@ NSString *const KINWebBrowserShowsProgressView = @"com.kinwa.KINWebBrowser.shows
 @property (nonatomic, assign) BOOL previousNavigationControllerToolbarHidden, previousNavigationControllerNavigationBarHidden;
 @property (nonatomic, assign) BOOL loading;
 @property (nonatomic, strong) UIBarButtonItem *backButton, *forwardButton, *refreshButton, *stopButton, *actionButton, *fixedSeparator, *flexibleSeparator;
-@property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) NSTimer *progressTimer;
 @property (nonatomic, strong) NSURL *URL;
 

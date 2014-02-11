@@ -76,8 +76,12 @@ FOUNDATION_EXPORT NSString *const KINWebBrowserShowsProgressView;
 
 @property (nonatomic, weak) id <KINWebBrowserDelegate> delegate;
 
-// The main and only webview
+// The main and only UIWebView
 @property (nonatomic, strong) UIWebView *webView;
+
+// The main and only UIProgressView
+@property (nonatomic, strong) UIProgressView *progressView;
+
 
 #pragma mark - Static Initializers
 
