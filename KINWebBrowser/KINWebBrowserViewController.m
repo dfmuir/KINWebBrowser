@@ -362,7 +362,6 @@ static NSString *const cancelActionTitle = @"Cancel";
 - (void)progressBarStopLoading {
     if(self.progressTimer) {
         [self.progressTimer invalidate];
-        self.progressTimer = nil;
     }
     
     [self.progressView setProgress:1.0f animated:YES];
