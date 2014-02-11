@@ -132,7 +132,7 @@ static NSString *const cancelActionTitle = @"Cancel";
     @{
       KINWebBrowserShowsActionButton : @YES,
       KINWebBrowserShowsProgressView : @YES
-    };
+      };
 }
 
 
@@ -174,8 +174,6 @@ static NSString *const cancelActionTitle = @"Cancel";
         [self.progressView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [self.view addSubview:self.progressView];
     }
-    
-    [self loadURL:self.URL];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -185,6 +183,14 @@ static NSString *const cancelActionTitle = @"Cancel";
     [self.navigationController setToolbarHidden:NO animated:YES];
     
     [self updateToolbarState];
+    
+    if(!self.webView.request && self.URL) {
+        [self loadURL:self.URL];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
