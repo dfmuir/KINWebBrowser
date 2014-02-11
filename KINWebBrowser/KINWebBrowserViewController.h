@@ -44,9 +44,9 @@ FOUNDATION_EXPORT NSString *const KINWebBrowserShowsProgressView;
 
 /*
  
-UINavigationController+KINWebBrowserWrapper category enables access to casted KINWebBroswerViewController when set as rootViewController of UINavigationController
+ UINavigationController+KINWebBrowserWrapper category enables access to casted KINWebBroswerViewController when set as rootViewController of UINavigationController
  
-*/
+ */
 @interface UINavigationController(KINWebBrowserWrapper)
 
 // Returns rootViewController casted as KINWebBrowserViewController
@@ -55,15 +55,26 @@ UINavigationController+KINWebBrowserWrapper category enables access to casted KI
 @end
 
 
+
+@protocol KINWebBrowserDelegate <NSObject>
+@optional
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didBeginLoadingRequest:(NSURLRequest *)request;
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFinishLoadingRequest:(NSURLRequest *)request;
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFailToLoadRequest:(NSURLRequest *)request withError:(NSError *)error;
+@end
+
+
 /*
  
-KINWebBrowserViewController is designed to be used inside of a UINavigationController.
-For convenience, two sets of static initializers are available.
+ KINWebBrowserViewController is designed to be used inside of a UINavigationController.
+ For convenience, two sets of static initializers are available.
  
-*/
+ */
 @interface KINWebBrowserViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate, UIActionSheetDelegate>
 
 #pragma mark - Public Properties
+
+@property (nonatomic, weak) id <KINWebBrowserDelegate> delegate;
 
 // The main and only webview
 @property (nonatomic, strong) UIWebView *webView;

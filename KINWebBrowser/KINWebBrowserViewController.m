@@ -132,7 +132,7 @@ static NSString *const cancelActionTitle = @"Cancel";
     @{
       KINWebBrowserShowsActionButton : @YES,
       KINWebBrowserShowsProgressView : @YES
-      };
+    };
 }
 
 
@@ -210,6 +210,10 @@ static NSString *const cancelActionTitle = @"Cancel";
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    if([self.delegate respondsToSelector:@selector(webBrowser:didFailToLoadRequest:withError:)]) {
+        [self.delegate webBrowser:self didFailToLoadRequest:self.webView.request withError:error];
+    }
+    
     if(!self.webView.isLoading) {
         [self didFinishLoading];
     }
@@ -237,12 +241,19 @@ static NSString *const cancelActionTitle = @"Cancel";
     self.loading = YES;
     [self progressViewStartLoading];
     [self updateToolbarState];
+    if([self.delegate respondsToSelector:@selector(webBrowser:didBeginLoadingRequest:)]) {
+        [self.delegate webBrowser:self didBeginLoadingRequest:self.webView.request];
+    }
 }
 
 - (void)didFinishLoading {
     self.loading = NO;
     [self progressBarStopLoading];
     [self updateToolbarState];
+    
+    if([self.delegate respondsToSelector:@selector(webBrowser:didFinishLoadingRequest:)]) {
+        [self.delegate webBrowser:self didFinishLoadingRequest:self.webView.request];
+    }
 }
 
 #pragma mark - Toolbar State

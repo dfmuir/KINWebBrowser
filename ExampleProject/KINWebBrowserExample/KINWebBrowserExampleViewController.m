@@ -33,7 +33,6 @@
 
 #import "KINWebBrowserExampleViewController.h"
 
-#import "KINWebBrowserViewController.h"
 
 @interface KINWebBrowserExampleViewController ()
 
@@ -66,19 +65,36 @@ static NSString *const defaultAddress = @"http://www.apple.com/";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - KINWebBrowserDelegate Protocol Implementation
+
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didBeginLoadingRequest:(NSURLRequest *)request {
+    NSLog(@"Began Loading Request: %@", request.URL);
+}
+
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFinishLoadingRequest:(NSURLRequest *)request {
+    NSLog(@"Finished Loading Request : %@", request.URL);
+}
+
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFailToLoadRequest:(NSURLRequest *)request withError:(NSError *)error {
+    NSLog(@"Failed To Load Request : %@ With Error: %@", request.URL, error);
+}
+
+
 #pragma mark - IBActions
 
 - (IBAction)pushButtonPressed:(id)sender {
     KINWebBrowserViewController *webBrowser = [KINWebBrowserViewController webBrowser];
+    [webBrowser setDelegate:self];
     [self.navigationController pushViewController:webBrowser animated:YES];
     [webBrowser loadURLString:defaultAddress];
 }
 
 - (IBAction)presentButtonPressed:(id)sender {
     UINavigationController *webBrowserNavigationController = [KINWebBrowserViewController navigationControllerWithWebBrowser];
-    [self presentViewController:webBrowserNavigationController animated:YES completion:nil];
-                                                              
     KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWebBrowserViewController];
+    [webBrowser setDelegate:self];
+    [self presentViewController:webBrowserNavigationController animated:YES completion:nil];
+
     [webBrowser loadURLString:defaultAddress];
 }
 @end

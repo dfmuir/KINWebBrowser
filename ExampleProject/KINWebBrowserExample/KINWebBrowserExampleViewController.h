@@ -33,7 +33,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KINWebBrowserExampleViewController : UIViewController
+#import "KINWebBrowserViewController.h"
+
+
+@interface KINWebBrowserExampleViewController : UIViewController <KINWebBrowserDelegate>
 
 - (IBAction)pushButtonPressed:(id)sender;
 - (IBAction)presentButtonPressed:(id)sender;
