@@ -35,6 +35,8 @@
 
 NSString *const KINWebBrowserShowsActionButton = @"com.kinwa.KINWebBrowser.showsActionButton";
 NSString *const KINWebBrowserShowsProgressView = @"com.kinwa.KINWebBrowser.showsProgressView";
+NSString *const KINWebBrowserRestoresNavigationBarState = @"com.kinwa.KINWebBrowser.restoresNavigationBarState";
+NSString *const KINWebBrowserRestoresToolbarState = @"com.kinwa.KINWebBrowser.restoresToolbarState";
 
 
 
@@ -61,16 +63,10 @@ NSString *const KINWebBrowserShowsProgressView = @"com.kinwa.KINWebBrowser.shows
 
 @implementation KINWebBrowserViewController
 
-
-
-
 static NSString *const safariActionTitle = @"Open in Safari";
 static NSString *const chromeActionTitle = @"Open in Chrome";
 static NSString *const copyActionTitle = @"Copy URL";
 static NSString *const cancelActionTitle = @"Cancel";
-
-
-
 
 #pragma mark - Static Initializers
 
@@ -130,7 +126,9 @@ static NSString *const cancelActionTitle = @"Cancel";
     return
     @{
       KINWebBrowserShowsActionButton : @YES,
-      KINWebBrowserShowsProgressView : @YES
+      KINWebBrowserShowsProgressView : @YES,
+      KINWebBrowserRestoresNavigationBarState : @YES,
+      KINWebBrowserRestoresToolbarState : @NO
       };
 }
 
@@ -196,8 +194,15 @@ static NSString *const cancelActionTitle = @"Cancel";
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:self.previousNavigationControllerNavigationBarHidden animated:animated];
-    [self.navigationController setToolbarHidden:self.previousNavigationControllerToolbarHidden animated:animated];
+    
+    if([[self valueForOption:KINWebBrowserRestoresNavigationBarState] boolValue]) {
+        [self.navigationController setNavigationBarHidden:self.previousNavigationControllerNavigationBarHidden animated:animated];
+    }
+    
+    if([[self valueForOption:KINWebBrowserRestoresToolbarState] boolValue]) {
+        [self.navigationController setToolbarHidden:self.previousNavigationControllerToolbarHidden animated:animated];
+    }
+    
     [self.progressView removeFromSuperview];
 }
 
