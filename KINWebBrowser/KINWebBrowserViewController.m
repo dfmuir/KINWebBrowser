@@ -169,7 +169,7 @@ static NSString *const cancelActionTitle = @"Cancel";
         self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
         [self.progressView setTrackTintColor:[UIColor colorWithWhite:1.0f alpha:0.0f]];
         [self.progressView setFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height-self.progressView.frame.size.height, self.view.frame.size.width, self.progressView.frame.size.height)];
-        [self.progressView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        [self.progressView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
     }
 }
 
