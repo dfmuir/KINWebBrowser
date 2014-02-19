@@ -3,7 +3,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "KINWebBrowser"
-  s.version      = "0.2.2"
+  s.version      = "0.2.3"
   s.summary      = "Embed a Safari-like web browser in your iOS 7 apps. Push to UINavigationController or present modally."
 
   s.description  = <<-DESC
