@@ -19,7 +19,7 @@ KINWebBrowserViewController *webBrowser = [KINWebBrowserViewController webBrowse
 
 **Presenting Modally:**
 ```objc
-UINavigationController *webBrowserNavigationController = [KINWebBrowserViewController navigationControllerWithRootWebBrowserViewController];
+UINavigationController *webBrowserNavigationController = [KINWebBrowserViewController navigationControllerWithWebBrowser];
 [self presentViewController:webBrowserNavigationController animated:YES completion:nil];
 
 KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWebBrowserViewController];
