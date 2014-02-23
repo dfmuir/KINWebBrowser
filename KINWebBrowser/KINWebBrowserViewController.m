@@ -200,10 +200,10 @@ static NSString *const cancelActionTitle = @"Cancel";
     }
     
     if([[self valueForOption:KINWebBrowserRestoresToolbarState] boolValue]) {
-        [self.navigationController setNavigationBarHidden:self.previousNavigationControllerToolbarHidden animated:animated];
+        [self.navigationController setToolbarHidden:self.previousNavigationControllerToolbarHidden animated:animated];
     }
-
     
+    [self.webView setDelegate:nil];
     [self.progressView removeFromSuperview];
 }
 
@@ -434,7 +434,6 @@ static NSString *const cancelActionTitle = @"Cancel";
 - (BOOL)canOpenGoogleChrome {
     return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"googlechrome://"]];
 }
-
 
 #pragma mark - Dismiss
 
