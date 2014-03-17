@@ -138,6 +138,9 @@ static NSString *const cancelActionTitle = @"Cancel";
 - (void)loadURL:(NSURL *)URL {
     _URL = URL;
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.URL]];
+
+    NSString *pageTitle = [URL absoluteString];
+    self.title = pageTitle;
 }
 
 - (void)loadURLString:(NSString *)URLString {
@@ -217,6 +220,9 @@ static NSString *const cancelActionTitle = @"Cancel";
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSString *pageTitle = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    self.title = pageTitle;
+
     [self updateToolbarState];
     if(!self.webView.isLoading) {
         [self didFinishLoading];
