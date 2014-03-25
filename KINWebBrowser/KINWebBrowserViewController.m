@@ -467,5 +467,11 @@ static NSString *const cancelActionTitle = @"Cancel";
     return YES;
 }
 
+#pragma mark - Dealloc
+
+- (void)dealloc {
+    [self.webView setDelegate:nil];
+}
+
 
 @end
