@@ -41,6 +41,10 @@
 FOUNDATION_EXPORT NSString *const KINWebBrowserShowsActionButton;
 // Show the UIProgressView along the bottom of the UINavigationBar to show loading progress
 FOUNDATION_EXPORT NSString *const KINWebBrowserShowsProgressView;
+// Show the page title in the navigation bar after the page has loaded
+FOUNDATION_EXPORT NSString *const KINWebBrowserShowsPageTitleInNavigationBar;
+// Show the page URL in the navigation bar while the page is loading
+FOUNDATION_EXPORT NSString *const KINWebBrowserShowsPageURLInNavigationBar;
 // Restore the hidden state of the UINavigationController navigationBar
 FOUNDATION_EXPORT NSString *const KINWebBrowserRestoresNavigationBarState;
 // Restore the hidden state of the UINavigationController toolbar

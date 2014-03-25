@@ -35,6 +35,8 @@
 
 NSString *const KINWebBrowserShowsActionButton = @"com.kinwa.KINWebBrowser.showsActionButton";
 NSString *const KINWebBrowserShowsProgressView = @"com.kinwa.KINWebBrowser.showsProgressView";
+NSString *const KINWebBrowserShowsPageTitleInNavigationBar = @"com.kinwa.KINWebBrowser.showsTitleInNavigationBar";
+NSString *const KINWebBrowserShowsPageURLInNavigationBar = @"com.kinwa.KINWebBrowser.showsURLInNavigationBar";
 NSString *const KINWebBrowserRestoresNavigationBarState = @"com.kinwa.KINWebBrowser.restoresNavigationBarState";
 NSString *const KINWebBrowserRestoresToolbarState = @"com.kinwa.KINWebBrowser.restoresToolbarState";
 
@@ -127,6 +129,8 @@ static NSString *const cancelActionTitle = @"Cancel";
     @{
       KINWebBrowserShowsActionButton : @YES,
       KINWebBrowserShowsProgressView : @YES,
+      KINWebBrowserShowsPageTitleInNavigationBar : @YES,
+      KINWebBrowserShowsPageURLInNavigationBar : @NO,
       KINWebBrowserRestoresNavigationBarState : @YES,
       KINWebBrowserRestoresToolbarState : @YES
       };
@@ -138,6 +142,7 @@ static NSString *const cancelActionTitle = @"Cancel";
 - (void)loadURL:(NSURL *)URL {
     _URL = URL;
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.URL]];
+    
 }
 
 - (void)loadURLString:(NSString *)URLString {
@@ -283,9 +288,20 @@ static NSString *const cancelActionTitle = @"Cancel";
     NSArray *barButtonItems;
     if(!self.loading) {
         barButtonItems = @[self.backButton, self.fixedSeparator, self.forwardButton, self.fixedSeparator, self.refreshButton, self.flexibleSeparator];
+        
+        if([[self valueForOption:KINWebBrowserShowsPageTitleInNavigationBar] boolValue]) {
+            self.navigationItem.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        }
+        else {
+            self.navigationItem.title = @"";
+        }
     }
     else {
         barButtonItems = @[self.backButton, self.fixedSeparator, self.forwardButton, self.fixedSeparator, self.stopButton, self.flexibleSeparator];
+        
+        if([[self valueForOption:KINWebBrowserShowsPageURLInNavigationBar] boolValue]) {
+            self.navigationItem.title = [self.URL absoluteString];
+        }
     }
     
     if([[self valueForOption:KINWebBrowserShowsActionButton] boolValue]) {
