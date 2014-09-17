@@ -1,0 +1,20 @@
+PODS:
+  - ARChromeActivity (1.0.2)
+  - KINWebBrowser (0.2.4):
+    - ARChromeActivity
+    - TUSafariActivity
+  - TUSafariActivity (1.0.0)
+
+DEPENDENCIES:
+  - KINWebBrowser (from `../KINWebBrowser.podspec`)
+
+EXTERNAL SOURCES:
+  KINWebBrowser:
+    :path: ../KINWebBrowser.podspec
+
+SPEC CHECKSUMS:
+  ARChromeActivity: 437b3e0c4cc43c19d7dd1af55bea98e008335151
+  KINWebBrowser: dcef431ca5c1812e99f96f72d441005938588cdc
+  TUSafariActivity: afff9b1d2eacf7cbace752c5f2bf56db852714de
+
+COCOAPODS: 0.33.1

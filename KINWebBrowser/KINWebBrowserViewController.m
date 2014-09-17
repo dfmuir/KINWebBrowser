@@ -30,6 +30,8 @@
 //  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#import <TUSafariActivity/TUSafariActivity.h>
+#import <ARChromeActivity/ARChromeActivity.h>
 
 #import "KINWebBrowserViewController.h"
 
@@ -60,6 +62,7 @@ NSString *const KINWebBrowserRestoresToolbarState = @"com.kinwa.KINWebBrowser.re
 @property (nonatomic, strong) UIBarButtonItem *backButton, *forwardButton, *refreshButton, *stopButton, *actionButton, *fixedSeparator, *flexibleSeparator;
 @property (nonatomic, strong) NSTimer *progressTimer;
 @property (nonatomic, strong) NSURL *URL;
+@property (nonatomic, strong) UIPopoverController *actionPopoverController;
 
 @end
 
@@ -355,17 +358,22 @@ static NSString *const cancelActionTitle = @"Cancel";
 
 - (void)actionButtonPressed:(id)sender {
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
-        [actionSheet setDelegate:self];
-        [actionSheet addButtonWithTitle:safariActionTitle];
-        if([self canOpenGoogleChrome]) {
-            [actionSheet addButtonWithTitle:chromeActionTitle];
+        TUSafariActivity *openInSafari = [[TUSafariActivity alloc] init];
+        ARChromeActivity *openInChrome = [[ARChromeActivity alloc] init];
+        UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[ self.URL ]
+                                                                                 applicationActivities:@[ openInSafari, openInChrome ]];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            if (self.actionPopoverController) {
+                [self.actionPopoverController dismissPopoverAnimated:YES];
+            }
+            self.actionPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+            [self.actionPopoverController presentPopoverFromBarButtonItem:self.actionButton
+                                                 permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                                 animated:YES];
+            
+        } else {
+            [self presentViewController:controller animated:YES completion:NULL];
         }
-        [actionSheet addButtonWithTitle:copyActionTitle];
-        [actionSheet addButtonWithTitle:cancelActionTitle];
-        [actionSheet setCancelButtonIndex:[actionSheet numberOfButtons]-1];
-        
-        [actionSheet showFromToolbar:self.navigationController.toolbar];
     });
 }
 
