@@ -78,7 +78,7 @@ FOUNDATION_EXPORT NSString *const KINWebBrowserRestoresToolbarState;
  For convenience, two sets of static initializers are available.
  
  */
-@interface KINWebBrowserViewController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate, UIActionSheetDelegate>
+@interface KINWebBrowserViewController : UIViewController <UIWebViewDelegate>
 
 #pragma mark - Public Properties
 

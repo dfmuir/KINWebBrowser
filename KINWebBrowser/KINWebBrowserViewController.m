@@ -68,11 +68,6 @@ NSString *const KINWebBrowserRestoresToolbarState = @"com.kinwa.KINWebBrowser.re
 
 @implementation KINWebBrowserViewController
 
-static NSString *const safariActionTitle = @"Open in Safari";
-static NSString *const chromeActionTitle = @"Open in Chrome";
-static NSString *const copyActionTitle = @"Copy URL";
-static NSString *const cancelActionTitle = @"Cancel";
-
 #pragma mark - Static Initializers
 
 + (KINWebBrowserViewController *)webBrowser {
@@ -241,22 +236,6 @@ static NSString *const cancelActionTitle = @"Cancel";
     }
 }
 
-#pragma mark - UIActionSheetDelegate Protocol Implementation
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
-    if([title isEqualToString:safariActionTitle]) {
-        [self openInSafari];
-    }
-    else if([title isEqualToString:chromeActionTitle]) {
-        [self openInChrome];
-    }
-    else if([title isEqualToString:copyActionTitle]) {
-        [self copyURL];
-    }
-}
-
-
 #pragma mark - Loading States
 
 - (void)didStartLoading {
@@ -414,50 +393,6 @@ static NSString *const cancelActionTitle = @"Cancel";
     }
 }
 
-#pragma mark - Actions
-
-- (void)openInSafari {
-    NSURL *URL = self.webView.request.URL;
-    [[UIApplication sharedApplication] openURL:URL];
-}
-
-- (void)openInChrome {
-    NSURL *URL = self.webView.request.URL;
-    
-    NSString *chromeScheme = nil;
-    if ([URL.scheme isEqualToString:@"http"]) {
-        chromeScheme = @"googlechrome";
-    }
-    else if ([URL.scheme isEqualToString:@"https"]) {
-        chromeScheme = @"googlechromes";
-    }
-    
-    if (chromeScheme) {
-        NSString *absoluteString = [URL absoluteString];
-        NSRange rangeForScheme = [absoluteString rangeOfString:@":"];
-        NSString *urlNoScheme =
-        [absoluteString substringFromIndex:rangeForScheme.location];
-        NSString *chromeURLString =
-        [chromeScheme stringByAppendingString:urlNoScheme];
-        NSURL *chromeURL = [NSURL URLWithString:chromeURLString];
-        
-        [[UIApplication sharedApplication] openURL:chromeURL];
-    }
-}
-
-- (void)copyURL {
-    NSURL *URL = self.webView.request.URL;
-    NSString *URLString = [URL absoluteString];
-    
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    [pasteboard setString:URLString];
-}
-
-#pragma mark - Determine If Actions Are Possible
-
-- (BOOL)canOpenGoogleChrome {
-    return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"googlechrome://"]];
-}
 
 #pragma mark - Dismiss
 
