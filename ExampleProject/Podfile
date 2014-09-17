@@ -1,0 +1,6 @@
+inhibit_all_warnings!
+
+xcodeproj 'KINWebBrowserExample.xcodeproj'
+platform :ios, :deployment_target => '7.0'
+
+pod "KINWebBrowser", path: '../KINWebBrowser.podspec'
