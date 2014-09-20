@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
 
   s.name         = "KINWebBrowser"
   s.version      = "0.2.5"
-  s.summary      = "Embed a Safari-like web browser in your iOS 7 apps. Push to UINavigationController or present modally."
+  s.summary      = "A full featured web browser module for your iOS apps."
 
   s.description  = <<-DESC
                    KINWebBrowser is a Safari-like web browser compatible with iOS 7 for use within existing iOS projects. It features, back/forward buttons, reload button, and action button. It also features a Safari-like progress view under the navigation bar.
