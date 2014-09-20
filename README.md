@@ -3,10 +3,13 @@ KINWebBrowser
 
 KINWebBrowser is a web browser module for your apps. Compatible with iPhone and iPad devices running iOS 7 & 8.
 
+![KINWebBrowser Screenshots](http://i.imgur.com/z1jkWKG.png)
+
 Features
 ------------------------
-* iOS 7 & 8 support
+* iOS 7 & 8 support for iPhone and iPad
 * Customizable UI
+* Portrait and landscape orientation support
 * Use with existing UINavigationController or present modally
 * Load URL from `NSURL` or `NSString`
 * Delegate protocol for status callbacks
