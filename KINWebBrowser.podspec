@@ -3,7 +3,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "KINWebBrowser"
-  s.version      = "0.2.4"
+  s.version      = "0.2.5"
   s.summary      = "Embed a Safari-like web browser in your iOS 7 apps. Push to UINavigationController or present modally."
 
   s.description  = <<-DESC
@@ -18,5 +18,8 @@ Pod::Spec.new do |s|
   s.source_files  = 'KINWebBrowser', 'KINWebBrowser/**/*.{h,m}'
   s.resources = "Assets/*.png"
   s.requires_arc = true
+  
+  s.dependency 'TUSafariActivity'
+  s.dependency 'ARChromeActivity'
 
 end

@@ -30,6 +30,8 @@
 //  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#import <TUSafariActivity/TUSafariActivity.h>
+#import <ARChromeActivity/ARChromeActivity.h>
 
 #import "KINWebBrowserViewController.h"
 
@@ -60,15 +62,11 @@ NSString *const KINWebBrowserRestoresToolbarState = @"com.kinwa.KINWebBrowser.re
 @property (nonatomic, strong) UIBarButtonItem *backButton, *forwardButton, *refreshButton, *stopButton, *actionButton, *fixedSeparator, *flexibleSeparator;
 @property (nonatomic, strong) NSTimer *progressTimer;
 @property (nonatomic, strong) NSURL *URL;
+@property (nonatomic, strong) UIPopoverController *actionPopoverController;
 
 @end
 
 @implementation KINWebBrowserViewController
-
-static NSString *const safariActionTitle = @"Open in Safari";
-static NSString *const chromeActionTitle = @"Open in Chrome";
-static NSString *const copyActionTitle = @"Copy URL";
-static NSString *const cancelActionTitle = @"Cancel";
 
 #pragma mark - Static Initializers
 
@@ -238,22 +236,6 @@ static NSString *const cancelActionTitle = @"Cancel";
     }
 }
 
-#pragma mark - UIActionSheetDelegate Protocol Implementation
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
-    if([title isEqualToString:safariActionTitle]) {
-        [self openInSafari];
-    }
-    else if([title isEqualToString:chromeActionTitle]) {
-        [self openInChrome];
-    }
-    else if([title isEqualToString:copyActionTitle]) {
-        [self copyURL];
-    }
-}
-
-
 #pragma mark - Loading States
 
 - (void)didStartLoading {
@@ -355,17 +337,22 @@ static NSString *const cancelActionTitle = @"Cancel";
 
 - (void)actionButtonPressed:(id)sender {
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
-        [actionSheet setDelegate:self];
-        [actionSheet addButtonWithTitle:safariActionTitle];
-        if([self canOpenGoogleChrome]) {
-            [actionSheet addButtonWithTitle:chromeActionTitle];
+        TUSafariActivity *openInSafari = [[TUSafariActivity alloc] init];
+        ARChromeActivity *openInChrome = [[ARChromeActivity alloc] init];
+        UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[ self.URL ]
+                                                                                 applicationActivities:@[ openInSafari, openInChrome ]];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            if (self.actionPopoverController) {
+                [self.actionPopoverController dismissPopoverAnimated:YES];
+            }
+            self.actionPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+            [self.actionPopoverController presentPopoverFromBarButtonItem:self.actionButton
+                                                 permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                                 animated:YES];
+            
+        } else {
+            [self presentViewController:controller animated:YES completion:NULL];
         }
-        [actionSheet addButtonWithTitle:copyActionTitle];
-        [actionSheet addButtonWithTitle:cancelActionTitle];
-        [actionSheet setCancelButtonIndex:[actionSheet numberOfButtons]-1];
-        
-        [actionSheet showFromToolbar:self.navigationController.toolbar];
     });
 }
 
@@ -406,50 +393,6 @@ static NSString *const cancelActionTitle = @"Cancel";
     }
 }
 
-#pragma mark - Actions
-
-- (void)openInSafari {
-    NSURL *URL = self.webView.request.URL;
-    [[UIApplication sharedApplication] openURL:URL];
-}
-
-- (void)openInChrome {
-    NSURL *URL = self.webView.request.URL;
-    
-    NSString *chromeScheme = nil;
-    if ([URL.scheme isEqualToString:@"http"]) {
-        chromeScheme = @"googlechrome";
-    }
-    else if ([URL.scheme isEqualToString:@"https"]) {
-        chromeScheme = @"googlechromes";
-    }
-    
-    if (chromeScheme) {
-        NSString *absoluteString = [URL absoluteString];
-        NSRange rangeForScheme = [absoluteString rangeOfString:@":"];
-        NSString *urlNoScheme =
-        [absoluteString substringFromIndex:rangeForScheme.location];
-        NSString *chromeURLString =
-        [chromeScheme stringByAppendingString:urlNoScheme];
-        NSURL *chromeURL = [NSURL URLWithString:chromeURLString];
-        
-        [[UIApplication sharedApplication] openURL:chromeURL];
-    }
-}
-
-- (void)copyURL {
-    NSURL *URL = self.webView.request.URL;
-    NSString *URLString = [URL absoluteString];
-    
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    [pasteboard setString:URLString];
-}
-
-#pragma mark - Determine If Actions Are Possible
-
-- (BOOL)canOpenGoogleChrome {
-    return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"googlechrome://"]];
-}
 
 #pragma mark - Dismiss
 

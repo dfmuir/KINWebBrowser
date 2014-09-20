@@ -33,7 +33,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "KINWebBrowserViewController.h"
+#import <KINWebBrowser/KINWebBrowserViewController.h>
 
 
 @interface KINWebBrowserExampleViewController : UIViewController <KINWebBrowserDelegate>
