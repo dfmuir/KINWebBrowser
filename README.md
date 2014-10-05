@@ -50,7 +50,7 @@ Installation With CocoaPods
 
 ```ruby
 platform :ios, '7.0'
-pod 'KINWebBrowser', '~> 0.2.5'
+pod 'KINWebBrowser'
 ```
 
 
