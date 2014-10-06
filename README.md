@@ -21,7 +21,7 @@ Overview
 ------------------------
 KINWebBrowser consists of a single component:
 
-* `KINWebBrowserViewController` - a UIViewController that contains a full featured web browser.
+`KINWebBrowserViewController` - a UIViewController that contains a full featured web browser.
 
 *KINWebBrowserViewController must be contained in a UINavigationController.*
 
@@ -50,7 +50,7 @@ Installation With CocoaPods
 
 ```ruby
 platform :ios, '7.0'
-pod 'KINWebBrowser', '~> 0.2.5'
+pod 'KINWebBrowser'
 ```
 
 
