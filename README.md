@@ -24,11 +24,7 @@ Overview
 ------------------------
 KINWebBrowser consists of a single component:
 
-<<<<<<< HEAD
-`KINWebBrowserViewController` - a UIViewController that contains a full featured web browser.
-=======
 `KINWebBrowserViewController` - a `UIViewController` that contains a full featured web browser.
->>>>>>> wk
 
 *`KINWebBrowserViewController` must be contained in a UINavigationController.*
 
