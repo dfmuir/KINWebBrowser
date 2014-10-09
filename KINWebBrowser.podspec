@@ -24,12 +24,8 @@ Pod::Spec.new do |s|
   s.resources = "Assets/*.png"
   s.requires_arc = true
 
-<<<<<<< HEAD
   s.frameworks = 'WebKit'
-=======
   s.weak_frameworks = 'WebKit'
-
->>>>>>> wk
 
   s.dependency 'TUSafariActivity', '1.0.0'
   s.dependency 'ARChromeActivity', '1.0.2'
