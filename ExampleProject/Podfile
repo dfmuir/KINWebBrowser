@@ -1,6 +1,8 @@
-inhibit_all_warnings!
-
 xcodeproj 'KINWebBrowserExample.xcodeproj'
 platform :ios, :deployment_target => '7.0'
 
+<<<<<<< HEAD
 pod "KINWebBrowser"
+=======
+pod 'KINWebBrowser', '~> 1.0'
+>>>>>>> wk

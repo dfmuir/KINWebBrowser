@@ -3,11 +3,16 @@
 Pod::Spec.new do |s|
 
   s.name         = "KINWebBrowser"
+<<<<<<< HEAD
   s.version      = "0.2.6"
   s.summary      = "A full featured web browser module for your iOS apps."
+=======
+  s.version      = "1.0.0"
+  s.summary      = "A web browser module for your apps."
+>>>>>>> wk
 
   s.description  = <<-DESC
-                   KINWebBrowser is a Safari-like web browser compatible with iOS 7 for use within existing iOS projects. It features, back/forward buttons, reload button, and action button. It also features a Safari-like progress view under the navigation bar.
+                   KINWebBrowser is a web browser module for your apps. Powered by WKWebView on iOS 8. Backwards compatible with iOS 7 using UIWebView. KINWebBrowser offers the simplest way to add a web browser to your apps.
                    DESC
 
   s.homepage     = "https://github.com/dfmuir/KINWebBrowser"
@@ -19,7 +24,12 @@ Pod::Spec.new do |s|
   s.resources = "Assets/*.png"
   s.requires_arc = true
 
+<<<<<<< HEAD
   s.frameworks = 'WebKit'
+=======
+  s.weak_frameworks = 'WebKit'
+
+>>>>>>> wk
 
   s.dependency 'TUSafariActivity', '1.0.0'
   s.dependency 'ARChromeActivity', '1.0.2'

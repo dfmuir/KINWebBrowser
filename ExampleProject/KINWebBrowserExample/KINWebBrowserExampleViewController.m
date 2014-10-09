@@ -55,8 +55,16 @@ static NSString *const defaultAddress = @"http://www.apple.com/";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.navigationItem.title = @"";
+    
     [self.navigationController setToolbarHidden:YES];
     [self.navigationController setNavigationBarHidden:YES];
+    
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.toolbar.translucent = YES;
+    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,16 +75,16 @@ static NSString *const defaultAddress = @"http://www.apple.com/";
 
 #pragma mark - KINWebBrowserDelegate Protocol Implementation
 
-- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didBeginLoadingRequest:(NSURLRequest *)request {
-    NSLog(@"Began Loading Request: %@", request.URL);
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didStartLoadingURL:(NSURL *)URL {
+    NSLog(@"Started Loading URL : %@", URL);
 }
 
-- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFinishLoadingRequest:(NSURLRequest *)request {
-    NSLog(@"Finished Loading Request : %@", request.URL);
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFinishLoadingURL:(NSURL *)URL {
+    NSLog(@"Finished Loading URL : %@", URL);
 }
 
-- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFailToLoadRequest:(NSURLRequest *)request withError:(NSError *)error {
-    NSLog(@"Failed To Load Request : %@ With Error: %@", request.URL, error);
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFailToLoadURL:(NSURL *)URL withError:(NSError *)error {
+    NSLog(@"Failed To Load URL : %@ With Error: %@", URL, error);
 }
 
 
@@ -93,6 +101,9 @@ static NSString *const defaultAddress = @"http://www.apple.com/";
     UINavigationController *webBrowserNavigationController = [KINWebBrowserViewController navigationControllerWithWebBrowser];
     KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWebBrowserViewController];
     [webBrowser setDelegate:self];
+    webBrowser.showsURLInNavigationBar = YES;
+    webBrowser.tintColor = [UIColor whiteColor];
+    webBrowser.barTintColor = [UIColor blackColor];
     [self presentViewController:webBrowserNavigationController animated:YES completion:nil];
 
     [webBrowser loadURLString:defaultAddress];

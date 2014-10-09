@@ -1,17 +1,20 @@
 KINWebBrowser
 ==========
 
-KINWebBrowser is a web browser module for your apps. Compatible with iPhone and iPad devices running iOS 7 & 8.
+KINWebBrowser is a web browser module for your apps.
+
+Powered by [WKWebView](https://developer.apple.com/library/IOs/documentation/WebKit/Reference/WKWebView_Ref/index.html) on iOS 8. Backwards compatible with iOS 7 using [UIWebView](https://developer.apple.com/library/ios/documentation/Uikit/reference/UIWebView_Class/index.html).
 
 ![KINWebBrowser Screenshots](http://i.imgur.com/z1jkWKG.png)
 
 Features
 ------------------------
-* iOS 7 & 8 support for iPhone and iPad
-* Customizable UI
+* iOS 7 & 8 support for iPhone and iPad devices
+* Safari-like interface
+* Animated progress bar
+* Customizable UI including tint color
 * Portrait and landscape orientation support
 * Use with existing UINavigationController or present modally
-* Load URL from `NSURL` or `NSString`
 * Delegate protocol for status callbacks
 * Action button to allow users to copy URL, share, or open in Safari & Google Chrome
 * Supports subclassing
@@ -21,9 +24,13 @@ Overview
 ------------------------
 KINWebBrowser consists of a single component:
 
+<<<<<<< HEAD
 `KINWebBrowserViewController` - a UIViewController that contains a full featured web browser.
+=======
+`KINWebBrowserViewController` - a `UIViewController` that contains a full featured web browser.
+>>>>>>> wk
 
-*KINWebBrowserViewController must be contained in a UINavigationController.*
+*`KINWebBrowserViewController` must be contained in a UINavigationController.*
 
 **Pushing to the navigation stack:**
 ```objective-c
@@ -53,49 +60,35 @@ platform :ios, '7.0'
 pod 'KINWebBrowser'
 ```
 
+Customizing the User Interface
+------------------------
+
+**Tint Color**
+
+The tint color of the toolbars and toolbar items can be customized.
+
+```
+webBrowserViewController.tintColor = [UIColor blueColor];
+webBrowserViewController.barTintColor = [UIColor blackColor];
+```
+
+**Title Bar Content** 
+
+The URL can be shown in the `UINavigationBar` while loading. The <title> of the page can be shown when loading completes.
+```
+webBrowserViewController.showsURLInNavigationBar = NO;
+webBrowserViewController.showsPageTitleInNavigationBar = YES;
+```
+
 
 Implementing `KINWebBrowserDelegate` Protocol
 ------------------------
-`KINWebBrowserDelegate` is a set of `@optional` callback methods to inform the `delegate` of `NSURLRequest` status changes.
+`KINWebBrowserDelegate` is a set of `@optional` callback methods to inform the `delegate` of status changes.
 
-```- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didBeginLoadingRequest:(NSURLRequest *)request;```
-
-```- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFinishLoadingRequest:(NSURLRequest *)request;```
-
-```- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFailToLoadRequest:(NSURLRequest *)request withError:(NSError *)error;```
-
-
-Customizing the User Interface
-------------------------
-The user interface of `KINWebBrowserViewController` can be customized at initialization using an `NSDictionary` of boolean `NSNumber` values.
-
-```objective-c
-// Create an NSDictionary containing the keys and NSNumber booelan values 
-NSDictionary *options = @{
-                            KINWebBrowserShowsActionButton : @YES,
-                            KINWebBrowserShowsProgressView : @NO
-                        };
 ```
-```objective-c
-// Create a KINWebBrowserViewController instance with the specified options
-[KINWebBrowserViewController webBrowserWithOptions:options];
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didStartLoadingURL:(NSURL *)URL;
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFinishLoadingURL:(NSURL *)URL;
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFailToLoadURL:(NSURL *)URL withError:(NSError *)error;
 ```
 
-```objective-c
-/* Create a UINavigationController with the rootViewController containing
- an instance of KINWebBrowserViewController instance with the specified options */
- 
-[KINWebBrowserViewController navigationControllerWithWebBrowserWithOptions:options];
-```
 
-####The following values can be customized
-
-
-| Key | Default Value | Description
-|:----:|:----:|:--------------
-|`KINWebBrowserShowsActionButton` | YES | Shows the action button. When enabled the action button launches a UIActivityViewController with the URL to copy to the clipboard, share, or launch Safari or Google Chrome. This displays in a UIPopoverController on iPad devices.
-| `KINWebBrowserShowsProgressView` | YES | Shows a Safari-like progress view in the UINavigationBar that displays the loading progress of the request.
-| `KINWebBrowserShowsPageTitleInNavigationBar` | YES | Once loading is complete, shows the <title> of the URL in the UINavigationBar
-| `KINWebBrowserShowsPageURLInNavigationBar` | YES | During loading, shows the URL in the UINavigationBar
-| `KINWebBrowserRestoresNavigationBarState` | YES | Restores the `navigationBarHidden` state from before KINWebBrowserViewController was pushed onto the navigation stack. Useful since KINWebBrowserViewController explicitly sets `navigationBarHidden` to `NO`. There is very little reason to set this value to `NO`
-| `KINWebBrowserRestoresToolbarState` | YES | Restores the `toolbarBarHidden` state from before KINWebBrowserViewController was pushed onto the navigation stack. Useful since KINWebBrowserViewController explicitly sets `toolbarBarHidden` to `NO`.

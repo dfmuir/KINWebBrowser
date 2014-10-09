@@ -1,514 +1,1136 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		1453FA1643434A30B809DF01 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40569994F8ED4A0FB96EC6BA /* libPods.a */; };
-		3BBECF2918A1E58D00A2499D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2818A1E58D00A2499D /* Foundation.framework */; };
-		3BBECF2B18A1E58D00A2499D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2A18A1E58D00A2499D /* CoreGraphics.framework */; };
-		3BBECF2D18A1E58D00A2499D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2C18A1E58D00A2499D /* UIKit.framework */; };
-		3BBECF3318A1E58D00A2499D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BBECF3118A1E58D00A2499D /* InfoPlist.strings */; };
-		3BBECF3518A1E58D00A2499D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBECF3418A1E58D00A2499D /* main.m */; };
-		3BBECF3918A1E58D00A2499D /* KINAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBECF3818A1E58D00A2499D /* KINAppDelegate.m */; };
-		3BBECF3B18A1E58D00A2499D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BBECF3A18A1E58D00A2499D /* Images.xcassets */; };
-		3BBECF4218A1E58D00A2499D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF4118A1E58D00A2499D /* XCTest.framework */; };
-		3BBECF4318A1E58E00A2499D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2818A1E58D00A2499D /* Foundation.framework */; };
-		3BBECF4418A1E58E00A2499D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2C18A1E58D00A2499D /* UIKit.framework */; };
-		3BBECF4C18A1E58E00A2499D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BBECF4A18A1E58E00A2499D /* InfoPlist.strings */; };
-		3BBECF4E18A1E58E00A2499D /* KINWebBrowserExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBECF4D18A1E58E00A2499D /* KINWebBrowserExampleTests.m */; };
-		3BBECF6518A1EAB100A2499D /* KINWebBrowserExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBECF6318A1EAB100A2499D /* KINWebBrowserExampleViewController.m */; };
-		3BBECF6618A1EAB100A2499D /* KINWebBrowserExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BBECF6418A1EAB100A2499D /* KINWebBrowserExampleViewController.xib */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3BBECF4518A1E58E00A2499D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3BBECF1D18A1E58D00A2499D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3BBECF2418A1E58D00A2499D;
-			remoteInfo = KINWebBrowserExample;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		3BBECF2518A1E58D00A2499D /* KINWebBrowserExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KINWebBrowserExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3BBECF2818A1E58D00A2499D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		3BBECF2A18A1E58D00A2499D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		3BBECF2C18A1E58D00A2499D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		3BBECF3018A1E58D00A2499D /* KINWebBrowserExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KINWebBrowserExample-Info.plist"; sourceTree = "<group>"; };
-		3BBECF3218A1E58D00A2499D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3BBECF3418A1E58D00A2499D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3BBECF3618A1E58D00A2499D /* KINWebBrowserExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KINWebBrowserExample-Prefix.pch"; sourceTree = "<group>"; };
-		3BBECF3718A1E58D00A2499D /* KINAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KINAppDelegate.h; sourceTree = "<group>"; };
-		3BBECF3818A1E58D00A2499D /* KINAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KINAppDelegate.m; sourceTree = "<group>"; };
-		3BBECF3A18A1E58D00A2499D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		3BBECF4018A1E58D00A2499D /* KINWebBrowserExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KINWebBrowserExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3BBECF4118A1E58D00A2499D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		3BBECF4918A1E58E00A2499D /* KINWebBrowserExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KINWebBrowserExampleTests-Info.plist"; sourceTree = "<group>"; };
-		3BBECF4B18A1E58E00A2499D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3BBECF4D18A1E58E00A2499D /* KINWebBrowserExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KINWebBrowserExampleTests.m; sourceTree = "<group>"; };
-		3BBECF6218A1EAB100A2499D /* KINWebBrowserExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KINWebBrowserExampleViewController.h; sourceTree = "<group>"; };
-		3BBECF6318A1EAB100A2499D /* KINWebBrowserExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KINWebBrowserExampleViewController.m; sourceTree = "<group>"; };
-		3BBECF6418A1EAB100A2499D /* KINWebBrowserExampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KINWebBrowserExampleViewController.xib; sourceTree = "<group>"; };
-		40569994F8ED4A0FB96EC6BA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		99271C859D3C4C9880D8C752 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		3BBECF2218A1E58D00A2499D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3BBECF2B18A1E58D00A2499D /* CoreGraphics.framework in Frameworks */,
-				3BBECF2D18A1E58D00A2499D /* UIKit.framework in Frameworks */,
-				3BBECF2918A1E58D00A2499D /* Foundation.framework in Frameworks */,
-				1453FA1643434A30B809DF01 /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3BBECF3D18A1E58D00A2499D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3BBECF4218A1E58D00A2499D /* XCTest.framework in Frameworks */,
-				3BBECF4418A1E58E00A2499D /* UIKit.framework in Frameworks */,
-				3BBECF4318A1E58E00A2499D /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		3BBECF1C18A1E58D00A2499D = {
-			isa = PBXGroup;
-			children = (
-				3BBECF2E18A1E58D00A2499D /* KINWebBrowserExample */,
-				3BBECF4718A1E58E00A2499D /* KINWebBrowserExampleTests */,
-				3BBECF2718A1E58D00A2499D /* Frameworks */,
-				3BBECF2618A1E58D00A2499D /* Products */,
-				99271C859D3C4C9880D8C752 /* Pods.xcconfig */,
-			);
-			sourceTree = "<group>";
-		};
-		3BBECF2618A1E58D00A2499D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3BBECF2518A1E58D00A2499D /* KINWebBrowserExample.app */,
-				3BBECF4018A1E58D00A2499D /* KINWebBrowserExampleTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		3BBECF2718A1E58D00A2499D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3BBECF2818A1E58D00A2499D /* Foundation.framework */,
-				3BBECF2A18A1E58D00A2499D /* CoreGraphics.framework */,
-				3BBECF2C18A1E58D00A2499D /* UIKit.framework */,
-				3BBECF4118A1E58D00A2499D /* XCTest.framework */,
-				40569994F8ED4A0FB96EC6BA /* libPods.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		3BBECF2E18A1E58D00A2499D /* KINWebBrowserExample */ = {
-			isa = PBXGroup;
-			children = (
-				3BBECF3718A1E58D00A2499D /* KINAppDelegate.h */,
-				3BBECF3818A1E58D00A2499D /* KINAppDelegate.m */,
-				3BBECF6218A1EAB100A2499D /* KINWebBrowserExampleViewController.h */,
-				3BBECF6318A1EAB100A2499D /* KINWebBrowserExampleViewController.m */,
-				3BBECF6418A1EAB100A2499D /* KINWebBrowserExampleViewController.xib */,
-				3BBECF3A18A1E58D00A2499D /* Images.xcassets */,
-				3BBECF2F18A1E58D00A2499D /* Supporting Files */,
-			);
-			path = KINWebBrowserExample;
-			sourceTree = "<group>";
-		};
-		3BBECF2F18A1E58D00A2499D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3BBECF3018A1E58D00A2499D /* KINWebBrowserExample-Info.plist */,
-				3BBECF3118A1E58D00A2499D /* InfoPlist.strings */,
-				3BBECF3418A1E58D00A2499D /* main.m */,
-				3BBECF3618A1E58D00A2499D /* KINWebBrowserExample-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3BBECF4718A1E58E00A2499D /* KINWebBrowserExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				3BBECF4D18A1E58E00A2499D /* KINWebBrowserExampleTests.m */,
-				3BBECF4818A1E58E00A2499D /* Supporting Files */,
-			);
-			path = KINWebBrowserExampleTests;
-			sourceTree = "<group>";
-		};
-		3BBECF4818A1E58E00A2499D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3BBECF4918A1E58E00A2499D /* KINWebBrowserExampleTests-Info.plist */,
-				3BBECF4A18A1E58E00A2499D /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		3BBECF2418A1E58D00A2499D /* KINWebBrowserExample */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3BBECF5118A1E58E00A2499D /* Build configuration list for PBXNativeTarget "KINWebBrowserExample" */;
-			buildPhases = (
-				6F51916B9AD244238CE3E060 /* Check Pods Manifest.lock */,
-				3BBECF2118A1E58D00A2499D /* Sources */,
-				3BBECF2218A1E58D00A2499D /* Frameworks */,
-				3BBECF2318A1E58D00A2499D /* Resources */,
-				F23BEC6F0D11442D85D78196 /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = KINWebBrowserExample;
-			productName = KINWebBrowserExample;
-			productReference = 3BBECF2518A1E58D00A2499D /* KINWebBrowserExample.app */;
-			productType = "com.apple.product-type.application";
-		};
-		3BBECF3F18A1E58D00A2499D /* KINWebBrowserExampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3BBECF5418A1E58E00A2499D /* Build configuration list for PBXNativeTarget "KINWebBrowserExampleTests" */;
-			buildPhases = (
-				3BBECF3C18A1E58D00A2499D /* Sources */,
-				3BBECF3D18A1E58D00A2499D /* Frameworks */,
-				3BBECF3E18A1E58D00A2499D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3BBECF4618A1E58E00A2499D /* PBXTargetDependency */,
-			);
-			name = KINWebBrowserExampleTests;
-			productName = KINWebBrowserExampleTests;
-			productReference = 3BBECF4018A1E58D00A2499D /* KINWebBrowserExampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		3BBECF1D18A1E58D00A2499D /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				CLASSPREFIX = KIN;
-				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "Kinwa, Inc.";
-				TargetAttributes = {
-					3BBECF3F18A1E58D00A2499D = {
-						TestTargetID = 3BBECF2418A1E58D00A2499D;
-					};
-				};
-			};
-			buildConfigurationList = 3BBECF2018A1E58D00A2499D /* Build configuration list for PBXProject "KINWebBrowserExample" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = 3BBECF1C18A1E58D00A2499D;
-			productRefGroup = 3BBECF2618A1E58D00A2499D /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				3BBECF2418A1E58D00A2499D /* KINWebBrowserExample */,
-				3BBECF3F18A1E58D00A2499D /* KINWebBrowserExampleTests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		3BBECF2318A1E58D00A2499D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3BBECF6618A1EAB100A2499D /* KINWebBrowserExampleViewController.xib in Resources */,
-				3BBECF3318A1E58D00A2499D /* InfoPlist.strings in Resources */,
-				3BBECF3B18A1E58D00A2499D /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3BBECF3E18A1E58D00A2499D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3BBECF4C18A1E58E00A2499D /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		6F51916B9AD244238CE3E060 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F23BEC6F0D11442D85D78196 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		3BBECF2118A1E58D00A2499D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3BBECF3518A1E58D00A2499D /* main.m in Sources */,
-				3BBECF6518A1EAB100A2499D /* KINWebBrowserExampleViewController.m in Sources */,
-				3BBECF3918A1E58D00A2499D /* KINAppDelegate.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3BBECF3C18A1E58D00A2499D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3BBECF4E18A1E58E00A2499D /* KINWebBrowserExampleTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3BBECF4618A1E58E00A2499D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3BBECF2418A1E58D00A2499D /* KINWebBrowserExample */;
-			targetProxy = 3BBECF4518A1E58E00A2499D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		3BBECF3118A1E58D00A2499D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3BBECF3218A1E58D00A2499D /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		3BBECF4A18A1E58E00A2499D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3BBECF4B18A1E58E00A2499D /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
-/* Begin XCBuildConfiguration section */
-		3BBECF4F18A1E58E00A2499D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		3BBECF5018A1E58E00A2499D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		3BBECF5218A1E58E00A2499D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99271C859D3C4C9880D8C752 /* Pods.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KINWebBrowserExample/KINWebBrowserExample-Prefix.pch";
-				INFOPLIST_FILE = "KINWebBrowserExample/KINWebBrowserExample-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		3BBECF5318A1E58E00A2499D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99271C859D3C4C9880D8C752 /* Pods.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KINWebBrowserExample/KINWebBrowserExample-Prefix.pch";
-				INFOPLIST_FILE = "KINWebBrowserExample/KINWebBrowserExample-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		3BBECF5518A1E58E00A2499D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KINWebBrowserExample.app/KINWebBrowserExample";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KINWebBrowserExample/KINWebBrowserExample-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "KINWebBrowserExampleTests/KINWebBrowserExampleTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		3BBECF5618A1E58E00A2499D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KINWebBrowserExample.app/KINWebBrowserExample";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KINWebBrowserExample/KINWebBrowserExample-Prefix.pch";
-				INFOPLIST_FILE = "KINWebBrowserExampleTests/KINWebBrowserExampleTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		3BBECF2018A1E58D00A2499D /* Build configuration list for PBXProject "KINWebBrowserExample" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3BBECF4F18A1E58E00A2499D /* Debug */,
-				3BBECF5018A1E58E00A2499D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3BBECF5118A1E58E00A2499D /* Build configuration list for PBXNativeTarget "KINWebBrowserExample" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3BBECF5218A1E58E00A2499D /* Debug */,
-				3BBECF5318A1E58E00A2499D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3BBECF5418A1E58E00A2499D /* Build configuration list for PBXNativeTarget "KINWebBrowserExampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3BBECF5518A1E58E00A2499D /* Debug */,
-				3BBECF5618A1E58E00A2499D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = 3BBECF1D18A1E58D00A2499D /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>0B4A989B6C1762F306885B5D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4D246F90867446D07C788DCE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0D66287F09CB3E898333BDB8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods/Pods.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3B57DAB619E11FAB00C499B5</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>WebKit.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/WebKit.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>3B57DAB719E11FAB00C499B5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3B57DAB619E11FAB00C499B5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Weak</string>
+				</array>
+			</dict>
+		</dict>
+		<key>3BBECF1C18A1E58D00A2499D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3BBECF2E18A1E58D00A2499D</string>
+				<string>3BBECF4718A1E58E00A2499D</string>
+				<string>3BBECF2718A1E58D00A2499D</string>
+				<string>3BBECF2618A1E58D00A2499D</string>
+				<string>F41A3D371A44A50919509CDE</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF1D18A1E58D00A2499D</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>CLASSPREFIX</key>
+				<string>KIN</string>
+				<key>LastUpgradeCheck</key>
+				<string>0600</string>
+				<key>ORGANIZATIONNAME</key>
+				<string>Kinwa, Inc.</string>
+				<key>TargetAttributes</key>
+				<dict>
+					<key>3BBECF3F18A1E58D00A2499D</key>
+					<dict>
+						<key>TestTargetID</key>
+						<string>3BBECF2418A1E58D00A2499D</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>3BBECF2018A1E58D00A2499D</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>3BBECF1C18A1E58D00A2499D</string>
+			<key>productRefGroup</key>
+			<string>3BBECF2618A1E58D00A2499D</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>3BBECF2418A1E58D00A2499D</string>
+				<string>3BBECF3F18A1E58D00A2499D</string>
+			</array>
+		</dict>
+		<key>3BBECF2018A1E58D00A2499D</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>3BBECF4F18A1E58E00A2499D</string>
+				<string>3BBECF5018A1E58E00A2499D</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>3BBECF2118A1E58D00A2499D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>3BBECF3518A1E58D00A2499D</string>
+				<string>3BBECF6518A1EAB100A2499D</string>
+				<string>3BBECF3918A1E58D00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>3BBECF2218A1E58D00A2499D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>3B57DAB719E11FAB00C499B5</string>
+				<string>3BBECF2B18A1E58D00A2499D</string>
+				<string>3BBECF2D18A1E58D00A2499D</string>
+				<string>3BBECF2918A1E58D00A2499D</string>
+				<string>0B4A989B6C1762F306885B5D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>3BBECF2318A1E58D00A2499D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>3BBECF6618A1EAB100A2499D</string>
+				<string>3BBECF3318A1E58D00A2499D</string>
+				<string>3BBECF3B18A1E58D00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>3BBECF2418A1E58D00A2499D</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>3BBECF5118A1E58E00A2499D</string>
+			<key>buildPhases</key>
+			<array>
+				<string>6F51916B9AD244238CE3E060</string>
+				<string>3BBECF2118A1E58D00A2499D</string>
+				<string>3BBECF2218A1E58D00A2499D</string>
+				<string>3BBECF2318A1E58D00A2499D</string>
+				<string>F23BEC6F0D11442D85D78196</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>KINWebBrowserExample</string>
+			<key>productName</key>
+			<string>KINWebBrowserExample</string>
+			<key>productReference</key>
+			<string>3BBECF2518A1E58D00A2499D</string>
+			<key>productType</key>
+			<string>com.apple.product-type.application</string>
+		</dict>
+		<key>3BBECF2518A1E58D00A2499D</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.application</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>KINWebBrowserExample.app</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>3BBECF2618A1E58D00A2499D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3BBECF2518A1E58D00A2499D</string>
+				<string>3BBECF4018A1E58D00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF2718A1E58D00A2499D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3B57DAB619E11FAB00C499B5</string>
+				<string>3BBECF2818A1E58D00A2499D</string>
+				<string>3BBECF2A18A1E58D00A2499D</string>
+				<string>3BBECF2C18A1E58D00A2499D</string>
+				<string>3BBECF4118A1E58D00A2499D</string>
+				<string>4D246F90867446D07C788DCE</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF2818A1E58D00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>3BBECF2918A1E58D00A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF2818A1E58D00A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF2A18A1E58D00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>CoreGraphics.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/CoreGraphics.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>3BBECF2B18A1E58D00A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF2A18A1E58D00A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF2C18A1E58D00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UIKit.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>3BBECF2D18A1E58D00A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF2C18A1E58D00A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF2E18A1E58D00A2499D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3BBECF3718A1E58D00A2499D</string>
+				<string>3BBECF3818A1E58D00A2499D</string>
+				<string>3BBECF6218A1EAB100A2499D</string>
+				<string>3BBECF6318A1EAB100A2499D</string>
+				<string>3BBECF6418A1EAB100A2499D</string>
+				<string>3BBECF3A18A1E58D00A2499D</string>
+				<string>3BBECF2F18A1E58D00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>KINWebBrowserExample</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF2F18A1E58D00A2499D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3BBECF3018A1E58D00A2499D</string>
+				<string>3BBECF3118A1E58D00A2499D</string>
+				<string>3BBECF3418A1E58D00A2499D</string>
+				<string>3BBECF3618A1E58D00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF3018A1E58D00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>KINWebBrowserExample-Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF3118A1E58D00A2499D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3BBECF3218A1E58D00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF3218A1E58D00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.strings</string>
+			<key>name</key>
+			<string>en</string>
+			<key>path</key>
+			<string>en.lproj/InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF3318A1E58D00A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF3118A1E58D00A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF3418A1E58D00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>main.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF3518A1E58D00A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF3418A1E58D00A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF3618A1E58D00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>KINWebBrowserExample-Prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF3718A1E58D00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>KINAppDelegate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF3818A1E58D00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>KINAppDelegate.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF3918A1E58D00A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF3818A1E58D00A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF3A18A1E58D00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>folder.assetcatalog</string>
+			<key>path</key>
+			<string>Images.xcassets</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF3B18A1E58D00A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF3A18A1E58D00A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF3C18A1E58D00A2499D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>3BBECF4E18A1E58E00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>3BBECF3D18A1E58D00A2499D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>3BBECF4218A1E58D00A2499D</string>
+				<string>3BBECF4418A1E58E00A2499D</string>
+				<string>3BBECF4318A1E58E00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>3BBECF3E18A1E58D00A2499D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>3BBECF4C18A1E58E00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>3BBECF3F18A1E58D00A2499D</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>3BBECF5418A1E58E00A2499D</string>
+			<key>buildPhases</key>
+			<array>
+				<string>3BBECF3C18A1E58D00A2499D</string>
+				<string>3BBECF3D18A1E58D00A2499D</string>
+				<string>3BBECF3E18A1E58D00A2499D</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>3BBECF4618A1E58E00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>KINWebBrowserExampleTests</string>
+			<key>productName</key>
+			<string>KINWebBrowserExampleTests</string>
+			<key>productReference</key>
+			<string>3BBECF4018A1E58D00A2499D</string>
+			<key>productType</key>
+			<string>com.apple.product-type.bundle.unit-test</string>
+		</dict>
+		<key>3BBECF4018A1E58D00A2499D</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.cfbundle</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>KINWebBrowserExampleTests.xctest</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>3BBECF4118A1E58D00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>XCTest.framework</string>
+			<key>path</key>
+			<string>Library/Frameworks/XCTest.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>3BBECF4218A1E58D00A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF4118A1E58D00A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF4318A1E58E00A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF2818A1E58D00A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF4418A1E58E00A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF2C18A1E58D00A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF4518A1E58E00A2499D</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>3BBECF1D18A1E58D00A2499D</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>3BBECF2418A1E58D00A2499D</string>
+			<key>remoteInfo</key>
+			<string>KINWebBrowserExample</string>
+		</dict>
+		<key>3BBECF4618A1E58E00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>3BBECF2418A1E58D00A2499D</string>
+			<key>targetProxy</key>
+			<string>3BBECF4518A1E58E00A2499D</string>
+		</dict>
+		<key>3BBECF4718A1E58E00A2499D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3BBECF4D18A1E58E00A2499D</string>
+				<string>3BBECF4818A1E58E00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>KINWebBrowserExampleTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF4818A1E58E00A2499D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3BBECF4918A1E58E00A2499D</string>
+				<string>3BBECF4A18A1E58E00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF4918A1E58E00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>KINWebBrowserExampleTests-Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF4A18A1E58E00A2499D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3BBECF4B18A1E58E00A2499D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF4B18A1E58E00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.strings</string>
+			<key>name</key>
+			<string>en</string>
+			<key>path</key>
+			<string>en.lproj/InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF4C18A1E58E00A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF4A18A1E58E00A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF4D18A1E58E00A2499D</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>KINWebBrowserExampleTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF4E18A1E58E00A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF4D18A1E58E00A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF4F18A1E58E00A2499D</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>3BBECF5018A1E58E00A2499D</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>3BBECF5118A1E58E00A2499D</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>3BBECF5218A1E58E00A2499D</string>
+				<string>3BBECF5318A1E58E00A2499D</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>3BBECF5218A1E58E00A2499D</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>E95061206B0428F84E5EAF94</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>KINWebBrowserExample/KINWebBrowserExample-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>KINWebBrowserExample/KINWebBrowserExample-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>app</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>3BBECF5318A1E58E00A2499D</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>0D66287F09CB3E898333BDB8</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>KINWebBrowserExample/KINWebBrowserExample-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>KINWebBrowserExample/KINWebBrowserExample-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>app</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>3BBECF5418A1E58E00A2499D</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>3BBECF5518A1E58E00A2499D</string>
+				<string>3BBECF5618A1E58E00A2499D</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>3BBECF5518A1E58E00A2499D</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(BUILT_PRODUCTS_DIR)/KINWebBrowserExample.app/KINWebBrowserExample</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
+				</array>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>KINWebBrowserExample/KINWebBrowserExample-Prefix.pch</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>INFOPLIST_FILE</key>
+				<string>KINWebBrowserExampleTests/KINWebBrowserExampleTests-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>TEST_HOST</key>
+				<string>$(BUNDLE_LOADER)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>xctest</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>3BBECF5618A1E58E00A2499D</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(BUILT_PRODUCTS_DIR)/KINWebBrowserExample.app/KINWebBrowserExample</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
+				</array>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>KINWebBrowserExample/KINWebBrowserExample-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>KINWebBrowserExampleTests/KINWebBrowserExampleTests-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>TEST_HOST</key>
+				<string>$(BUNDLE_LOADER)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>xctest</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>3BBECF6218A1EAB100A2499D</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>KINWebBrowserExampleViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF6318A1EAB100A2499D</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>KINWebBrowserExampleViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF6418A1EAB100A2499D</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>KINWebBrowserExampleViewController.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BBECF6518A1EAB100A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF6318A1EAB100A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3BBECF6618A1EAB100A2499D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3BBECF6418A1EAB100A2499D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4D246F90867446D07C788DCE</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>6F51916B9AD244238CE3E060</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>E95061206B0428F84E5EAF94</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods/Pods.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F23BEC6F0D11442D85D78196</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>F41A3D371A44A50919509CDE</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>E95061206B0428F84E5EAF94</string>
+				<string>0D66287F09CB3E898333BDB8</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>3BBECF1D18A1E58D00A2499D</string>
+</dict>
+</plist>

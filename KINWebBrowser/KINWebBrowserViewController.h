@@ -31,24 +31,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 @class KINWebBrowserViewController;
-
-
-#pragma mark - Initialization Options
-
-// Show the action button on the UIToolbar to allow special actions on current page (launch in Safari, copy URL, etc.)
-FOUNDATION_EXPORT NSString *const KINWebBrowserShowsActionButton;
-// Show the UIProgressView along the bottom of the UINavigationBar to show loading progress
-FOUNDATION_EXPORT NSString *const KINWebBrowserShowsProgressView;
-// Show the page title in the navigation bar after the page has loaded
-FOUNDATION_EXPORT NSString *const KINWebBrowserShowsPageTitleInNavigationBar;
-// Show the page URL in the navigation bar while the page is loading
-FOUNDATION_EXPORT NSString *const KINWebBrowserShowsPageURLInNavigationBar;
-// Restore the hidden state of the UINavigationController navigationBar
-FOUNDATION_EXPORT NSString *const KINWebBrowserRestoresNavigationBarState;
-// Restore the hidden state of the UINavigationController toolbar
-FOUNDATION_EXPORT NSString *const KINWebBrowserRestoresToolbarState;
 
 /*
  
@@ -66,9 +51,9 @@ FOUNDATION_EXPORT NSString *const KINWebBrowserRestoresToolbarState;
 
 @protocol KINWebBrowserDelegate <NSObject>
 @optional
-- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didBeginLoadingRequest:(NSURLRequest *)request;
-- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFinishLoadingRequest:(NSURLRequest *)request;
-- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFailToLoadRequest:(NSURLRequest *)request withError:(NSError *)error;
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didStartLoadingURL:(NSURL *)URL;
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFinishLoadingURL:(NSURL *)URL;
+- (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFailToLoadURL:(NSURL *)URL error:(NSError *)error;
 @end
 
 
@@ -78,41 +63,57 @@ FOUNDATION_EXPORT NSString *const KINWebBrowserRestoresToolbarState;
  For convenience, two sets of static initializers are available.
  
  */
-@interface KINWebBrowserViewController : UIViewController <UIWebViewDelegate>
+@interface KINWebBrowserViewController : UIViewController <WKNavigationDelegate, UIWebViewDelegate>
 
 #pragma mark - Public Properties
 
 @property (nonatomic, weak) id <KINWebBrowserDelegate> delegate;
 
-// The main and only UIWebView
-@property (nonatomic, strong) UIWebView *webView;
-
 // The main and only UIProgressView
 @property (nonatomic, strong) UIProgressView *progressView;
 
+// The web views
+// Depending on the version of iOS, one of these will be set
+@property (nonatomic, strong) WKWebView *wkWebView;
+@property (nonatomic, strong) UIWebView *uiWebView;
+
+- (id)initWithConfiguration:(WKWebViewConfiguration *)configuration NS_AVAILABLE_IOS(8_0);
 
 #pragma mark - Static Initializers
 
-// Initializes a basic KINWebBrowserViewController instance for push onto navigation stack
-// Ideal for use with UINavigationController pushViewController:animated: or initWithRootViewController:
+/*
+ Initialize a basic KINWebBrowserViewController instance for push onto navigation stack
+ 
+ Ideal for use with UINavigationController pushViewController:animated: or initWithRootViewController:
+ 
+ Optionally specify KINWebBrowser options or WKWebConfiguration
+ */
+
 + (KINWebBrowserViewController *)webBrowser;
++ (KINWebBrowserViewController *)webBrowserWithConfiguration:(WKWebViewConfiguration *)configuration NS_AVAILABLE_IOS(8_0);
 
-// Initializes a KINWebBrowserViewController instance with custom options
-// Ideal for use with UINavigationController pushViewController:animated: or initWithRootViewController:
-+ (KINWebBrowserViewController *)webBrowserWithOptions:(NSDictionary *)options;
+/*
+ Initialize a UINavigationController with a KINWebBrowserViewController for modal presentation.
+ 
+ Ideal for use with presentViewController:animated:
+ 
+ Optionally specify KINWebBrowser options or WKWebConfiguration
+ */
 
-
-// Initializes a UINavigationController with a KINWebBrowserViewController for modal presentation
-// Ideal for use with presentViewController:animated:
 + (UINavigationController *)navigationControllerWithWebBrowser;
++ (UINavigationController *)navigationControllerWithWebBrowserWithConfiguration:(WKWebViewConfiguration *)configuration NS_AVAILABLE_IOS(8_0);
 
-// Initializes a UINavigationController with a KINWebBrowserViewController with custom options
-// Ideal for use with presentViewController:animated:
-+ (UINavigationController *)navigationControllerWithWebBrowserWithOptions:(NSDictionary *)options;
+
+
+@property (nonatomic, strong) UIColor *tintColor;
+@property (nonatomic, strong) UIColor *barTintColor;
+@property (nonatomic, assign) BOOL actionButtonHidden;
+@property (nonatomic, assign) BOOL showsURLInNavigationBar;
+@property (nonatomic, assign) BOOL showsPageTitleInNavigationBar;
 
 #pragma mark - Public Interface
 
-// Loads a NSURL to webView
+// Load a NSURL to webView
 // Can be called any time after initialization
 - (void)loadURL:(NSURL *)URL;
 
@@ -121,6 +122,4 @@ FOUNDATION_EXPORT NSString *const KINWebBrowserRestoresToolbarState;
 - (void)loadURLString:(NSString *)URLString;
 
 @end
-
-
 
