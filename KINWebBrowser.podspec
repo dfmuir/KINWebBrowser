@@ -1,5 +1,3 @@
-
-
 Pod::Spec.new do |s|
 
   s.name         = "KINWebBrowser"
