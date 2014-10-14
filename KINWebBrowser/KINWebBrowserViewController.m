@@ -523,7 +523,9 @@
     
     [self.wkWebView setNavigationDelegate:nil];
     [self.wkWebView setUIDelegate:nil];
-    [self.wkWebView removeObserver:self forKeyPath:@"estimatedProgress"];
+	if ([self isViewLoaded]) {
+		[self.wkWebView removeObserver:self forKeyPath:@"estimatedProgress"];
+	}
 }
 
 
