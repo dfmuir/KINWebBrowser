@@ -103,7 +103,9 @@ static NSString *const defaultAddress = @"http://www.apple.com/";
     [webBrowser setDelegate:self];
     webBrowser.showsURLInNavigationBar = YES;
     webBrowser.tintColor = [UIColor whiteColor];
-    webBrowser.barTintColor = [UIColor blackColor];
+    webBrowser.barTintColor = [UIColor colorWithRed:102.0f/255.0f green:204.0f/255.0f blue:51.0f/255.0f alpha:1.0f];
+    webBrowser.showsPageTitleInNavigationBar = NO;
+    webBrowser.showsURLInNavigationBar = NO;
     [self presentViewController:webBrowserNavigationController animated:YES completion:nil];
 
     [webBrowser loadURLString:defaultAddress];
