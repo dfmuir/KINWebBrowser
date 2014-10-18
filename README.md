@@ -30,7 +30,7 @@ KINWebBrowser consists of a single component:
 
 **Pushing to the navigation stack:**
 ```objective-c
-KINWebBrowserViewController *webBrowser = [KINWebBrowserViewController webBrowserViewController];
+KINWebBrowserViewController *webBrowser = [KINWebBrowserViewController webBrowser];
 [self.navigationController pushViewController:webBrowser animated:YES];
 [webBrowser loadURLString:@"http://www.example.com"];
 ```
