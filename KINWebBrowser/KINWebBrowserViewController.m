@@ -436,7 +436,8 @@ static void *KINContext = &KINContext;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(estimatedProgress))] && object == self.wkWebView) {
         [self.progressView setAlpha:1.0f];
-        [self.progressView setProgress:self.wkWebView.estimatedProgress animated:YES];
+        BOOL animated = self.wkWebView.estimatedProgress > self.progressView.progress;
+        [self.progressView setProgress:self.wkWebView.estimatedProgress animated:animated];
         
         // Once complete, fade out UIProgressView
         if(self.wkWebView.estimatedProgress >= 1.0f) {
