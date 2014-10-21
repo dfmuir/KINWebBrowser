@@ -99,7 +99,7 @@ static NSString *const defaultAddress = @"http://www.apple.com/";
 
 - (IBAction)presentButtonPressed:(id)sender {
     UINavigationController *webBrowserNavigationController = [KINWebBrowserViewController navigationControllerWithWebBrowser];
-    KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWebBrowserViewController];
+    KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWebBrowser];
     [webBrowser setDelegate:self];
     webBrowser.showsURLInNavigationBar = YES;
     webBrowser.tintColor = [UIColor whiteColor];
