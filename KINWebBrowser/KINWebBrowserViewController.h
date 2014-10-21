@@ -40,10 +40,10 @@
  UINavigationController+KINWebBrowserWrapper category enables access to casted KINWebBroswerViewController when set as rootViewController of UINavigationController
  
  */
-@interface UINavigationController(KINWebBrowserWrapper)
+@interface UINavigationController(KINWebBrowser)
 
 // Returns rootViewController casted as KINWebBrowserViewController
-- (KINWebBrowserViewController *)rootWebBrowserViewController;
+- (KINWebBrowserViewController *)rootWebBrowser;
 
 @end
 

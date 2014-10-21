@@ -35,26 +35,14 @@
 #import <TUSafariActivity/TUSafariActivity.h>
 #import <ARChromeActivity/ARChromeActivity.h>
 
-
-
-@implementation UINavigationController(KINWebBrowserWrapper)
-
-- (KINWebBrowserViewController *)rootWebBrowserViewController {
-    UIViewController *rootViewController = [self.viewControllers objectAtIndex:0];
-    return (KINWebBrowserViewController *)rootViewController;
-}
-
-@end
+static void *KINContext = &KINContext;
 
 @interface KINWebBrowserViewController ()
-
 
 @property (nonatomic, assign) BOOL previousNavigationControllerToolbarHidden, previousNavigationControllerNavigationBarHidden;
 @property (nonatomic, strong) UIBarButtonItem *backButton, *forwardButton, *refreshButton, *stopButton, *actionButton, *fixedSeparator, *flexibleSeparator;
 @property (nonatomic, strong) NSTimer *fakeProgressTimer;
-
 @property (nonatomic, strong) UIPopoverController *actionPopoverController;
-
 @property (nonatomic, assign) BOOL uiWebViewIsLoading;
 @property (nonatomic, strong) NSURL *uiWebViewCurrentURL;
 
@@ -139,7 +127,7 @@
         [self.wkWebView.scrollView setAlwaysBounceVertical:YES];
         [self.view addSubview:self.wkWebView];
         
-        [self.wkWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:NULL];
+        [self.wkWebView addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:0 context:KINContext];
     }
     else if(self.uiWebView) {
         [self.uiWebView setFrame:self.view.bounds];
@@ -426,9 +414,9 @@
         URLForActivityItem = self.uiWebView.request.URL;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        TUSafariActivity *openInSafari = [[TUSafariActivity alloc] init];
-        ARChromeActivity *openInChrome = [[ARChromeActivity alloc] init];
-        UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:@[openInSafari, openInChrome]];
+        TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
+        ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
+        UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:@[safariActivity, chromeActivity]];
         if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             if(self.actionPopoverController) {
                 [self.actionPopoverController dismissPopoverAnimated:YES];
@@ -443,13 +431,14 @@
 }
 
 
-#pragma mark - Estimate Progress KVO (WKWebView)
+#pragma mark - Estimated Progress KVO (WKWebView)
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"estimatedProgress"] && object == self.wkWebView) {
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(estimatedProgress))] && object == self.wkWebView) {
         [self.progressView setAlpha:1.0f];
         [self.progressView setProgress:self.wkWebView.estimatedProgress animated:YES];
         
+        // Once complete, fade out UIProgressView
         if(self.wkWebView.estimatedProgress >= 1.0f) {
             [UIView animateWithDuration:0.3f delay:0.3f options:UIViewAnimationOptionCurveEaseOut animations:^{
                 [self.progressView setAlpha:0.0f];
@@ -523,10 +512,19 @@
     
     [self.wkWebView setNavigationDelegate:nil];
     [self.wkWebView setUIDelegate:nil];
-	if ([self isViewLoaded]) {
-		[self.wkWebView removeObserver:self forKeyPath:@"estimatedProgress"];
-	}
+    if ([self isViewLoaded]) {
+        [self.wkWebView removeObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
+    }
 }
 
+
+@end
+
+@implementation UINavigationController(KINWebBrowser)
+
+- (KINWebBrowserViewController *)rootWebBrowser {
+    UIViewController *rootViewController = [self.viewControllers objectAtIndex:0];
+    return (KINWebBrowserViewController *)rootViewController;
+}
 
 @end
