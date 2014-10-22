@@ -24,7 +24,7 @@ Overview
 ------------------------
 KINWebBrowser consists of a single component:
 
-`KINWebBrowserViewController` - a `UIViewController` that contains a full featured web browser.
+**`KINWebBrowserViewController`** - a `UIViewController` that contains a full featured web browser.
 
 *`KINWebBrowserViewController` must be contained in a UINavigationController.*
 
@@ -44,17 +44,26 @@ KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWe
 [webBrowser loadURLString:@"http://www.example.com"];
 ```
 
-Installation With CocoaPods
+Installation
 ------------------------
 
+#### Cocoapods
 [CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries in your projects. See the ["Getting Started" for more information](http://guides.cocoapods.org/using/getting-started.html).
 
-#### Podfile
+###### Podfile
 
 ```ruby
 platform :ios, '7.0'
 pod 'KINWebBrowser'
 ```
+
+Dependencies
+------------------------
+These dependency projects should be also installed with KINWebBrowser. They are installed automatically when installing KINWebBrowser with CocoaPods.
+
+[TUSafariActivity](https://github.com/davbeck/TUSafariActivity) -  a UIActivity subclass that provides an "Open In Safari" action to a UIActivityViewController
+[ARChromeActivity](https://github.com/alextrob/ARChromeActivity) - a UIActivity subclass that provides an "Open In Google Chrome" action to a UIActivityViewController
+
 
 Customizing the User Interface
 ------------------------
@@ -70,7 +79,7 @@ webBrowser.barTintColor = [UIColor blackColor];
 
 **Title Bar Content** 
 
-The URL can be shown in the `UINavigationBar` while loading. The <title> of the page can be shown when loading completes.
+The URL can be shown in the `UINavigationBar` while loading. The title of the page can be shown when loading completes.
 ```
 webBrowser.showsURLInNavigationBar = NO;
 webBrowser.showsPageTitleInNavigationBar = YES;
@@ -86,5 +95,3 @@ Implementing `KINWebBrowserDelegate` Protocol
 - (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFinishLoadingURL:(NSURL *)URL;
 - (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFailToLoadURL:(NSURL *)URL withError:(NSError *)error;
 ```
-
-
