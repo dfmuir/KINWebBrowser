@@ -40,7 +40,7 @@ KINWebBrowserViewController *webBrowser = [KINWebBrowserViewController webBrowse
 UINavigationController *webBrowserNavigationController = [KINWebBrowserViewController navigationControllerWithWebBrowser];
 [self presentViewController:webBrowserNavigationController animated:YES completion:nil];
 
-KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWebBrowserViewController];
+KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWebBrowser];
 [webBrowser loadURLString:@"http://www.example.com"];
 ```
 
