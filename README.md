@@ -64,16 +64,16 @@ Customizing the User Interface
 The tint color of the toolbars and toolbar items can be customized.
 
 ```
-webBrowserViewController.tintColor = [UIColor blueColor];
-webBrowserViewController.barTintColor = [UIColor blackColor];
+webBrowser.tintColor = [UIColor blueColor];
+webBrowser.barTintColor = [UIColor blackColor];
 ```
 
 **Title Bar Content** 
 
 The URL can be shown in the `UINavigationBar` while loading. The <title> of the page can be shown when loading completes.
 ```
-webBrowserViewController.showsURLInNavigationBar = NO;
-webBrowserViewController.showsPageTitleInNavigationBar = YES;
+webBrowser.showsURLInNavigationBar = NO;
+webBrowser.showsPageTitleInNavigationBar = YES;
 ```
 
 
