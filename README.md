@@ -61,8 +61,8 @@ Dependencies
 ------------------------
 These dependency projects should be also installed with KINWebBrowser. They are installed automatically when installing KINWebBrowser with CocoaPods.
 
-[TUSafariActivity](https://github.com/davbeck/TUSafariActivity) -  a UIActivity subclass that provides an "Open In Safari" action to a UIActivityViewController
-[ARChromeActivity](https://github.com/alextrob/ARChromeActivity) - a UIActivity subclass that provides an "Open In Google Chrome" action to a UIActivityViewController
+* [TUSafariActivity](https://github.com/davbeck/TUSafariActivity) -  a UIActivity subclass that provides an "Open In Safari" action to a UIActivityViewController
+* [ARChromeActivity](https://github.com/alextrob/ARChromeActivity) - a UIActivity subclass that provides an "Open In Google Chrome" action to a UIActivityViewController
 
 
 Customizing the User Interface
