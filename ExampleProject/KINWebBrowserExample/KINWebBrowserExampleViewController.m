@@ -38,7 +38,7 @@
 
 @end
 
-static NSString *const defaultAddress = @"http://www.apple.com/";
+static NSString *const defaultAddress = @"https://www.apple.com";
 
 @implementation KINWebBrowserExampleViewController
 
