@@ -88,22 +88,23 @@ static void *KINContext = &KINContext;
 
 // Instantiate via Storyboard
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    return [self initWithConfiguration:nil];
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self = [self initWithConfiguration:nil];
+    }
+    return self;
 }
 
 - (id)initWithConfiguration:(WKWebViewConfiguration *)configuration {
-    self = [super init];
+    if (!self) self = [super init];
     if(self) {
-        
         if([WKWebView class]) {
             if(configuration) {
                 self.wkWebView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
-            }
-            else {
+            } else {
                 self.wkWebView = [[WKWebView alloc] init];
             }
-        }
-        else {
+        } else {
             self.uiWebView = [[UIWebView alloc] init];
         }
         
@@ -113,6 +114,19 @@ static void *KINContext = &KINContext;
         
     }
     return self;
+}
+
+#pragma mark - Lazy Initializers
+
+- (UIProgressView *)progressView {
+    if (!_progressView) {
+        _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+        [_progressView setTrackTintColor:[UIColor colorWithWhite:1.0f alpha:0.0f]];
+        [_progressView setFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height-_progressView.frame.size.height, self.view.frame.size.width, _progressView.frame.size.height)];
+        [_progressView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
+        [self.navigationController.navigationBar addSubview:_progressView];
+    }
+    return _progressView;
 }
 
 #pragma mark - View Lifecycle
@@ -133,8 +147,7 @@ static void *KINContext = &KINContext;
         [self.view addSubview:self.wkWebView];
         
         [self.wkWebView addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:0 context:KINContext];
-    }
-    else if(self.uiWebView) {
+    } else if(self.uiWebView) {
         [self.uiWebView setFrame:self.view.bounds];
         [self.uiWebView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         [self.uiWebView setDelegate:self];
@@ -144,12 +157,6 @@ static void *KINContext = &KINContext;
         [self.uiWebView.scrollView setAlwaysBounceVertical:YES];
         [self.view addSubview:self.uiWebView];
     }
-    
-    
-    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-    [self.progressView setTrackTintColor:[UIColor colorWithWhite:1.0f alpha:0.0f]];
-    [self.progressView setFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height-self.progressView.frame.size.height, self.view.frame.size.width, self.progressView.frame.size.height)];
-    [self.progressView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -158,8 +165,6 @@ static void *KINContext = &KINContext;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationController setToolbarHidden:NO animated:YES];
     
-    [self.navigationController.navigationBar addSubview:self.progressView];
-    
     [self updateToolbarState];
 }
 
@@ -167,7 +172,6 @@ static void *KINContext = &KINContext;
     [super viewWillDisappear:animated];
     
     [self.navigationController setNavigationBarHidden:self.previousNavigationControllerNavigationBarHidden animated:animated];
-    
     [self.navigationController setToolbarHidden:self.previousNavigationControllerToolbarHidden animated:animated];
     
     [self.uiWebView setDelegate:nil];
@@ -179,15 +183,21 @@ static void *KINContext = &KINContext;
 - (void)loadURL:(NSURL *)URL {
     if(self.wkWebView) {
         [self.wkWebView loadRequest:[NSURLRequest requestWithURL:URL]];
-    }
-    else if(self.uiWebView) {
+    } else if(self.uiWebView) {
         [self.uiWebView loadRequest:[NSURLRequest requestWithURL:URL]];
     }
 }
 
 - (void)loadURLString:(NSString *)URLString {
-    NSURL *URL = [NSURL URLWithString:URLString];
-    [self loadURL:URL];
+    [self loadURL:[NSURL URLWithString:URLString]];
+}
+
+- (UIView *)webView {
+    return (self.wkWebView ? self.wkWebView : self.uiWebView);
+}
+
+- (UIScrollView *)scrollViewOfWebView {
+    return (self.wkWebView ? self.wkWebView.scrollView : self.uiWebView.scrollView);
 }
 
 - (void)setTintColor:(UIColor *)tintColor {

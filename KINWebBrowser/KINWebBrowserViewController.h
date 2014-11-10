@@ -77,6 +77,11 @@
 @property (nonatomic, strong) WKWebView *wkWebView;
 @property (nonatomic, strong) UIWebView *uiWebView;
 
+// Return the instantiated Webview as View
+- (UIView *)webView;
+// Return the Scrollview of the instantiated Webview
+- (UIScrollView *)scrollViewOfWebView;
+
 - (id)initWithConfiguration:(WKWebViewConfiguration *)configuration NS_AVAILABLE_IOS(8_0);
 
 #pragma mark - Static Initializers
