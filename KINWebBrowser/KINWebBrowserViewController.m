@@ -86,6 +86,11 @@ static void *KINContext = &KINContext;
     return [self initWithConfiguration:nil];
 }
 
+// Instantiate via Storyboard
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    return [self initWithConfiguration:nil];
+}
+
 - (id)initWithConfiguration:(WKWebViewConfiguration *)configuration {
     self = [super init];
     if(self) {
