@@ -45,6 +45,7 @@ static void *KINContext = &KINContext;
 @property (nonatomic, strong) UIPopoverController *actionPopoverController;
 @property (nonatomic, assign) BOOL uiWebViewIsLoading;
 @property (nonatomic, strong) NSURL *uiWebViewCurrentURL;
+@property (strong, nonatomic) NSMutableDictionary *HTTPHeaders;
 
 @end
 
@@ -112,6 +113,7 @@ static void *KINContext = &KINContext;
         self.showsURLInNavigationBar = NO;
         self.showsPageTitleInNavigationBar = YES;
         
+        _HTTPHeaders = [NSMutableDictionary new];
     }
     return self;
 }
@@ -181,10 +183,17 @@ static void *KINContext = &KINContext;
 #pragma mark - Public Interface
 
 - (void)loadURL:(NSURL *)URL {
+    __weak KINWebBrowserViewController *wself = self;
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL];
+    if (wself.headersFilter) {
+        request.allHTTPHeaderFields = wself.headersFilter(URL, [wself.HTTPHeaders copy]);
+    } else {
+        request.allHTTPHeaderFields = wself.HTTPHeaders;
+    }
     if(self.wkWebView) {
-        [self.wkWebView loadRequest:[NSURLRequest requestWithURL:URL]];
+        [self.wkWebView loadRequest:request];
     } else if(self.uiWebView) {
-        [self.uiWebView loadRequest:[NSURLRequest requestWithURL:URL]];
+        [self.uiWebView loadRequest:request];
     }
 }
 
@@ -218,6 +227,17 @@ static void *KINContext = &KINContext;
     [self updateToolbarState];
 }
 
+- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field {
+    if (value) {
+        self.HTTPHeaders[field] = value;
+    } else {
+        [self.HTTPHeaders removeObjectForKey:field];
+    }
+}
+
+- (NSString *)valueForHTTPHeaderField:(NSString *)field {
+    return self.HTTPHeaders[field];
+}
 
 #pragma mark - UIWebViewDelegate
 
