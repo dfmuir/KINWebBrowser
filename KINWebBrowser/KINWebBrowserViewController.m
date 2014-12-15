@@ -217,6 +217,16 @@ static void *KINContext = &KINContext;
     }
 }
 
+- (void)loadFileURLString:(NSString *)URLString {
+    NSURL *url = [NSURL fileURLWithPath:URLString];
+    if (url) {
+        [self loadRequest:[[NSURLRequest alloc] initWithURL:url]];
+    } else {
+        [self.actionButton setEnabled:NO];
+    }
+    
+}
+
 - (void)loadURLString:(NSString *)URLString {
     NSURL *url = [NSURL URLWithString:URLString];
     if (url) {
@@ -225,6 +235,8 @@ static void *KINContext = &KINContext;
         url = [NSURL fileURLWithPath:URLString];
         if (url) {
             [self loadRequest:[[NSURLRequest alloc] initWithURL:url]];
+        } else {
+            [self.actionButton setEnabled:NO];
         }
     }
 }
@@ -591,7 +603,6 @@ static void *KINContext = &KINContext;
 
 - (void)dealloc {
     [self.uiWebView setDelegate:nil];
-    
     [self.wkWebView setNavigationDelegate:nil];
     [self.wkWebView setUIDelegate:nil];
     if ([self isViewLoaded]) {
