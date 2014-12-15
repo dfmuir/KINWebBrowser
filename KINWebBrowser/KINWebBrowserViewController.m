@@ -37,12 +37,13 @@
 
 static void *KINContext = &KINContext;
 
-@interface KINWebBrowserViewController ()
+@interface KINWebBrowserViewController () <UIDocumentInteractionControllerDelegate>
 
 @property (nonatomic, assign) BOOL previousNavigationControllerToolbarHidden, previousNavigationControllerNavigationBarHidden;
 @property (nonatomic, strong) UIBarButtonItem *backButton, *forwardButton, *refreshButton, *stopButton, *actionButton, *fixedSeparator, *flexibleSeparator;
 @property (nonatomic, strong) NSTimer *fakeProgressTimer;
 @property (nonatomic, strong) UIPopoverController *actionPopoverController;
+@property (nonatomic, strong) UIDocumentInteractionController *openInController;
 @property (nonatomic, assign) BOOL uiWebViewIsLoading;
 @property (nonatomic, strong) NSURL *uiWebViewCurrentURL;
 @property (strong, nonatomic) NSMutableDictionary *HTTPHeaders;
@@ -50,6 +51,8 @@ static void *KINContext = &KINContext;
 @end
 
 @implementation KINWebBrowserViewController
+
+@synthesize openInController = _openInController;
 
 #pragma mark - Static Initializers
 
@@ -131,6 +134,15 @@ static void *KINContext = &KINContext;
     return _progressView;
 }
 
+-(UIDocumentInteractionController *)openInController
+{
+    if (!_openInController) {
+        _openInController = [[UIDocumentInteractionController alloc] init];
+        [_openInController setDelegate:self];
+    }
+    return _openInController;
+}
+
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad {
@@ -182,7 +194,7 @@ static void *KINContext = &KINContext;
 
 #pragma mark - Public Interface
 
-- (void)loadURL:(NSURL *)URL {
+- (NSMutableURLRequest *)requestWithURL:(NSURL *)URL {
     __weak KINWebBrowserViewController *wself = self;
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL];
     if (wself.headersFilter) {
@@ -190,6 +202,14 @@ static void *KINContext = &KINContext;
     } else {
         request.allHTTPHeaderFields = wself.HTTPHeaders;
     }
+    return request;
+}
+
+- (void)loadURL:(NSURL *)URL {
+    [self loadRequest:[self requestWithURL:URL]];
+}
+
+- (void)loadRequest:(NSURLRequest *)request {
     if(self.wkWebView) {
         [self.wkWebView loadRequest:request];
     } else if(self.uiWebView) {
@@ -198,7 +218,15 @@ static void *KINContext = &KINContext;
 }
 
 - (void)loadURLString:(NSString *)URLString {
-    [self loadURL:[NSURL URLWithString:URLString]];
+    NSURL *url = [NSURL URLWithString:URLString];
+    if (url) {
+        [self loadURL:[NSURL URLWithString:URLString]];
+    } else {
+        url = [NSURL fileURLWithPath:URLString];
+        if (url) {
+            [self loadRequest:[[NSURLRequest alloc] initWithURL:url]];
+        }
+    }
 }
 
 - (UIView *)webView {
@@ -448,23 +476,41 @@ static void *KINContext = &KINContext;
     else if(self.uiWebView) {
         URLForActivityItem = self.uiWebView.request.URL;
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
-        ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
-        UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:@[safariActivity, chromeActivity]];
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            if(self.actionPopoverController) {
-                [self.actionPopoverController dismissPopoverAnimated:YES];
+    if ([URLForActivityItem isFileURL]) {
+        [self.openInController setURL:URLForActivityItem];
+        //[self.openInController setUTI:@"com.adobe.pdf"];
+        if (![self.openInController presentOptionsMenuFromBarButtonItem:sender animated:YES]) {
+            NSLog(@"Not possible to display OpenInController");
+        }
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
+            ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
+            UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:@[safariActivity, chromeActivity]];
+            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                if(self.actionPopoverController) {
+                    [self.actionPopoverController dismissPopoverAnimated:YES];
+                }
+                self.actionPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+                [self.actionPopoverController presentPopoverFromBarButtonItem:self.actionButton permittedArrowDirections: UIPopoverArrowDirectionAny animated:YES];
             }
-            self.actionPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
-            [self.actionPopoverController presentPopoverFromBarButtonItem:self.actionButton permittedArrowDirections: UIPopoverArrowDirectionAny animated:YES];
-        }
-        else {
-            [self presentViewController:controller animated:YES completion:NULL];
-        }
-    });
+            else {
+                [self presentViewController:controller animated:YES completion:NULL];
+            }
+        });
+    }
 }
 
+#pragma mark - UIDocumentInteractionController
+
+- (void)documentInteractionController:(UIDocumentInteractionController *)controller willBeginSendingToApplication:(NSString *)application {
+}
+
+- (void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application {
+}
+
+- (void)documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController *)controller {
+}
 
 #pragma mark - Estimated Progress KVO (WKWebView)
 
@@ -552,7 +598,6 @@ static void *KINContext = &KINContext;
         [self.wkWebView removeObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
     }
 }
-
 
 @end
 

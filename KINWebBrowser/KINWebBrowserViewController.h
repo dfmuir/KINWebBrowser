@@ -126,6 +126,8 @@ typedef NSDictionary *(^KINWebBrowserHeadersFilterBlock)(NSURL *url, NSDictionar
 
 #pragma mark - Public Interface
 
+- (NSMutableURLRequest *)requestWithURL:(NSURL *)URL;
+
 // Load a NSURL to webView
 // Can be called any time after initialization
 - (void)loadURL:(NSURL *)URL;
