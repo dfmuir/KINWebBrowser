@@ -493,6 +493,9 @@ static void *KINContext = &KINContext;
 #pragma mark - Dismiss
 
 - (void)dismissAnimated:(BOOL)animated {
+	if([self.delegate respondsToSelector:@selector(webBrowserViewControllerWillDismiss:)]) {
+		[self.delegate webBrowserViewControllerWillDismiss:self];
+	}
     [self.navigationController dismissViewControllerAnimated:animated completion:nil];
 }
 
