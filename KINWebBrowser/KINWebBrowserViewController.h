@@ -54,6 +54,7 @@
 - (void)webBrowser:(KINWebBrowserViewController *)webBrowser didStartLoadingURL:(NSURL *)URL;
 - (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFinishLoadingURL:(NSURL *)URL;
 - (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFailToLoadURL:(NSURL *)URL error:(NSError *)error;
+- (void)webBrowserViewControllerWillDismiss:(KINWebBrowserViewController*)viewController;
 @end
 
 
