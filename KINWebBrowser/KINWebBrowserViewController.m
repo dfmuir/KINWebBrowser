@@ -32,8 +32,8 @@
 
 #import "KINWebBrowserViewController.h"
 
-#import <TUSafariActivity/TUSafariActivity.h>
-#import <ARChromeActivity/ARChromeActivity.h>
+#import "TUSafariActivity.h"
+#import "ARChromeActivity.h"
 
 static void *KINWebBrowserContext = &KINWebBrowserContext;
 
@@ -108,7 +108,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
         self.showsPageTitleInNavigationBar = YES;
         
         self.externalAppPermissionAlertView = [[UIAlertView alloc] initWithTitle:@"Leave this app?" message:@"This web page is trying to open an outside app. Are you sure you want to open it?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Open App", nil];
-
+        
     }
     return self;
 }
@@ -374,6 +374,11 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     }
     
     [self setToolbarItems:barButtonItems animated:YES];
+    
+    self.tintColor = self.tintColor;
+    self.barTintColor = self.barTintColor;
+    
+    
 }
 
 - (void)setupToolbarItems {
