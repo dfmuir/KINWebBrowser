@@ -35,9 +35,9 @@
 #import <TUSafariActivity/TUSafariActivity.h>
 #import <ARChromeActivity/ARChromeActivity.h>
 
-static void *KINContext = &KINContext;
+static void *KINWebBrowserContext = &KINWebBrowserContext;
 
-@interface KINWebBrowserViewController ()
+@interface KINWebBrowserViewController () <UIAlertViewDelegate>
 
 @property (nonatomic, assign) BOOL previousNavigationControllerToolbarHidden, previousNavigationControllerNavigationBarHidden;
 @property (nonatomic, strong) UIBarButtonItem *backButton, *forwardButton, *refreshButton, *stopButton, *actionButton, *fixedSeparator, *flexibleSeparator;
@@ -45,6 +45,8 @@ static void *KINContext = &KINContext;
 @property (nonatomic, strong) UIPopoverController *actionPopoverController;
 @property (nonatomic, assign) BOOL uiWebViewIsLoading;
 @property (nonatomic, strong) NSURL *uiWebViewCurrentURL;
+@property (nonatomic, strong) NSURL *URLToLaunchWithPermission;
+@property (nonatomic, strong) UIAlertView *externalAppPermissionAlertView;
 
 @end
 
@@ -89,7 +91,6 @@ static void *KINContext = &KINContext;
 - (id)initWithConfiguration:(WKWebViewConfiguration *)configuration {
     self = [super init];
     if(self) {
-        
         if([WKWebView class]) {
             if(configuration) {
                 self.wkWebView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
@@ -106,6 +107,8 @@ static void *KINContext = &KINContext;
         self.showsURLInNavigationBar = NO;
         self.showsPageTitleInNavigationBar = YES;
         
+        self.externalAppPermissionAlertView = [[UIAlertView alloc] initWithTitle:@"Leave this app?" message:@"This web page is trying to open an outside app. Are you sure you want to open it?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Open App", nil];
+
     }
     return self;
 }
@@ -127,7 +130,7 @@ static void *KINContext = &KINContext;
         [self.wkWebView.scrollView setAlwaysBounceVertical:YES];
         [self.view addSubview:self.wkWebView];
         
-        [self.wkWebView addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:0 context:KINContext];
+        [self.wkWebView addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:0 context:KINWebBrowserContext];
     }
     else if(self.uiWebView) {
         [self.uiWebView setFrame:self.view.bounds];
@@ -208,17 +211,25 @@ static void *KINContext = &KINContext;
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if(webView == self.uiWebView) {
-        self.uiWebViewCurrentURL = request.URL;
-        self.uiWebViewIsLoading = YES;
-        [self updateToolbarState];
         
-        [self fakeProgressViewStartLoading];
-        
-        if([self.delegate respondsToSelector:@selector(webBrowser:didStartLoadingURL:)]) {
-            [self.delegate webBrowser:self didStartLoadingURL:request.URL];
+        if(![self externalAppRequiredToOpenURL:request.URL]) {
+            self.uiWebViewCurrentURL = request.URL;
+            self.uiWebViewIsLoading = YES;
+            [self updateToolbarState];
+            
+            [self fakeProgressViewStartLoading];
+            
+            if([self.delegate respondsToSelector:@selector(webBrowser:didStartLoadingURL:)]) {
+                [self.delegate webBrowser:self didStartLoadingURL:request.URL];
+            }
+            return YES;
+        }
+        else {
+            [self launchExternalAppWithURL:request.URL];
+            return NO;
         }
     }
-    return YES;
+    return NO;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -288,6 +299,26 @@ static void *KINContext = &KINContext;
             [self.delegate webBrowser:self didFailToLoadURL:self.wkWebView.URL error:error];
         }
     }
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    if(webView == self.wkWebView) {
+        
+        NSURL *URL = navigationAction.request.URL;
+        if(![self externalAppRequiredToOpenURL:URL]) {
+            if(!navigationAction.targetFrame) {
+                [self loadURL:URL];
+                decisionHandler(WKNavigationActionPolicyCancel);
+                return;
+            }
+        }
+        else if([[UIApplication sharedApplication] canOpenURL:URL]) {
+            [self launchExternalAppWithURL:URL];
+            decisionHandler(WKNavigationActionPolicyCancel);
+            return;
+        }
+    }
+    decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 #pragma mark - Toolbar State
@@ -487,6 +518,29 @@ static void *KINContext = &KINContext;
         if(self.progressView.progress < 0.95) {
             [self.progressView setProgress:progress animated:YES];
         }
+    }
+}
+
+#pragma mark - External App Support
+
+- (BOOL)externalAppRequiredToOpenURL:(NSURL *)URL {
+    NSSet *validSchemes = [NSSet setWithArray:@[@"http", @"https"]];
+    return ![validSchemes containsObject:URL.scheme];
+}
+
+- (void)launchExternalAppWithURL:(NSURL *)URL {
+    self.URLToLaunchWithPermission = URL;
+    [self.externalAppPermissionAlertView show];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if(alertView == self.externalAppPermissionAlertView) {
+        if(buttonIndex != alertView.cancelButtonIndex) {
+            [[UIApplication sharedApplication] openURL:self.URLToLaunchWithPermission];
+        }
+        self.URLToLaunchWithPermission = nil;
     }
 }
 
