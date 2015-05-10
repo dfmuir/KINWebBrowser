@@ -443,7 +443,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 
 - (void)actionButtonPressed:(id)sender {
     NSURL *URLForActivityItem;
-    NSString *URLtitle;
+    NSString *URLTitle;
     if(self.wkWebView) {
         URLForActivityItem = self.wkWebView.URL;
         URLTitle = self.wkWebView.title;
@@ -564,9 +564,9 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 #pragma mark - Dismiss
 
 - (void)dismissAnimated:(BOOL)animated {
-	if([self.delegate respondsToSelector:@selector(webBrowserViewControllerWillDismiss:)]) {
-		[self.delegate webBrowserViewControllerWillDismiss:self];
-	}
+    if([self.delegate respondsToSelector:@selector(webBrowserViewControllerWillDismiss:)]) {
+        [self.delegate webBrowserViewControllerWillDismiss:self];
+    }
     [self.navigationController dismissViewControllerAnimated:animated completion:nil];
 }
 

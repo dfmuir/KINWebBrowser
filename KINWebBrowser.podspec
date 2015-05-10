@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
 
   s.name         = "KINWebBrowser"
 
-  s.version      = "1.2.0"
+  s.version      = "1.2.1"
 
   s.summary      = "A web browser module for your apps."
   s.description  = <<-DESC
