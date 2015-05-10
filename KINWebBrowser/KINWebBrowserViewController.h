@@ -112,6 +112,9 @@
 @property (nonatomic, assign) BOOL showsURLInNavigationBar;
 @property (nonatomic, assign) BOOL showsPageTitleInNavigationBar;
 
+//Allow for custom activities in the browser by populating this optional array
+@property (nonatomic, strong) NSArray *customActivityItems;
+
 #pragma mark - Public Interface
 
 // Load a NSURL to webView

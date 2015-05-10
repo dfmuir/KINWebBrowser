@@ -455,7 +455,16 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     dispatch_async(dispatch_get_main_queue(), ^{
         TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
         ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
-        UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem, URLTitle] applicationActivities:@[safariActivity, chromeActivity]];
+        
+        NSMutableArray *activities = [[NSMutableArray alloc] init];
+        [activities addObject:safariActivity];
+        [activities addObject:chromeActivity];
+        if(self.customActivityItems != nil) {
+            [activities addObjectsFromArray:self.customActivityItems];
+        }
+        
+        UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:activities];
+        
         if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             if(self.actionPopoverController) {
                 [self.actionPopoverController dismissPopoverAnimated:YES];
