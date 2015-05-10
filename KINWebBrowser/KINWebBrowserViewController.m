@@ -438,16 +438,19 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 
 - (void)actionButtonPressed:(id)sender {
     NSURL *URLForActivityItem;
+    NSString *URLtitle;
     if(self.wkWebView) {
         URLForActivityItem = self.wkWebView.URL;
+        URLTitle = self.wkWebView.title;
     }
     else if(self.uiWebView) {
         URLForActivityItem = self.uiWebView.request.URL;
+        URLTitle = [self.uiWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
         ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
-        UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:@[safariActivity, chromeActivity]];
+        UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem, URLTitle] applicationActivities:@[safariActivity, chromeActivity]];
         if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             if(self.actionPopoverController) {
                 [self.actionPopoverController dismissPopoverAnimated:YES];
