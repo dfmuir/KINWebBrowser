@@ -60,17 +60,17 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 }
 
 + (KINWebBrowserViewController *)webBrowserWithConfiguration:(WKWebViewConfiguration *)configuration {
-    KINWebBrowserViewController *webBrowserViewController = [[KINWebBrowserViewController alloc] initWithConfiguration:configuration];
+    KINWebBrowserViewController *webBrowserViewController = [[self alloc] initWithConfiguration:configuration];
     return webBrowserViewController;
 }
 
 + (UINavigationController *)navigationControllerWithWebBrowser {
-    KINWebBrowserViewController *webBrowserViewController = [[KINWebBrowserViewController alloc] initWithConfiguration:nil];
+    KINWebBrowserViewController *webBrowserViewController = [[self alloc] initWithConfiguration:nil];
     return [KINWebBrowserViewController navigationControllerWithBrowser:webBrowserViewController];
 }
 
 + (UINavigationController *)navigationControllerWithWebBrowserWithConfiguration:(WKWebViewConfiguration *)configuration {
-    KINWebBrowserViewController *webBrowserViewController = [[KINWebBrowserViewController alloc] initWithConfiguration:configuration];
+    KINWebBrowserViewController *webBrowserViewController = [[self alloc] initWithConfiguration:configuration];
     return [KINWebBrowserViewController navigationControllerWithBrowser:webBrowserViewController];
 }
 
