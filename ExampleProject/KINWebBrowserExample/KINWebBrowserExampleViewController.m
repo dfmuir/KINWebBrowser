@@ -38,7 +38,7 @@
 
 @end
 
-static NSString *const defaultAddress = @"http://www.apple.com/";
+static NSString *const defaultAddress = @"https://www.apple.com";
 
 @implementation KINWebBrowserExampleViewController
 
@@ -85,6 +85,11 @@ static NSString *const defaultAddress = @"http://www.apple.com/";
 
 - (void)webBrowser:(KINWebBrowserViewController *)webBrowser didFailToLoadURL:(NSURL *)URL withError:(NSError *)error {
     NSLog(@"Failed To Load URL : %@ With Error: %@", URL, error);
+}
+
+- (void)webBrowserViewControllerWillDismiss:(KINWebBrowserViewController*)viewController {
+	NSLog(@"View Controller will dismiss: %@", viewController);
+	
 }
 
 
