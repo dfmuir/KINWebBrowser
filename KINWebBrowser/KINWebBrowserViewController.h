@@ -125,5 +125,9 @@
 // Can be called any time after initialization
 - (void)loadURLString:(NSString *)URLString;
 
+// Load a NSURLRequest
+// Can be called any time after initialization
+- (void)loadRequest:(NSURLRequest *)request;
+
 @end
 
