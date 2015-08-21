@@ -44,6 +44,15 @@ KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWe
 [webBrowser loadURLString:@"http://www.example.com"];
 ```
 
+**Load HTML from a string:**
+```objective-c
+UINavigationController *webBrowserNavigationController = [KINWebBrowserViewController navigationControllerWithWebBrowser];
+[self presentViewController:webBrowserNavigationController animated:YES completion:nil];
+
+KINWebBrowserViewController *webBrowser = [webBrowserNavigationController rootWebBrowser];
+[webBrowser loadHTML:@"<body><head><title>Title</title><html><h1>Hello HTML</h1></html></body>"];
+```
+
 Installation
 ------------------------
 

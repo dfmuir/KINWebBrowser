@@ -125,5 +125,9 @@
 // Can be called any time after initialization
 - (void)loadURLString:(NSString *)URLString;
 
+// Loads an HTML NSString to webView
+// Can be called any time after initialization
+- (void)loadHTML:(NSString *)html;
+
 @end
 
