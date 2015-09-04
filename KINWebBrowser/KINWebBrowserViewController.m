@@ -43,7 +43,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 @property (nonatomic, strong) UIBarButtonItem *backButton, *forwardButton, *refreshButton, *stopButton, *actionButton, *fixedSeparator, *flexibleSeparator;
 @property (nonatomic, strong) NSTimer *fakeProgressTimer;
 @property (nonatomic, strong) UIPopoverController *actionPopoverController;
-@property (nonatomic, assign) BOOL uiWebViewIsLoading;
+@property (nonatomic, assign) BOOL uiWebViewIsLoading, hideToolbar;
 @property (nonatomic, strong) NSURL *uiWebViewCurrentURL;
 @property (nonatomic, strong) NSURL *URLToLaunchWithPermission;
 @property (nonatomic, strong) UIAlertView *externalAppPermissionAlertView;
@@ -154,11 +154,12 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self.navigationController setToolbarHidden:NO animated:YES];
-    
+    if (self.hideToolbar == false) // will be true if displaying an NSString as website with [self loadText:text] in which case the toolbar is unnecessary
+    {
+        [self.navigationController setToolbarHidden:NO animated:YES];
+        [self updateToolbarState];
+    }
     [self.navigationController.navigationBar addSubview:self.progressView];
-    
-    [self updateToolbarState];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -173,6 +174,21 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 }
 
 #pragma mark - Public Interface
+
+- (void)loadText:(NSString *)text {
+    NSString* htmlContentString = [NSString stringWithFormat:
+                                   @"<html>"
+                                   "<body>"
+                                   "<p>%@</p>"
+                                   "</body></html>", text];
+    if(self.wkWebView) {
+        [self.wkWebView loadHTMLString:htmlContentString baseURL:nil ];
+    }
+    else if(self.uiWebView) {
+        [self.uiWebView loadHTMLString:htmlContentString baseURL:nil ];
+    }
+    self.hideToolbar = true; 
+}
 
 - (void)loadURL:(NSURL *)URL {
     if(self.wkWebView) {
