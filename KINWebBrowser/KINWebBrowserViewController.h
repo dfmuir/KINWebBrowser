@@ -132,17 +132,25 @@ typedef NSDictionary *(^KINWebBrowserHeadersFilterBlock)(NSURL *url, NSDictionar
 
 - (NSMutableURLRequest *)requestWithURL:(NSURL *)URL;
 
-// Load a NSURL to webView
+// Load a NSURLURLRequest to web view
+// Can be called any time after initialization
+- (void)loadRequest:(NSURLRequest *)request;
+
+// Load a NSURL to web view
 // Can be called any time after initialization
 - (void)loadURL:(NSURL *)URL;
 
-// Loads a URL as NSString to webView
+// Loads a URL as NSString to web view
 // Can be called any time after initialization
 - (void)loadURLString:(NSString *)URLString;
 
 - (void)loadFileURLString:(NSString *)URLString;
 
 - (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
+
+// Loads an string containing HTML to web view
+// Can be called any time after initialization
+- (void)loadHTMLString:(NSString *)HTMLString;
 
 - (NSString *)valueForHTTPHeaderField:(NSString *)field;
 

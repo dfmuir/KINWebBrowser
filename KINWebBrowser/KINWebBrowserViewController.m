@@ -119,9 +119,9 @@ static void *KINContext = &KINContext;
         self.showsPageTitleInNavigationBar = YES;
         
         _HTTPHeaders = [NSMutableDictionary new];
-
+        
         self.externalAppPermissionAlertView = [[UIAlertView alloc] initWithTitle:@"Leave this app?" message:@"This web page is trying to open an outside app. Are you sure you want to open it?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Open App", nil];
-
+        
     }
     return self;
 }
@@ -228,7 +228,6 @@ static void *KINContext = &KINContext;
     } else {
         [self.actionButton setEnabled:NO];
     }
-    
 }
 
 - (void)loadURLString:(NSString *)URLString {
@@ -251,6 +250,15 @@ static void *KINContext = &KINContext;
 
 - (UIScrollView *)scrollViewOfWebView {
     return (self.wkWebView ? self.wkWebView.scrollView : self.uiWebView.scrollView);
+}
+
+- (void)loadHTMLString:(NSString *)HTMLString {
+    if(self.wkWebView) {
+        [self.wkWebView loadHTMLString:HTMLString baseURL:nil];
+    }
+    else if(self.uiWebView) {
+        [self.uiWebView loadHTMLString:HTMLString baseURL:nil];
+    }
 }
 
 - (void)setTintColor:(UIColor *)tintColor {
@@ -458,10 +466,16 @@ static void *KINContext = &KINContext;
 }
 
 - (void)setupToolbarItems {
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    
     self.refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshButtonPressed:)];
     self.stopButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stopButtonPressed:)];
-    self.backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"backbutton"] style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed:)];
-    self.forwardButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"forwardbutton"] style:UIBarButtonItemStylePlain target:self action:@selector(forwardButtonPressed:)];
+    
+    UIImage *backbuttonImage = [UIImage imageWithContentsOfFile: [bundle pathForResource:@"backbutton" ofType:@"png"]];
+    self.backButton = [[UIBarButtonItem alloc] initWithImage:backbuttonImage style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed:)];
+    
+    UIImage *forwardbuttonImage = [UIImage imageWithContentsOfFile: [bundle pathForResource:@"forwardbutton" ofType:@"png"]];
+    self.forwardButton = [[UIBarButtonItem alloc] initWithImage:forwardbuttonImage style:UIBarButtonItemStylePlain target:self action:@selector(forwardButtonPressed:)];
     self.actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonPressed:)];
     self.fixedSeparator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     self.fixedSeparator.width = 50.0f;
@@ -535,30 +549,32 @@ static void *KINContext = &KINContext;
             NSLog(@"Not possible to display OpenInController");
         }
     } else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
-            ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
-            
-            NSMutableArray *activities = [[NSMutableArray alloc] init];
-            [activities addObject:safariActivity];
-            [activities addObject:chromeActivity];
-            if(self.customActivityItems != nil) {
-                [activities addObjectsFromArray:self.customActivityItems];
-            }
-            
-            UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:activities];
-            
-            if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-                if(self.actionPopoverController) {
-                    [self.actionPopoverController dismissPopoverAnimated:YES];
+        if (URLForActivityItem) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
+                ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
+                
+                NSMutableArray *activities = [[NSMutableArray alloc] init];
+                [activities addObject:safariActivity];
+                [activities addObject:chromeActivity];
+                if(self.customActivityItems != nil) {
+                    [activities addObjectsFromArray:self.customActivityItems];
                 }
-                self.actionPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
-                [self.actionPopoverController presentPopoverFromBarButtonItem:self.actionButton permittedArrowDirections: UIPopoverArrowDirectionAny animated:YES];
-            }
-            else {
-                [self presentViewController:controller animated:YES completion:NULL];
-            }
-        });
+                
+                UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:activities];
+                
+                if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+                    if(self.actionPopoverController) {
+                        [self.actionPopoverController dismissPopoverAnimated:YES];
+                    }
+                    self.actionPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+                    [self.actionPopoverController presentPopoverFromBarButtonItem:self.actionButton permittedArrowDirections: UIPopoverArrowDirectionAny animated:YES];
+                }
+                else {
+                    [self presentViewController:controller animated:YES completion:NULL];
+                }
+            });
+        }
     }
 }
 
@@ -641,7 +657,9 @@ static void *KINContext = &KINContext;
 
 - (void)launchExternalAppWithURL:(NSURL *)URL {
     self.URLToLaunchWithPermission = URL;
-    [self.externalAppPermissionAlertView show];
+    if (![self.externalAppPermissionAlertView isVisible]) {
+        [self.externalAppPermissionAlertView show];
+    }
 }
 
 #pragma mark - UIAlertViewDelegate

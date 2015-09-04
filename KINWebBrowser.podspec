@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "KINWebBrowser"
-  s.version      = "1.2.4"
+  s.version      = "1.3.0"
   s.summary      = "A web browser module for your apps."
   s.description  = <<-DESC
                    KINWebBrowser is a web browser module for your apps. Powered by WKWebView on iOS 8. Backwards compatible with iOS 7 using UIWebView. KINWebBrowser offers the simplest way to add a web browser to your apps.
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.weak_framework = 'WebKit'
 
-  s.dependency 'TUSafariActivity', '1.0.2'
+  s.dependency 'TUSafariActivity', '1.0.4'
   s.dependency 'ARChromeActivity', '1.0.4'
 
 end
