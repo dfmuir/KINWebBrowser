@@ -471,30 +471,32 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
         URLForActivityItem = self.uiWebView.request.URL;
         URLTitle = [self.uiWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
-        ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
-        
-        NSMutableArray *activities = [[NSMutableArray alloc] init];
-        [activities addObject:safariActivity];
-        [activities addObject:chromeActivity];
-        if(self.customActivityItems != nil) {
-            [activities addObjectsFromArray:self.customActivityItems];
-        }
-        
-        UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:activities];
-        
-        if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-            if(self.actionPopoverController) {
-                [self.actionPopoverController dismissPopoverAnimated:YES];
+    if (URLForActivityItem) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
+            ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
+            
+            NSMutableArray *activities = [[NSMutableArray alloc] init];
+            [activities addObject:safariActivity];
+            [activities addObject:chromeActivity];
+            if(self.customActivityItems != nil) {
+                [activities addObjectsFromArray:self.customActivityItems];
             }
-            self.actionPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
-            [self.actionPopoverController presentPopoverFromBarButtonItem:self.actionButton permittedArrowDirections: UIPopoverArrowDirectionAny animated:YES];
-        }
-        else {
-            [self presentViewController:controller animated:YES completion:NULL];
-        }
-    });
+            
+            UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:activities];
+            
+            if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+                if(self.actionPopoverController) {
+                    [self.actionPopoverController dismissPopoverAnimated:YES];
+                }
+                self.actionPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+                [self.actionPopoverController presentPopoverFromBarButtonItem:self.actionButton permittedArrowDirections: UIPopoverArrowDirectionAny animated:YES];
+            }
+            else {
+                [self presentViewController:controller animated:YES completion:NULL];
+            }
+        });
+    }
 }
 
 
@@ -566,7 +568,10 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 
 - (void)launchExternalAppWithURL:(NSURL *)URL {
     self.URLToLaunchWithPermission = URL;
-    [self.externalAppPermissionAlertView show];
+    if (![self.externalAppPermissionAlertView isVisible]) {
+        [self.externalAppPermissionAlertView show];
+    }
+
 }
 
 #pragma mark - UIAlertViewDelegate
