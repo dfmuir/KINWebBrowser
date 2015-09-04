@@ -174,13 +174,17 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 
 #pragma mark - Public Interface
 
-- (void)loadURL:(NSURL *)URL {
+- (void)loadRequest:(NSURLRequest *)request {
     if(self.wkWebView) {
-        [self.wkWebView loadRequest:[NSURLRequest requestWithURL:URL]];
+        [self.wkWebView loadRequest:request];
     }
     else if(self.uiWebView) {
-        [self.uiWebView loadRequest:[NSURLRequest requestWithURL:URL]];
+        [self.uiWebView loadRequest:request];
     }
+}
+
+- (void)loadURL:(NSURL *)URL {
+    [self loadRequest:[NSURLRequest requestWithURL:URL]];
 }
 
 - (void)loadURLString:(NSString *)URLString {

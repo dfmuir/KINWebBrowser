@@ -117,16 +117,21 @@
 
 #pragma mark - Public Interface
 
-// Load a NSURL to webView
+
+// Load a NSURLURLRequest to web view
+// Can be called any time after initialization
+- (void)loadRequest:(NSURLRequest *)request;
+
+// Load a NSURL to web view
 // Can be called any time after initialization
 - (void)loadURL:(NSURL *)URL;
 
-// Loads a URL as NSString to webView
+// Loads a URL as NSString to web view
 // Can be called any time after initialization
 - (void)loadURLString:(NSString *)URLString;
 
 
-// Loads an string containing HTML to webView
+// Loads an string containing HTML to web view
 // Can be called any time after initialization
 - (void)loadHTMLString:(NSString *)HTMLString;
 
