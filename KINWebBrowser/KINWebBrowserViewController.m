@@ -458,6 +458,10 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
         URLForActivityItem = self.uiWebView.request.URL;
         URLTitle = [self.uiWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
     }
+    if (!URLForActivityItem) {
+        // This happens if the webpage doesn't get loaded due to a connection issue
+        return;
+    }
     dispatch_async(dispatch_get_main_queue(), ^{
         TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
         ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
