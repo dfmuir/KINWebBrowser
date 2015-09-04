@@ -188,6 +188,15 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     [self loadURL:URL];
 }
 
+- (void)loadHTMLString:(NSString *)HTMLString {
+    if(self.wkWebView) {
+        [self.wkWebView loadHTMLString:HTMLString baseURL:nil];
+    }
+    else if(self.uiWebView) {
+        [self.uiWebView loadHTMLString:HTMLString baseURL:nil];
+    }
+}
+
 - (void)setTintColor:(UIColor *)tintColor {
     _tintColor = tintColor;
     [self.progressView setTintColor:tintColor];
@@ -389,7 +398,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     
     UIImage *backbuttonImage = [UIImage imageWithContentsOfFile: [bundle pathForResource:@"backbutton" ofType:@"png"]];
     self.backButton = [[UIBarButtonItem alloc] initWithImage:backbuttonImage style:UIBarButtonItemStylePlain target:self action:@selector(backButtonPressed:)];
-	
+    
     UIImage *forwardbuttonImage = [UIImage imageWithContentsOfFile: [bundle pathForResource:@"forwardbutton" ofType:@"png"]];
     self.forwardButton = [[UIBarButtonItem alloc] initWithImage:forwardbuttonImage style:UIBarButtonItemStylePlain target:self action:@selector(forwardButtonPressed:)];
     self.actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionButtonPressed:)];
