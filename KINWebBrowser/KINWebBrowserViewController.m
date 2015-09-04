@@ -175,17 +175,21 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 #pragma mark - Public Interface
 
 - (void)loadURL:(NSURL *)URL {
-    if(self.wkWebView) {
-        [self.wkWebView loadRequest:[NSURLRequest requestWithURL:URL]];
-    }
-    else if(self.uiWebView) {
-        [self.uiWebView loadRequest:[NSURLRequest requestWithURL:URL]];
-    }
+    [self loadRequest:[NSURLRequest requestWithURL:URL]];
 }
 
 - (void)loadURLString:(NSString *)URLString {
     NSURL *URL = [NSURL URLWithString:URLString];
     [self loadURL:URL];
+}
+
+- (void)loadRequest:(NSURLRequest *)request {
+    if(self.wkWebView) {
+        [self.wkWebView loadRequest:request];
+    }
+    else if(self.uiWebView) {
+        [self.uiWebView loadRequest:request];
+    }
 }
 
 - (void)setTintColor:(UIColor *)tintColor {
