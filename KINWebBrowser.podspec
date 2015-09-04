@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '7.0'
   s.source       = { :git => "https://github.com/dfmuir/KINWebBrowser.git", :tag => s.version.to_s }
   s.source_files  = 'KINWebBrowser', 'KINWebBrowser/**/*.{h,m}'
+  s.resources = "Assets/*.png"
   s.requires_arc = true
 
   s.weak_framework = 'WebKit'
