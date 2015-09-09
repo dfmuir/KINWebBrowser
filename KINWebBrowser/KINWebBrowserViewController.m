@@ -596,7 +596,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 
 #pragma mark - Interface Orientation
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
