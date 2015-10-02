@@ -32,25 +32,29 @@
 
 #import "KINWebBrowserViewController.h"
 
-#import "TUSafariActivity.h"
-#import "ARChromeActivity.h"
+#import <TUSafariActivity/TUSafariActivity.h>
+#import <ARChromeActivity/ARChromeActivity.h>
 
-static void *KINWebBrowserContext = &KINWebBrowserContext;
+static void *KINContext = &KINContext;
 
-@interface KINWebBrowserViewController () <UIAlertViewDelegate>
+@interface KINWebBrowserViewController () <UIDocumentInteractionControllerDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, assign) BOOL previousNavigationControllerToolbarHidden, previousNavigationControllerNavigationBarHidden;
 @property (nonatomic, strong) UIBarButtonItem *backButton, *forwardButton, *refreshButton, *stopButton, *actionButton, *fixedSeparator, *flexibleSeparator;
 @property (nonatomic, strong) NSTimer *fakeProgressTimer;
 @property (nonatomic, strong) UIPopoverController *actionPopoverController;
+@property (nonatomic, strong) UIDocumentInteractionController *openInController;
 @property (nonatomic, assign) BOOL uiWebViewIsLoading;
 @property (nonatomic, strong) NSURL *uiWebViewCurrentURL;
+@property (nonatomic, strong) NSMutableDictionary *HTTPHeaders;
 @property (nonatomic, strong) NSURL *URLToLaunchWithPermission;
 @property (nonatomic, strong) UIAlertView *externalAppPermissionAlertView;
 
 @end
 
 @implementation KINWebBrowserViewController
+
+@synthesize openInController = _openInController;
 
 #pragma mark - Static Initializers
 
@@ -60,17 +64,17 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 }
 
 + (KINWebBrowserViewController *)webBrowserWithConfiguration:(WKWebViewConfiguration *)configuration {
-    KINWebBrowserViewController *webBrowserViewController = [[self alloc] initWithConfiguration:configuration];
+    KINWebBrowserViewController *webBrowserViewController = [[KINWebBrowserViewController alloc] initWithConfiguration:configuration];
     return webBrowserViewController;
 }
 
 + (UINavigationController *)navigationControllerWithWebBrowser {
-    KINWebBrowserViewController *webBrowserViewController = [[self alloc] initWithConfiguration:nil];
+    KINWebBrowserViewController *webBrowserViewController = [[KINWebBrowserViewController alloc] initWithConfiguration:nil];
     return [KINWebBrowserViewController navigationControllerWithBrowser:webBrowserViewController];
 }
 
 + (UINavigationController *)navigationControllerWithWebBrowserWithConfiguration:(WKWebViewConfiguration *)configuration {
-    KINWebBrowserViewController *webBrowserViewController = [[self alloc] initWithConfiguration:configuration];
+    KINWebBrowserViewController *webBrowserViewController = [[KINWebBrowserViewController alloc] initWithConfiguration:configuration];
     return [KINWebBrowserViewController navigationControllerWithBrowser:webBrowserViewController];
 }
 
@@ -88,18 +92,25 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     return [self initWithConfiguration:nil];
 }
 
+// Instantiate via Storyboard
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self = [self initWithConfiguration:nil];
+    }
+    return self;
+}
+
 - (id)initWithConfiguration:(WKWebViewConfiguration *)configuration {
-    self = [super init];
+    if (!self) self = [super init];
     if(self) {
         if([WKWebView class]) {
             if(configuration) {
                 self.wkWebView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
-            }
-            else {
+            } else {
                 self.wkWebView = [[WKWebView alloc] init];
             }
-        }
-        else {
+        } else {
             self.uiWebView = [[UIWebView alloc] init];
         }
         
@@ -107,10 +118,34 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
         self.showsURLInNavigationBar = NO;
         self.showsPageTitleInNavigationBar = YES;
         
+        _HTTPHeaders = [NSMutableDictionary new];
+        
         self.externalAppPermissionAlertView = [[UIAlertView alloc] initWithTitle:@"Leave this app?" message:@"This web page is trying to open an outside app. Are you sure you want to open it?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Open App", nil];
         
     }
     return self;
+}
+
+#pragma mark - Lazy Initializers
+
+- (UIProgressView *)progressView {
+    if (!_progressView) {
+        _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+        [_progressView setTrackTintColor:[UIColor colorWithWhite:1.0f alpha:0.0f]];
+        [_progressView setFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height-_progressView.frame.size.height, self.view.frame.size.width, _progressView.frame.size.height)];
+        [_progressView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
+        [self.navigationController.navigationBar addSubview:_progressView];
+    }
+    return _progressView;
+}
+
+-(UIDocumentInteractionController *)openInController
+{
+    if (!_openInController) {
+        _openInController = [[UIDocumentInteractionController alloc] init];
+        [_openInController setDelegate:self];
+    }
+    return _openInController;
 }
 
 #pragma mark - View Lifecycle
@@ -129,10 +164,8 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
         [self.wkWebView setAutoresizesSubviews:YES];
         [self.wkWebView.scrollView setAlwaysBounceVertical:YES];
         [self.view addSubview:self.wkWebView];
-        
-        [self.wkWebView addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:0 context:KINWebBrowserContext];
-    }
-    else if(self.uiWebView) {
+        [self.wkWebView addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:0 context:KINContext];
+    } else if(self.uiWebView) {
         [self.uiWebView setFrame:self.view.bounds];
         [self.uiWebView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         [self.uiWebView setDelegate:self];
@@ -142,12 +175,6 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
         [self.uiWebView.scrollView setAlwaysBounceVertical:YES];
         [self.view addSubview:self.uiWebView];
     }
-    
-    
-    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-    [self.progressView setTrackTintColor:[UIColor colorWithWhite:1.0f alpha:0.0f]];
-    [self.progressView setFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height-self.progressView.frame.size.height, self.view.frame.size.width, self.progressView.frame.size.height)];
-    [self.progressView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -156,8 +183,6 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self.navigationController setToolbarHidden:NO animated:YES];
     
-    [self.navigationController.navigationBar addSubview:self.progressView];
-    
     [self updateToolbarState];
 }
 
@@ -165,7 +190,6 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     [super viewWillDisappear:animated];
     
     [self.navigationController setNavigationBarHidden:self.previousNavigationControllerNavigationBarHidden animated:animated];
-    
     [self.navigationController setToolbarHidden:self.previousNavigationControllerToolbarHidden animated:animated];
     
     [self.uiWebView setDelegate:nil];
@@ -174,22 +198,58 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 
 #pragma mark - Public Interface
 
+- (NSMutableURLRequest *)requestWithURL:(NSURL *)URL {
+    __weak KINWebBrowserViewController *wself = self;
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL];
+    if (wself.headersFilter) {
+        request.allHTTPHeaderFields = wself.headersFilter(URL, [wself.HTTPHeaders copy]);
+    } else {
+        request.allHTTPHeaderFields = wself.HTTPHeaders;
+    }
+    return request;
+}
+
+- (void)loadURL:(NSURL *)URL {
+    [self loadRequest:[self requestWithURL:URL]];
+}
+
 - (void)loadRequest:(NSURLRequest *)request {
     if(self.wkWebView) {
         [self.wkWebView loadRequest:request];
-    }
-    else if(self.uiWebView) {
+    } else if(self.uiWebView) {
         [self.uiWebView loadRequest:request];
     }
 }
 
-- (void)loadURL:(NSURL *)URL {
-    [self loadRequest:[NSURLRequest requestWithURL:URL]];
+- (void)loadFileURLString:(NSString *)URLString {
+    NSURL *url = [NSURL fileURLWithPath:URLString];
+    if (url) {
+        [self loadRequest:[[NSURLRequest alloc] initWithURL:url]];
+    } else {
+        [self.actionButton setEnabled:NO];
+    }
 }
 
 - (void)loadURLString:(NSString *)URLString {
-    NSURL *URL = [NSURL URLWithString:URLString];
-    [self loadURL:URL];
+    NSURL *url = [NSURL URLWithString:URLString];
+    if (url) {
+        [self loadURL:[NSURL URLWithString:URLString]];
+    } else {
+        url = [NSURL fileURLWithPath:URLString];
+        if (url) {
+            [self loadRequest:[[NSURLRequest alloc] initWithURL:url]];
+        } else {
+            [self.actionButton setEnabled:NO];
+        }
+    }
+}
+
+- (UIView *)webView {
+    return (self.wkWebView ? self.wkWebView : self.uiWebView);
+}
+
+- (UIScrollView *)scrollViewOfWebView {
+    return (self.wkWebView ? self.wkWebView.scrollView : self.uiWebView.scrollView);
 }
 
 - (void)loadHTMLString:(NSString *)HTMLString {
@@ -219,6 +279,17 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     [self updateToolbarState];
 }
 
+- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field {
+    if (value) {
+        self.HTTPHeaders[field] = value;
+    } else {
+        [self.HTTPHeaders removeObjectForKey:field];
+    }
+}
+
+- (NSString *)valueForHTTPHeaderField:(NSString *)field {
+    return self.HTTPHeaders[field];
+}
 
 #pragma mark - UIWebViewDelegate
 
@@ -471,34 +542,52 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
         URLForActivityItem = self.uiWebView.request.URL;
         URLTitle = [self.uiWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
     }
-    if (URLForActivityItem) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
-            ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
-            
-            NSMutableArray *activities = [[NSMutableArray alloc] init];
-            [activities addObject:safariActivity];
-            [activities addObject:chromeActivity];
-            if(self.customActivityItems != nil) {
-                [activities addObjectsFromArray:self.customActivityItems];
-            }
-            
-            UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:activities];
-            
-            if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-                if(self.actionPopoverController) {
-                    [self.actionPopoverController dismissPopoverAnimated:YES];
+    if ([URLForActivityItem isFileURL]) {
+        [self.openInController setURL:URLForActivityItem];
+        //[self.openInController setUTI:@"com.adobe.pdf"];
+        if (![self.openInController presentOptionsMenuFromBarButtonItem:sender animated:YES]) {
+            NSLog(@"Not possible to display OpenInController");
+        }
+    } else {
+        if (URLForActivityItem) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
+                ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
+                
+                NSMutableArray *activities = [[NSMutableArray alloc] init];
+                [activities addObject:safariActivity];
+                [activities addObject:chromeActivity];
+                if(self.customActivityItems != nil) {
+                    [activities addObjectsFromArray:self.customActivityItems];
                 }
-                self.actionPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
-                [self.actionPopoverController presentPopoverFromBarButtonItem:self.actionButton permittedArrowDirections: UIPopoverArrowDirectionAny animated:YES];
-            }
-            else {
-                [self presentViewController:controller animated:YES completion:NULL];
-            }
-        });
+                
+                UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:activities];
+                
+                if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+                    if(self.actionPopoverController) {
+                        [self.actionPopoverController dismissPopoverAnimated:YES];
+                    }
+                    self.actionPopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+                    [self.actionPopoverController presentPopoverFromBarButtonItem:self.actionButton permittedArrowDirections: UIPopoverArrowDirectionAny animated:YES];
+                }
+                else {
+                    [self presentViewController:controller animated:YES completion:NULL];
+                }
+            });
+        }
     }
 }
 
+#pragma mark - UIDocumentInteractionController
+
+- (void)documentInteractionController:(UIDocumentInteractionController *)controller willBeginSendingToApplication:(NSString *)application {
+}
+
+- (void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application {
+}
+
+- (void)documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController *)controller {
+}
 
 #pragma mark - Estimated Progress KVO (WKWebView)
 
@@ -571,7 +660,6 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     if (![self.externalAppPermissionAlertView isVisible]) {
         [self.externalAppPermissionAlertView show];
     }
-
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -608,14 +696,12 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 
 - (void)dealloc {
     [self.uiWebView setDelegate:nil];
-    
     [self.wkWebView setNavigationDelegate:nil];
     [self.wkWebView setUIDelegate:nil];
     if ([self isViewLoaded]) {
         [self.wkWebView removeObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
     }
 }
-
 
 @end
 

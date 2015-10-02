@@ -35,6 +35,8 @@
 
 @class KINWebBrowserViewController;
 
+typedef NSDictionary *(^KINWebBrowserHeadersFilterBlock)(NSURL *url, NSDictionary *headers);
+
 /*
  
  UINavigationController+KINWebBrowserWrapper category enables access to casted KINWebBroswerViewController when set as rootViewController of UINavigationController
@@ -78,6 +80,11 @@
 @property (nonatomic, strong) WKWebView *wkWebView;
 @property (nonatomic, strong) UIWebView *uiWebView;
 
+// Return the instantiated Webview as View
+- (UIView *)webView;
+// Return the Scrollview of the instantiated Webview
+- (UIScrollView *)scrollViewOfWebView;
+
 - (id)initWithConfiguration:(WKWebViewConfiguration *)configuration NS_AVAILABLE_IOS(8_0);
 
 #pragma mark - Static Initializers
@@ -104,7 +111,13 @@
 + (UINavigationController *)navigationControllerWithWebBrowser;
 + (UINavigationController *)navigationControllerWithWebBrowserWithConfiguration:(WKWebViewConfiguration *)configuration NS_AVAILABLE_IOS(8_0);
 
-
+/**
+ * Set filter to pick headers for HTTP request.
+ *
+ * This block will be invoked for each request, returned
+ * NSDictionary will be used as headers in corresponding HTTP request.
+ */
+@property (nonatomic, copy) KINWebBrowserHeadersFilterBlock headersFilter;
 
 @property (nonatomic, strong) UIColor *tintColor;
 @property (nonatomic, strong) UIColor *barTintColor;
@@ -117,6 +130,7 @@
 
 #pragma mark - Public Interface
 
+- (NSMutableURLRequest *)requestWithURL:(NSURL *)URL;
 
 // Load a NSURLURLRequest to web view
 // Can be called any time after initialization
@@ -130,10 +144,14 @@
 // Can be called any time after initialization
 - (void)loadURLString:(NSString *)URLString;
 
+- (void)loadFileURLString:(NSString *)URLString;
+
+- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
 
 // Loads an string containing HTML to web view
 // Can be called any time after initialization
 - (void)loadHTMLString:(NSString *)HTMLString;
 
-@end
+- (NSString *)valueForHTTPHeaderField:(NSString *)field;
 
+@end
