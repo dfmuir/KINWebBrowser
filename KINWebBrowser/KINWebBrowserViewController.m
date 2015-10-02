@@ -684,7 +684,7 @@ static void *KINContext = &KINContext;
 
 #pragma mark - Interface Orientation
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
