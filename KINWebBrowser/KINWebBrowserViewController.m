@@ -336,6 +336,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 }
 
 #pragma mark - WKUIDelegate
+
 - (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
     if (!navigationAction.targetFrame.isMainFrame) {
         [webView loadRequest:navigationAction.request];
