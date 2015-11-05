@@ -125,6 +125,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
         [self.wkWebView setFrame:self.view.bounds];
         [self.wkWebView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         [self.wkWebView setNavigationDelegate:self];
+        [self.wkWebView setUIDelegate:self];
         [self.wkWebView setMultipleTouchEnabled:YES];
         [self.wkWebView setAutoresizesSubviews:YES];
         [self.wkWebView.scrollView setAlwaysBounceVertical:YES];
@@ -332,6 +333,14 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
         }
     }
     decisionHandler(WKNavigationActionPolicyAllow);
+}
+
+#pragma mark - WKUIDelegate
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
+    if (!navigationAction.targetFrame.isMainFrame) {
+        [webView loadRequest:navigationAction.request];
+    }
+    return nil;
 }
 
 #pragma mark - Toolbar State
