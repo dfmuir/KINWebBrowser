@@ -105,7 +105,7 @@
 + (UINavigationController *)navigationControllerWithWebBrowserWithConfiguration:(WKWebViewConfiguration *)configuration NS_AVAILABLE_IOS(8_0);
 
 
-
+@property (nonatomic, strong) UIBarButtonItem *actionButton;
 @property (nonatomic, strong) UIColor *tintColor;
 @property (nonatomic, strong) UIColor *barTintColor;
 @property (nonatomic, assign) BOOL actionButtonHidden;
