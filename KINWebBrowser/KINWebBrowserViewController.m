@@ -317,7 +317,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     if(webView == self.wkWebView) {
-        
+        [self updateToolbarState];
         NSURL *URL = navigationAction.request.URL;
         if(![self externalAppRequiredToOpenURL:URL]) {
             if(!navigationAction.targetFrame) {
