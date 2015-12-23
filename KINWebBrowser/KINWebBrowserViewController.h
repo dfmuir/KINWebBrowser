@@ -112,8 +112,20 @@
 @property (nonatomic, assign) BOOL showsURLInNavigationBar;
 @property (nonatomic, assign) BOOL showsPageTitleInNavigationBar;
 
-//Allow for custom activities in the browser by populating this optional array
+/*
+ Allow for custom activities in the browser by populating this optional array
+ 
+ Warning: Custom activities is actualy not the right name for this property.
+ This array will be used as applicationActivities in UIActivityViewController's initWithActivityItems:applicationActivities:, not as activityItems as the name suggests.
+ It should be renamed to something like customApplicationActivities, but this would be a breaking change.
+ */
 @property (nonatomic, strong) NSArray *customActivityItems;
+
+/*
+ Allow for custom share items in the browser by populating this optional array
+ It will be used as activityItems in UIActivityViewController's initWithActivityItems:applicationActivities:
+ */
+@property (nonatomic, strong) NSArray *customShareItems;
 
 #pragma mark - Public Interface
 

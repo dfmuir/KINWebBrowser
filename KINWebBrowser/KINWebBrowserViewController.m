@@ -481,8 +481,13 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
         URLForActivityItem = self.uiWebView.request.URL;
         URLTitle = [self.uiWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
     }
-    if (URLForActivityItem) {
+    if (URLForActivityItem || self.customShareItems) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray *shareItems = @[URLForActivityItem];
+            if (self.customShareItems) {
+                shareItems = self.customShareItems;
+            }
+            
             TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
             ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
             
@@ -493,7 +498,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
                 [activities addObjectsFromArray:self.customActivityItems];
             }
             
-            UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:activities];
+            UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:activities];
             
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
                 if(self.actionPopoverController) {
