@@ -226,6 +226,12 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if(webView == self.uiWebView) {
         
+        if([self.delegate respondsToSelector:@selector(webBrowser:shouldStartLoadingURL:)]) {
+            if(![self.delegate webBrowser:self shouldStartLoadingURL:request.URL]) {
+                return NO;
+            }
+        }
+        
         if(![self externalAppRequiredToOpenURL:request.URL]) {
             self.uiWebViewCurrentURL = request.URL;
             self.uiWebViewIsLoading = YES;
@@ -319,6 +325,14 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     if(webView == self.wkWebView) {
         
         NSURL *URL = navigationAction.request.URL;
+
+        if([self.delegate respondsToSelector:@selector(webBrowser:shouldStartLoadingURL:)]) {
+            if(![self.delegate webBrowser:self shouldStartLoadingURL:URL]) {
+                decisionHandler(WKNavigationActionPolicyCancel);
+                return;
+            }
+        }
+        
         if(![self externalAppRequiredToOpenURL:URL]) {
             if(!navigationAction.targetFrame) {
                 [self loadURL:URL];
