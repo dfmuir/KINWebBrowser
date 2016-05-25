@@ -211,7 +211,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 
 - (void)setProgressViewTintColor:(UIColor *)progressViewTintColor {
     _progressViewTintColor = progressViewTintColor;
-    [self.progressView setTintColor:tintColor];
+    [self.progressView setTintColor:progressViewTintColor];
 }
 
 - (void)setBarTintColor:(UIColor *)barTintColor {
