@@ -204,9 +204,14 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 
 - (void)setTintColor:(UIColor *)tintColor {
     _tintColor = tintColor;
-    [self.progressView setTintColor:tintColor];
+    
     [self.navigationController.navigationBar setTintColor:tintColor];
     [self.navigationController.toolbar setTintColor:tintColor];
+}
+
+- (void)setProgressViewTintColor:(UIColor *)progressViewTintColor {
+    _progressViewTintColor = progressViewTintColor;
+    [self.progressView setTintColor:tintColor];
 }
 
 - (void)setBarTintColor:(UIColor *)barTintColor {
@@ -399,6 +404,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     [self setToolbarItems:barButtonItems animated:YES];
     
     self.tintColor = self.tintColor;
+    self.progressViewTintColor = self.progressViewTintColor;
     self.barTintColor = self.barTintColor;
     
     
