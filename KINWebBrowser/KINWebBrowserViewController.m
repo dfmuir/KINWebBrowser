@@ -36,6 +36,7 @@
 #import "ARChromeActivity.h"
 
 static void *KINWebBrowserContext = &KINWebBrowserContext;
+static BOOL onlyUIWebViewApplied;
 
 @interface KINWebBrowserViewController () <UIAlertViewDelegate>
 
@@ -82,6 +83,10 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
     return navigationController;
 }
 
++ (void)setOnlyUIWebViewApplied:(BOOL)applied {
+    onlyUIWebViewApplied = applied;
+}
+
 #pragma mark - Initializers
 
 - (id)init {
@@ -91,7 +96,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 - (id)initWithConfiguration:(WKWebViewConfiguration *)configuration {
     self = [super init];
     if(self) {
-        if([WKWebView class]) {
+        if(!onlyUIWebViewApplied && [WKWebView class]) {
             if(configuration) {
                 self.wkWebView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
             }
