@@ -577,7 +577,7 @@ static BOOL onlyUIWebViewApplied;
 #pragma mark - External App Support
 
 - (BOOL)externalAppRequiredToOpenURL:(NSURL *)URL {
-    NSSet *validSchemes = [NSSet setWithArray:@[@"http", @"https"]];
+    NSSet *validSchemes = [NSSet setWithArray:@[@"http", @"https", @"tel"]];
     return ![validSchemes containsObject:URL.scheme];
 }
 
