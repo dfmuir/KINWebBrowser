@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B4A989B6C1762F306885B5D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D246F90867446D07C788DCE /* libPods.a */; };
 		3BBECF2918A1E58D00A2499D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2818A1E58D00A2499D /* Foundation.framework */; };
 		3BBECF2B18A1E58D00A2499D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2A18A1E58D00A2499D /* CoreGraphics.framework */; };
 		3BBECF2D18A1E58D00A2499D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBECF2C18A1E58D00A2499D /* UIKit.framework */; };
@@ -22,6 +21,8 @@
 		3BBECF4E18A1E58E00A2499D /* KINWebBrowserExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBECF4D18A1E58E00A2499D /* KINWebBrowserExampleTests.m */; };
 		3BBECF6518A1EAB100A2499D /* KINWebBrowserExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BBECF6318A1EAB100A2499D /* KINWebBrowserExampleViewController.m */; };
 		3BBECF6618A1EAB100A2499D /* KINWebBrowserExampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BBECF6418A1EAB100A2499D /* KINWebBrowserExampleViewController.xib */; };
+		C29E741E1DB8A02D0058C106 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C29E741D1DB8A02D0058C106 /* Launch Screen.storyboard */; };
+		F513409AC812CFC9F2355928 /* libPods-KINWebBrowserExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A432E1AB91AADA983CEFC5 /* libPods-KINWebBrowserExample.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0D66287F09CB3E898333BDB8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		20A432E1AB91AADA983CEFC5 /* libPods-KINWebBrowserExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KINWebBrowserExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B57DAB619E11FAB00C499B5 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3BBECF2518A1E58D00A2499D /* KINWebBrowserExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KINWebBrowserExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BBECF2818A1E58D00A2499D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -56,8 +57,9 @@
 		3BBECF6218A1EAB100A2499D /* KINWebBrowserExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KINWebBrowserExampleViewController.h; sourceTree = "<group>"; };
 		3BBECF6318A1EAB100A2499D /* KINWebBrowserExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KINWebBrowserExampleViewController.m; sourceTree = "<group>"; };
 		3BBECF6418A1EAB100A2499D /* KINWebBrowserExampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KINWebBrowserExampleViewController.xib; sourceTree = "<group>"; };
-		4D246F90867446D07C788DCE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		E95061206B0428F84E5EAF94 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		C29E741D1DB8A02D0058C106 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		D55AFEF6AACABA699C9D8738 /* Pods-KINWebBrowserExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KINWebBrowserExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KINWebBrowserExample/Pods-KINWebBrowserExample.debug.xcconfig"; sourceTree = "<group>"; };
+		EEE34F1E750ABC931B5340E0 /* Pods-KINWebBrowserExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KINWebBrowserExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-KINWebBrowserExample/Pods-KINWebBrowserExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,7 @@
 				3BBECF2B18A1E58D00A2499D /* CoreGraphics.framework in Frameworks */,
 				3BBECF2D18A1E58D00A2499D /* UIKit.framework in Frameworks */,
 				3BBECF2918A1E58D00A2499D /* Foundation.framework in Frameworks */,
-				0B4A989B6C1762F306885B5D /* libPods.a in Frameworks */,
+				F513409AC812CFC9F2355928 /* libPods-KINWebBrowserExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,7 +115,7 @@
 				3BBECF2A18A1E58D00A2499D /* CoreGraphics.framework */,
 				3BBECF2C18A1E58D00A2499D /* UIKit.framework */,
 				3BBECF4118A1E58D00A2499D /* XCTest.framework */,
-				4D246F90867446D07C788DCE /* libPods.a */,
+				20A432E1AB91AADA983CEFC5 /* libPods-KINWebBrowserExample.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -128,6 +130,7 @@
 				3BBECF6418A1EAB100A2499D /* KINWebBrowserExampleViewController.xib */,
 				3BBECF3A18A1E58D00A2499D /* Images.xcassets */,
 				3BBECF2F18A1E58D00A2499D /* Supporting Files */,
+				C29E741D1DB8A02D0058C106 /* Launch Screen.storyboard */,
 			);
 			path = KINWebBrowserExample;
 			sourceTree = "<group>";
@@ -164,8 +167,8 @@
 		F41A3D371A44A50919509CDE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E95061206B0428F84E5EAF94 /* Pods.debug.xcconfig */,
-				0D66287F09CB3E898333BDB8 /* Pods.release.xcconfig */,
+				D55AFEF6AACABA699C9D8738 /* Pods-KINWebBrowserExample.debug.xcconfig */,
+				EEE34F1E750ABC931B5340E0 /* Pods-KINWebBrowserExample.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -177,11 +180,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3BBECF5118A1E58E00A2499D /* Build configuration list for PBXNativeTarget "KINWebBrowserExample" */;
 			buildPhases = (
-				6F51916B9AD244238CE3E060 /* Check Pods Manifest.lock */,
+				6F51916B9AD244238CE3E060 /* [CP] Check Pods Manifest.lock */,
 				3BBECF2118A1E58D00A2499D /* Sources */,
 				3BBECF2218A1E58D00A2499D /* Frameworks */,
 				3BBECF2318A1E58D00A2499D /* Resources */,
-				F23BEC6F0D11442D85D78196 /* Copy Pods Resources */,
+				F23BEC6F0D11442D85D78196 /* [CP] Copy Pods Resources */,
+				AA798053815ECDCA7FA428BB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -217,9 +221,13 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = KIN;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Kinwa, Inc.";
 				TargetAttributes = {
+					3BBECF2418A1E58D00A2499D = {
+						DevelopmentTeam = G7D8C6342Q;
+						ProvisioningStyle = Automatic;
+					};
 					3BBECF3F18A1E58D00A2499D = {
 						TestTargetID = 3BBECF2418A1E58D00A2499D;
 					};
@@ -250,6 +258,7 @@
 			files = (
 				3BBECF6618A1EAB100A2499D /* KINWebBrowserExampleViewController.xib in Resources */,
 				3BBECF3318A1E58D00A2499D /* InfoPlist.strings in Resources */,
+				C29E741E1DB8A02D0058C106 /* Launch Screen.storyboard in Resources */,
 				3BBECF3B18A1E58D00A2499D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,14 +274,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6F51916B9AD244238CE3E060 /* Check Pods Manifest.lock */ = {
+		6F51916B9AD244238CE3E060 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,19 +289,34 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F23BEC6F0D11442D85D78196 /* Copy Pods Resources */ = {
+		AA798053815ECDCA7FA428BB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KINWebBrowserExample/Pods-KINWebBrowserExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F23BEC6F0D11442D85D78196 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KINWebBrowserExample/Pods-KINWebBrowserExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -359,13 +383,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -378,7 +408,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -398,20 +428,25 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -420,13 +455,16 @@
 		};
 		3BBECF5218A1E58E00A2499D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E95061206B0428F84E5EAF94 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = D55AFEF6AACABA699C9D8738 /* Pods-KINWebBrowserExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = G7D8C6342Q;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KINWebBrowserExample/KINWebBrowserExample-Prefix.pch";
 				INFOPLIST_FILE = "KINWebBrowserExample/KINWebBrowserExample-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kinwa.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -434,13 +472,16 @@
 		};
 		3BBECF5318A1E58E00A2499D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D66287F09CB3E898333BDB8 /* Pods.release.xcconfig */;
+			baseConfigurationReference = EEE34F1E750ABC931B5340E0 /* Pods-KINWebBrowserExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = G7D8C6342Q;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KINWebBrowserExample/KINWebBrowserExample-Prefix.pch";
 				INFOPLIST_FILE = "KINWebBrowserExample/KINWebBrowserExample-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kinwa.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -462,6 +503,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "KINWebBrowserExampleTests/KINWebBrowserExampleTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kinwa.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -480,6 +522,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KINWebBrowserExample/KINWebBrowserExample-Prefix.pch";
 				INFOPLIST_FILE = "KINWebBrowserExampleTests/KINWebBrowserExampleTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kinwa.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
