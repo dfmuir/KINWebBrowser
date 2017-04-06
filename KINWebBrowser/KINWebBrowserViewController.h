@@ -108,6 +108,7 @@
 @property (nonatomic, strong) UIBarButtonItem *actionButton;
 @property (nonatomic, strong) UIColor *tintColor;
 @property (nonatomic, strong) UIColor *barTintColor;
+@property (nonatomic, strong) UIColor *progressViewTintColor;
 @property (nonatomic, assign) BOOL actionButtonHidden;
 @property (nonatomic, assign) BOOL showsURLInNavigationBar;
 @property (nonatomic, assign) BOOL showsPageTitleInNavigationBar;
