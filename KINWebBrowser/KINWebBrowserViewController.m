@@ -203,16 +203,20 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 }
 
 - (void)setTintColor:(UIColor *)tintColor {
-    _tintColor = tintColor;
-    [self.progressView setTintColor:tintColor];
-    [self.navigationController.navigationBar setTintColor:tintColor];
-    [self.navigationController.toolbar setTintColor:tintColor];
+    if (tintColor) {
+        _tintColor = tintColor;
+        [self.progressView setTintColor:tintColor];
+        [self.navigationController.navigationBar setTintColor:tintColor];
+        [self.navigationController.toolbar setTintColor:tintColor];
+    }
 }
 
 - (void)setBarTintColor:(UIColor *)barTintColor {
-    _barTintColor = barTintColor;
-    [self.navigationController.navigationBar setBarTintColor:barTintColor];
-    [self.navigationController.toolbar setBarTintColor:barTintColor];
+    if (barTintColor) {
+        _barTintColor = barTintColor;
+        [self.navigationController.navigationBar setBarTintColor:barTintColor];
+        [self.navigationController.toolbar setBarTintColor:barTintColor];
+    }
 }
 
 - (void)setActionButtonHidden:(BOOL)actionButtonHidden {
