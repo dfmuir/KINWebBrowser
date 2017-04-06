@@ -374,7 +374,21 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
             URLString = [URLString stringByReplacingOccurrencesOfString:@"http://" withString:@""];
             URLString = [URLString stringByReplacingOccurrencesOfString:@"https://" withString:@""];
             URLString = [URLString substringToIndex:[URLString length]-1];
-            self.navigationItem.title = URLString;
+            
+            UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.navigationController.navigationBar.bounds.size.width, 29.0f)];
+            titleView.backgroundColor = [UIColor colorWithRed:228/255.0f green:228/255.0f blue:230/255.0f alpha:1.0];
+            titleView.layer.cornerRadius = 5.0f;
+            
+            UILabel *label = [[UILabel alloc] init];
+            label.font = [UIFont systemFontOfSize:17.0f];
+            label.text = URLString;
+            label.textColor = [UIColor darkGrayColor];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.frame = CGRectInset(titleView.frame, 10.0f, 0.0f);
+            label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            [titleView addSubview:label];
+            
+            self.navigationItem.titleView = titleView;
         }
     }
     else {
@@ -481,8 +495,13 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
         URLForActivityItem = self.uiWebView.request.URL;
         URLTitle = [self.uiWebView stringByEvaluatingJavaScriptFromString:@"document.title"];
     }
-    if (URLForActivityItem) {
+    if (URLForActivityItem || self.customShareItems) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            NSArray *shareItems = @[URLForActivityItem];
+            if (self.customShareItems) {
+                shareItems = self.customShareItems;
+            }
+            
             TUSafariActivity *safariActivity = [[TUSafariActivity alloc] init];
             ARChromeActivity *chromeActivity = [[ARChromeActivity alloc] init];
             
@@ -493,7 +512,7 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
                 [activities addObjectsFromArray:self.customActivityItems];
             }
             
-            UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[URLForActivityItem] applicationActivities:activities];
+            UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:activities];
             
             if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
                 if(self.actionPopoverController) {
