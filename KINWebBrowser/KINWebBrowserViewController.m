@@ -38,7 +38,7 @@
 static void *KINWebBrowserContext = &KINWebBrowserContext;
 static BOOL onlyUIWebViewApplied;
 
-@interface KINWebBrowserViewController () <UIAlertViewDelegate>
+@interface KINWebBrowserViewController () <UIAlertViewDelegate, NSURLConnectionDataDelegate>
 
 @property (nonatomic, assign) BOOL previousNavigationControllerToolbarHidden, previousNavigationControllerNavigationBarHidden;
 @property (nonatomic, strong) UIBarButtonItem *backButton, *forwardButton, *refreshButton, *stopButton, *fixedSeparator, *flexibleSeparator;
@@ -48,7 +48,8 @@ static BOOL onlyUIWebViewApplied;
 @property (nonatomic, strong) NSURL *uiWebViewCurrentURL;
 @property (nonatomic, strong) NSURL *URLToLaunchWithPermission;
 @property (nonatomic, strong) UIAlertView *externalAppPermissionAlertView;
-
+@property (nonatomic, assign) BOOL authenticated;
+@property (nonatomic, strong) NSURLRequest *failedRequest;
 @end
 
 @implementation KINWebBrowserViewController
@@ -225,6 +226,27 @@ static BOOL onlyUIWebViewApplied;
     [self updateToolbarState];
 }
 
+#pragma mark - NSURLConnectionDataDelegate
+
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+        NSURL *baseURL = self.failedRequest.URL;
+//        if ([challenge.protectionSpace.host isEqualToString:baseURL.host]) {
+            [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+//        } else {
+//            NSLog(@"Not trusting connection to host %@", challenge.protectionSpace.host);
+//        }
+    }
+    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    self.authenticated = YES;
+    [connection cancel];
+    if (self.uiWebView) {
+        [self.uiWebView loadRequest:self.failedRequest];
+    }
+}
 
 #pragma mark - UIWebViewDelegate
 
@@ -232,6 +254,13 @@ static BOOL onlyUIWebViewApplied;
     if(webView == self.uiWebView) {
         
         if(![self externalAppRequiredToOpenURL:request.URL]) {
+            if ([request.URL.scheme isEqualToString:@"https"] && !self.authenticated) {
+                self.failedRequest = request;
+                NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+                [connection start];
+                return NO;
+            }
+            
             self.uiWebViewCurrentURL = request.URL;
             self.uiWebViewIsLoading = YES;
             [self updateToolbarState];
