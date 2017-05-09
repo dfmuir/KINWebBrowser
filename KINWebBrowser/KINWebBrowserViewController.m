@@ -230,7 +230,7 @@ static BOOL onlyUIWebViewApplied;
 
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
     if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-        NSURL *baseURL = self.failedRequest.URL;
+//        NSURL *baseURL = self.failedRequest.URL;
 //        if ([challenge.protectionSpace.host isEqualToString:baseURL.host]) {
             [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
 //        } else {
