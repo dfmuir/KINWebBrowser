@@ -3,5 +3,6 @@ source 'https://github.com/CocoaPods/Specs.git'
 xcodeproj 'KINWebBrowserExample.xcodeproj'
 platform :ios, :deployment_target => '7.0'
 
-pod 'KINWebBrowser'
-
+target 'KINWebBrowserExample' do
+	pod 'KINWebBrowser', :path => '../'
+end
