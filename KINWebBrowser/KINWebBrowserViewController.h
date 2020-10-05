@@ -101,7 +101,7 @@
  */
 
 + (UINavigationController *)navigationControllerWithWebBrowser;
-+ (UINavigationController *)navigationControllerWithWebBrowserWithConfiguration:(WKWebViewConfiguration *)configuration
++ (UINavigationController *)navigationControllerWithWebBrowserWithConfiguration:(WKWebViewConfiguration *)configuration;
 
 
 @property (nonatomic, strong) UIBarButtonItem *actionButton;
