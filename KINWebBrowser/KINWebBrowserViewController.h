@@ -31,6 +31,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 @class KINWebBrowserViewController;
 
@@ -76,7 +77,7 @@
 // Depending on the version of iOS, one of these will be set
 @property (nonatomic, strong) WKWebView *wkWebView;
 
-- (id)initWithConfiguration:(WKWebViewConfiguration *)configuration
+- (id)initWithConfiguration:(WKWebViewConfiguration *)configuration;
 
 #pragma mark - Static Initializers
 
@@ -89,7 +90,7 @@
  */
 
 + (KINWebBrowserViewController *)webBrowser;
-+ (KINWebBrowserViewController *)webBrowserWithConfiguration:(WKWebViewConfiguration *)configuration
++ (KINWebBrowserViewController *)webBrowserWithConfiguration:(WKWebViewConfiguration *)configuration;
 
 /*
  Initialize a UINavigationController with a KINWebBrowserViewController for modal presentation.
