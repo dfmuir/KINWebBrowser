@@ -263,8 +263,8 @@ static void *KINWebBrowserContext = &KINWebBrowserContext;
 
 - (void)updateToolbarState {
     
-    BOOL canGoBack = self.wkWebView.canGoBack
-    BOOL canGoForward = self.wkWebView.canGoForward
+    BOOL canGoBack = self.wkWebView.canGoBack;
+    BOOL canGoForward = self.wkWebView.canGoForward;
     
     [self.backButton setEnabled:canGoBack];
     [self.forwardButton setEnabled:canGoForward];
