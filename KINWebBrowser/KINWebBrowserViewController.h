@@ -64,7 +64,7 @@
  For convenience, two sets of static initializers are available.
  
  */
-@interface KINWebBrowserViewController : UIViewController <WKNavigationDelegate, WKUIDelegate, UIWebViewDelegate>
+@interface KINWebBrowserViewController : UIViewController <WKNavigationDelegate, WKUIDelegate>
 
 #pragma mark - Public Properties
 
@@ -76,9 +76,8 @@
 // The web views
 // Depending on the version of iOS, one of these will be set
 @property (nonatomic, strong) WKWebView *wkWebView;
-@property (nonatomic, strong) UIWebView *uiWebView;
 
-- (id)initWithConfiguration:(WKWebViewConfiguration *)configuration NS_AVAILABLE_IOS(8_0);
+- (id)initWithConfiguration:(WKWebViewConfiguration *)configuration;
 
 #pragma mark - Static Initializers
 
@@ -91,7 +90,7 @@
  */
 
 + (KINWebBrowserViewController *)webBrowser;
-+ (KINWebBrowserViewController *)webBrowserWithConfiguration:(WKWebViewConfiguration *)configuration NS_AVAILABLE_IOS(8_0);
++ (KINWebBrowserViewController *)webBrowserWithConfiguration:(WKWebViewConfiguration *)configuration;
 
 /*
  Initialize a UINavigationController with a KINWebBrowserViewController for modal presentation.
@@ -102,7 +101,7 @@
  */
 
 + (UINavigationController *)navigationControllerWithWebBrowser;
-+ (UINavigationController *)navigationControllerWithWebBrowserWithConfiguration:(WKWebViewConfiguration *)configuration NS_AVAILABLE_IOS(8_0);
++ (UINavigationController *)navigationControllerWithWebBrowserWithConfiguration:(WKWebViewConfiguration *)configuration;
 
 
 @property (nonatomic, strong) UIBarButtonItem *actionButton;

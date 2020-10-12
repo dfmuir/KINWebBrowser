@@ -3,13 +3,13 @@ KINWebBrowser
 
 KINWebBrowser is a web browser module for your apps.
 
-Powered by [WKWebView](https://developer.apple.com/library/IOs/documentation/WebKit/Reference/WKWebView_Ref/index.html) on iOS 8. Backwards compatible with iOS 7 using [UIWebView](https://developer.apple.com/library/ios/documentation/Uikit/reference/UIWebView_Class/index.html).
+Powered by [WKWebView](https://developer.apple.com/library/IOs/documentation/WebKit/Reference/WKWebView_Ref/index.html) on iOS 8.
 
 ![KINWebBrowser Screenshots](http://i.imgur.com/z1jkWKG.png)
 
 Features
 ------------------------
-* iOS 7 & 8 support for iPhone and iPad devices
+* iOS 8 support for iPhone and iPad devices
 * Safari-like interface
 * Animated progress bar
 * Customizable UI including tint color
@@ -53,7 +53,7 @@ Installation
 ###### Podfile
 
 ```ruby
-platform :ios, '7.0'
+platform :ios, '8.0'
 pod 'KINWebBrowser'
 ```
 
